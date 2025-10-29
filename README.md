@@ -10,4 +10,4 @@ The main class is located at [src/main/java/es/um/dis/cfihos/main/Cfihos.java](s
 ## CFIHOS ontology
 The resulting ontology is located at [CORE-CFIHOS-V2.0.owl](CORE-CFIHOS-V2.0.owl). This ontology can be open with Protégé ontology editor.
 
-We also provide a set of competency questions (CQ), available in the file [CFIHOS_QC.docx](CFIHOS_QC.docx). This file contains CQs, the SPARQL query that solves the corresponding CQ, and the result provided. This can be tested by querying the ontology in Protégé by using the SPARQL tab.
+We also provide a set of competency questions (CQ), available in the file [CFIHOS_CQ.docx](CFIHOS_CQ.docx). This file contains CQs, the SPARQL query that solves the corresponding CQ, and the result provided. This can be tested by querying the ontology in Protégé by using the SPARQL tab.
