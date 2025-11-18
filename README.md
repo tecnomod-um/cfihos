@@ -5,9 +5,11 @@ We provide a Java script to convert CFIHOS excel file into an OWL ontology.
 
 The intended use of this script is through an IDE editor, such as Eclipse. It is needed to import this project as a Maven project.
 
-The main class is located at [src/main/java/es/um/dis/cfihos/main/Cfihos.java](src/main/java/es/um/dis/cfihos/main/Cfihos.java). This class reads the CFIHOS excel file at [src/main/resources/CORE-CFIHOS-V2.0-excel-FINAL.xlsx](src/main/resources/CORE-CFIHOS-V2.0-excel-FINAL.xlsx) and creates and OWL ontology called *CORE-CFIHOS-V2.0.owl* in the root folder of the project.
+The main class is located at [src/main/java/es/um/dis/cfihos/main/Cfihos.java](src/main/java/es/um/dis/cfihos/main/Cfihos.java). This class reads the CFIHOS excel file at [src/main/resources/CORE-CFIHOS-V2.0-excel-FINAL.xlsx](src/main/resources/CORE-CFIHOS-V2.0-excel-FINAL.xlsx) and creates and OWL ontology called *CORE-CFIHOS-V2.0.owl* in the root folder of the project, as well as another OWL file called *CORE-CFIHOS-V2.0_ido.owl* with integrations to The Industrial Data Ontology ([IDO](https://rds.posccaesar.org/ontology/lis14/)) .
 
 ## CFIHOS ontology
 The resulting ontology is located at [CORE-CFIHOS-V2.0.owl](CORE-CFIHOS-V2.0.owl). This ontology can be open with Protégé ontology editor.
+
+Furthermore, an OWL file is integrating the CFIHOS ontology with IDO is available at [CORE-CFIHOS-V2.0_ido.owl](CORE-CFIHOS-V2.0_ido.owl).
 
 We also provide a set of competency questions (CQ), available in the file [CFIHOS_CQ.docx](CFIHOS_CQ.docx). This file contains CQs, the SPARQL query that solves the corresponding CQ, and the result provided. This can be tested by querying the ontology in Protégé by using the SPARQL tab.

@@ -5,22 +5,30 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLImportsDeclaration;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.rdf.rdfxml.parser.RDFConstants;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
+import org.semanticweb.owlapi.util.SimpleIRIMapper;
 
 import es.um.dis.utils.OWLUtils;
 
@@ -28,7 +36,10 @@ public class Cfihos {
 	/* Input parameters */
 	private static final String EXCEL_FILE = "CORE-CFIHOS-V2.0-excel-FINAL.xlsx";
 	private static final String OUTPUT_FILE = "CORE-CFIHOS-V2.0.owl";
-	private static final IRI ONTOLOGY_IRI = IRI.create("http://infohub.siemens-energy.com/CFIHOS");
+
+	private static final String OUTPUT_FILE_IDO = "CORE-CFIHOS-V2.0_ido.owl";
+	private static final IRI CFIHOS_ONTOLOGY_IRI = IRI.create("http://infohub.siemens-energy.com/CFIHOS");
+	private static final IRI CFIHOS_IDO_ONTOLOGY_IRI = IRI.create("http://infohub.siemens-energy.com/CFIHOS-IDO");
 	
 	/* Internal constants */
 	private static final String DISCIPLINE_DOCUMENT_TYPE_SHEET_NAME = "discipline document type";
@@ -45,32 +56,114 @@ public class Cfihos {
 	private static final String PROPERTY_SHEET_NAME = "property";
 	private static final String DOCUMENT_REQUIRED_PER_CLASS_SHEET_NAME = "document required per class";
 	
+	/* IDO */
+	private static final IRI IDO_ONTOLOGY_IRI = IRI.create("http://rds.posccaesar.org/ontology/lis14/ont/core");
+	
 	
 	
 	public static void main(String[] args) throws OWLOntologyStorageException, OWLOntologyCreationException, IOException {
 		InputStream inputStream = Cfihos.class.getClassLoader().getResourceAsStream(EXCEL_FILE);
 		OWLOntology ontology = generateOntology(inputStream);
 		ontology.saveOntology(new FileOutputStream(new File(OUTPUT_FILE)));
-
+		
+		OWLOntology ontologyIDO = generateIDOCompliantOntology(OUTPUT_FILE);
+		ontologyIDO.saveOntology(new FileOutputStream(new File(OUTPUT_FILE_IDO)));
 	}
 	
+	private static OWLOntology generateIDOCompliantOntology(String cfihosOntologyPath) throws OWLOntologyCreationException {
+		/* Create ontology */
+		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		OWLOntology ontology = manager.createOntology(CFIHOS_IDO_ONTOLOGY_IRI);
+		
+		/* Add imports */
+		OWLImportsDeclaration cfihosImportDeclaration = manager.getOWLDataFactory().getOWLImportsDeclaration(CFIHOS_ONTOLOGY_IRI);
+		manager.applyChange(new AddImport(ontology, cfihosImportDeclaration));
+		
+		OWLImportsDeclaration idoImportDeclaration = manager.getOWLDataFactory().getOWLImportsDeclaration(IDO_ONTOLOGY_IRI);
+		manager.applyChange(new AddImport(ontology, idoImportDeclaration));
+		
+		/* IRI mapper */
+		SimpleIRIMapper mapper = new SimpleIRIMapper(CFIHOS_ONTOLOGY_IRI, IRI.create(new File(cfihosOntologyPath)));
+		manager.getIRIMappers().add(mapper);
+		
+		/* Load imported ontologies*/
+		OWLOntology cfihosOntology = manager.loadOntology(CFIHOS_ONTOLOGY_IRI);
+		OWLOntology idoOntology = manager.loadOntology(CFIHOS_ONTOLOGY_IRI);
+		
+		/* Add subclasses */
+		/* CFIHOS equipment sub class of IDO physical object */
+		OWLClass idoPhysicalObjectClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "PhysicalObject");
+		OWLClass cfihosEquipmentClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRIForEquipment() + "CFIHOS-30000311");
+		OWLUtils.addSubclassOf(ontology, cfihosEquipmentClass, idoPhysicalObjectClass);
+		
+		/* CFIHOS tag sub class of IDO function */
+		OWLClass idoFunctionClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "Function");
+		OWLClass cfihosTagClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRIForTags() + "CFIHOS-30000311");
+		OWLUtils.addSubclassOf(ontology, cfihosTagClass, idoFunctionClass);
+		
+		/* CFIHOS document sub class of IDO information object */
+		OWLClass idoInformationObjectClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "InformationObject");
+		OWLClass cfihosDocumentClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRI() + "Document");
+		OWLUtils.addSubclassOf(ontology, cfihosDocumentClass, idoInformationObjectClass);
+		
+		/* CFIHOS discipline document type sub class of IDO information object */
+		OWLClass cfihosDisciplineDocumentTypeClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRI() + "DisciplineDocumentType");
+		OWLUtils.addSubclassOf(ontology, cfihosDisciplineDocumentTypeClass, idoInformationObjectClass);
+		
+		/* CFIHOS standard sub class of IDO information object */
+		OWLClass cfihosStandardClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRI() + "Standard");
+		OWLUtils.addSubclassOf(ontology, cfihosStandardClass, idoInformationObjectClass);
+		
+		/* CFIHOS picklist sub class of IDO information object */
+		OWLClass cfihosPropertyPicklistClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRI() + "PropertyPicklist");
+		OWLUtils.addSubclassOf(ontology, cfihosPropertyPicklistClass, idoInformationObjectClass);
+		
+		/* CFIHOS property picklist value sub class of IDO information object */
+//		OWLClass cfihosPropertyPicklistValueClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRI() + "PropertyPickListValue");
+//		OWLUtils.addSubclassOf(ontology, cfihosPropertyPicklistValueClass, idoInformationObjectClass);
+		
+		/* CFIHOS SourceStandardDocumentAndDataRequirement sub class of IDO information object */
+		OWLClass cfihosSourceStandardDocumentAndDataRequirementClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRI() + "SourceStandardDocumentAndDataRequirement");
+		OWLUtils.addSubclassOf(ontology, cfihosSourceStandardDocumentAndDataRequirementClass, idoInformationObjectClass);
+		
+		/* CFIHOS discipline sub class of IDO Role */
+		OWLClass idoRoleClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "Role");
+		OWLClass cfihosDisciplineClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRI() + "Discipline");
+		OWLUtils.addSubclassOf(ontology, cfihosDisciplineClass, idoRoleClass);
+		
+		/* om2:Unit sub class of IDO information object  */
+		OWLClass cfihosUnitClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.OM2_NS + "Unit");
+		OWLUtils.addSubclassOf(ontology, cfihosUnitClass, idoInformationObjectClass);
+		
+		/* Add equivalent classes */
+		/* om2:Unit equivalent to IDO UnitOfMeasure */
+		OWLClass idoUnitOfMeasureClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "UnitOfMeasure");
+		OWLUtils.addEquivalentClass(ontology, cfihosUnitClass, idoUnitOfMeasureClass);
+		
+		/* Add equivalent properties */
+		OWLObjectProperty idoHasFunction = manager.getOWLDataFactory().getOWLObjectProperty(OWLUtils.IDO_NS + "hasFunction");
+		OWLObjectProperty cfihosHasTag = manager.getOWLDataFactory().getOWLObjectProperty(getPrefixIRI() + "hasTag");
+		OWLUtils.addEquivalentProperties(ontology, cfihosHasTag, idoHasFunction);
+		return ontology;
+	}
+
 	private static String getPrefixIRI() {
-		String prefixIRI = ONTOLOGY_IRI.getIRIString() + "#";
+		String prefixIRI = CFIHOS_ONTOLOGY_IRI.getIRIString() + "#";
 		return prefixIRI;
 	}
 	
 	private static String getPrefixIRIForEquipment() {
-		String prefixIRI = ONTOLOGY_IRI.getIRIString() + "/equipment" + "#";
+		String prefixIRI = CFIHOS_ONTOLOGY_IRI.getIRIString() + "/equipment" + "#";
 		return prefixIRI;
 	}
 	
 	private static String getPrefixIRIForTags() {
-		String prefixIRI = ONTOLOGY_IRI.getIRIString() + "/tag" + "#";
+		String prefixIRI = CFIHOS_ONTOLOGY_IRI.getIRIString() + "/tag" + "#";
 		return prefixIRI;
 	}
 	
 	private static OWLOntology generateOntology(InputStream is) throws OWLOntologyCreationException, IOException {
-		OWLOntology ontology = OWLManager.createOWLOntologyManager().createOntology(ONTOLOGY_IRI);
+		OWLOntology ontology = OWLManager.createOWLOntologyManager().createOntology(CFIHOS_ONTOLOGY_IRI);
 		Workbook workbook = new XSSFWorkbook(is);
 
 		includeBaseEntities(ontology);
@@ -87,14 +180,16 @@ public class Cfihos {
 		includeTagOrEquipmentStandards(workbook, ontology);
 		includePropertyPickListValues(workbook, ontology);
 		includeDocumentRequiredPerClass(workbook, ontology);
+		includeDisjointClasses(ontology);
 		return ontology;
 	}
 
-	
-
-	
-
-	
+	private static void includeDisjointClasses(OWLOntology ontology) {
+		OWLReasoner reasoner = new StructuralReasonerFactory().createReasoner(ontology);
+		OWLClass thing = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLThing();
+		Collection<OWLClass> parentClasses = reasoner.subClasses(thing, true).filter(x -> !x.isOWLNothing()).collect(Collectors.toSet());
+		OWLUtils.setDisjointClasses(ontology, parentClasses);
+	}
 
 	private static void includeDocumentRequiredPerClass(Workbook workbook, OWLOntology ontology) {
 		Sheet sheet = workbook.getSheet(DOCUMENT_REQUIRED_PER_CLASS_SHEET_NAME);
@@ -384,11 +479,28 @@ public class Cfihos {
 		//OWLClass measureClass = OWLUtils.createClass(ontology, IRI.create("http://www.ontology-of-units-of-measure.org/resource/om-2/Measure"));
 		//OWLDataProperty hasValue = OWLUtils.createDataProperty(ontology, IRI.create("http://purl.org/biotop/btl2.owl#hasValue"));
 		//OWLObjectProperty hasUnit = OWLUtils.createObjectProperty(ontology, IRI.create("http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit"));
-		OWLClass unitClass = OWLUtils.createClass(ontology, IRI.create("http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"));
+		OWLClass unitClass = OWLUtils.createClass(ontology, IRI.create(OWLUtils.OM2_NS + "Unit"));
+		OWLUtils.addAnnotation(ontology, unitClass, IRI.create(RDFConstants.RDFS_LABEL), "unit");
 		OWLClass internationalSystemUnitClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "InternationalSystemUnit"));
+		OWLUtils.addAnnotation(ontology, internationalSystemUnitClass, IRI.create(RDFConstants.RDFS_LABEL), "international system unit");
 		OWLClass imperialSystemUnitClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "ImperialSystemUnit"));
+		OWLUtils.addAnnotation(ontology, imperialSystemUnitClass, IRI.create(RDFConstants.RDFS_LABEL), "imperial system unit");
 		OWLUtils.addSubclassOf(ontology, internationalSystemUnitClass, unitClass);
 		OWLUtils.addSubclassOf(ontology, imperialSystemUnitClass, unitClass);
+		
+		OWLClass pickListClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "PropertyPicklist"));
+		OWLUtils.addAnnotation(ontology, pickListClass, IRI.create(RDFConstants.RDFS_LABEL), "property picklist");
+		OWLUtils.addAnnotation(ontology, pickListClass, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "Represent a defined ranges of properties.");
+		
+//		OWLClass propertyPickListValue = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "PropertyPickListValue"));
+//		OWLUtils.addAnnotation(ontology, propertyPickListValue, IRI.create(RDFConstants.RDFS_LABEL), "property picklist value");
+//		OWLUtils.addAnnotation(ontology, propertyPickListValue, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "Represent a a selectable item from a list.");
+		
+//		OWLObjectProperty hasPickListValues = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + "hasPickListValues"));
+//		OWLUtils.addDomain(ontology, hasPickListValues, pickListClass);
+//		OWLUtils.addRange(ontology, hasPickListValues, propertyPickListValue);
+//		OWLUtils.addAnnotation(ontology, hasPickListValues, IRI.create(RDFConstants.RDFS_LABEL), "has picklist values");
+//		OWLUtils.addAnnotation(ontology, hasPickListValues, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "Relates a PickList with its possible values.");
 		//OWLUtils.addObjectSomeValuesFromRestriction(ontology, hasUnit, measureClass, unitClass);
 		//OWLUtils.addDataSomeValuesFromRestriction(ontology, hasValue, measureClass, OWL2Datatype.RDFS_LITERAL);
 	}

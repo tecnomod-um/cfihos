@@ -1,6 +1,7 @@
 package es.um.dis.utils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.semanticweb.owlapi.model.IRI;
@@ -29,6 +30,8 @@ public class OWLUtils {
 	public static final String XSD_NS = "http://www.w3.org/2001/XMLSchema#";
 	public static final String IAO_DEFINITION_IRI = IAO_NS + "IAO_0000115";
 	public static final String SKOS_ALT_LABEL_IRI = SKOS_NS + "altLabel";
+	public static final String IDO_NS = "http://rds.posccaesar.org/ontology/lis14/rdl/";
+	public static final String OM2_NS = "http://www.ontology-of-units-of-measure.org/resource/om-2/";
 	public static final String DECIMAL_IRI = XSD_NS + "decimal";
 	public static final String DOUBLE_IRI = XSD_NS + "double";
 
@@ -68,6 +71,37 @@ public class OWLUtils {
 	public static void addSubclassOf(OWLOntology ontology, OWLClass entity, OWLClassExpression parentEntity) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAxiom axiom = df.getOWLSubClassOfAxiom(entity, parentEntity);
+		ontology.add(axiom);
+	}
+	
+	public static void addEquivalentClass(OWLOntology ontology, OWLClass entity, OWLClassExpression equivalentEntity) {
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLAxiom axiom = df.getOWLEquivalentClassesAxiom(entity, equivalentEntity);
+		ontology.add(axiom);
+	}
+	
+	public static void addEquivalentProperties(OWLOntology ontology, OWLObjectPropertyExpression property1, OWLObjectPropertyExpression property2) {
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLAxiom axiom = df.getOWLEquivalentObjectPropertiesAxiom(property1, property2);
+		ontology.add(axiom);
+	}
+	
+	public static void addDomain(OWLOntology ontology, OWLProperty property, OWLClassExpression classExpression) {
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLAxiom axiom = null;
+		if(property.isOWLObjectProperty()) {
+			axiom = df.getOWLObjectPropertyDomainAxiom((OWLObjectProperty) property, classExpression);
+		} else if (property.isOWLDataProperty()) {
+			axiom = df.getOWLDataPropertyDomainAxiom((OWLDataProperty) property, classExpression);
+		}
+		if(axiom != null) {
+			ontology.add(axiom);
+		}
+	}
+	
+	public static void addRange(OWLOntology ontology, OWLObjectProperty objectProperty, OWLClassExpression classExpression) {
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLAxiom axiom = df.getOWLObjectPropertyRangeAxiom(objectProperty, classExpression);
 		ontology.add(axiom);
 	}
 
@@ -175,11 +209,13 @@ public class OWLUtils {
 	
 
 	
-	public static List<OWLNamedIndividual> getIndividualsFromList(OWLOntology ontology, String prefixIRI, List<String> listOfNames) {
+	public static List<OWLNamedIndividual> getIndividualsFromList(OWLOntology ontology, String prefixIRI, List<String> listOfNames, OWLClass type) {
 		List<OWLNamedIndividual> result = new ArrayList<>();
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		for(String name : listOfNames) {
 			OWLNamedIndividual individual = df.getOWLNamedIndividual(prefixIRI + name);
+			OWLAxiom axiom = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClassAssertionAxiom(type, individual);
+			ontology.add(axiom);
 			result.add(individual);
 		}
 		return result;
@@ -192,5 +228,9 @@ public class OWLUtils {
 		ontology.add(equivalentAxiom);
 	}
 
-	
+	public static void setDisjointClasses(OWLOntology ontology, Collection<OWLClass> classes) {
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLAxiom axiom = df.getOWLDisjointClassesAxiom(classes);
+		ontology.add(axiom);
+	}
 }

@@ -11,6 +11,7 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectOneOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -303,7 +304,7 @@ public class CFIHOSUtils {
 		if(propertyPicklistValueCFIHOSCode == null || propertyPicklistValueCFIHOSCode.isEmpty()) {
 			return;
 		}
-		OWLClass parentPicklistClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "Picklist"));
+		OWLClass parentPicklistClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "PropertyPicklist"));
 		OWLClass picklistClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + propertyPicklistCFIHOSCode));
 		OWLAxiom axiom = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLSubClassOfAxiom(picklistClass, parentPicklistClass);
 		ontology.add(axiom);
@@ -314,9 +315,9 @@ public class CFIHOSUtils {
 		}
 		
 		OWLNamedIndividual propertyValue = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(prefixIRI + propertyPicklistValueCFIHOSCode);
-		OWLClass propertyPickListValue = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "PropertyPickListValue"));
-		axiom = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClassAssertionAxiom(propertyPickListValue, propertyValue);
-		ontology.add(axiom);
+//		OWLClass propertyPickListValue = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "PropertyPickListValue"));
+//		axiom = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClassAssertionAxiom(propertyPickListValue, propertyValue);
+//		ontology.add(axiom);
 		OWLUtils.addAnnotation(ontology, propertyValue, IRI.create(prefixIRI + "hasCFIHOSCode"), propertyPicklistValueCFIHOSCode);
 		if(propertyPicklistValueCode != null && !propertyPicklistValueCode.isEmpty()) {
 			OWLUtils.addAnnotation(ontology, propertyValue, IRI.create(RDFConstants.RDFS_LABEL), propertyPicklistValueCode);
@@ -333,12 +334,17 @@ public class CFIHOSUtils {
 	public static void linkPropertyValues(OWLOntology ontology, String prefixIRI,
 			Map<String, List<String>> propertyPickValuesMap) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		
+		//OWLObjectProperty hasPickListValues = df.getOWLObjectProperty(prefixIRI + "hasPickListValues");
 		for(Entry<String, List<String>> entry : propertyPickValuesMap.entrySet()) {
 			String propertyCode = entry.getKey();
 			List<String> propertyValues = entry.getValue();
 			OWLClass domainClass = df.getOWLClass(prefixIRI + propertyCode);
-			List<OWLNamedIndividual> propertyValuesIndividuals = OWLUtils.getIndividualsFromList(ontology, prefixIRI, propertyValues);
+			List<OWLNamedIndividual> propertyValuesIndividuals = OWLUtils.getIndividualsFromList(ontology, prefixIRI, propertyValues, domainClass);
 			OWLObjectOneOf oneOf = df.getOWLObjectOneOf(propertyValuesIndividuals);
+			//OWLObjectAllValuesFrom allValuesFrom = df.getOWLObjectAllValuesFrom(hasPickListValues, oneOf);
+			//OWLAxiom equivalentAxiom = df.getOWLEquivalentClassesAxiom(domainClass, allValuesFrom);
+			//ontology.add(equivalentAxiom);
 			OWLAxiom equivalentAxiom = df.getOWLEquivalentClassesAxiom(domainClass, oneOf);
 			ontology.add(equivalentAxiom);
 		}
