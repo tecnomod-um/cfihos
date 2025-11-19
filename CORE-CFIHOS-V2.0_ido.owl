@@ -6,6 +6,7 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:om-2="http://www.ontology-of-units-of-measure.org/resource/om-2/"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:skos="http://www.w3.org/2004/02/skos/core#"
      xmlns:CFIHOS="http://infohub.siemens-energy.com/CFIHOS#"
@@ -150,6 +151,13 @@
     
 
 
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity -->
+
+
+    <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+    
+
+
     <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Role -->
 
 
@@ -163,6 +171,15 @@
     <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/UnitOfMeasure">
         <owl:equivalentClass rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"/>
     </owl:Class>
+    
+
+
+    <!-- http://www.ontology-of-units-of-measure.org/resource/om-2/Dimension -->
+
+
+    <rdf:Description rdf:about="http://www.ontology-of-units-of-measure.org/resource/om-2/Dimension">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+    </rdf:Description>
     
 
 

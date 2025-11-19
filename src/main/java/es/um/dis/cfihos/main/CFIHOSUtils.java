@@ -11,7 +11,6 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectOneOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -22,6 +21,8 @@ import org.semanticweb.owlapi.search.EntitySearcher;
 import es.um.dis.utils.OWLUtils;
 
 public class CFIHOSUtils {
+	private static final String CFIHOS_SYSTEME_INTERNATIONAL_CODE = "CFIHOS-60001649";
+	private static final String CFIHOS_IMPERIAL_SYSTEM_CODE = "CFIHOS-60001650";
 	public static void addEquipmentClass(OWLOntology ontology, String prefixIRI, String prefixIRIForEquipment,
 			String classCode, String parentClassCode, String className, String classDefinition, String classSynonym) {
 
@@ -50,27 +51,6 @@ public class CFIHOSUtils {
 			String propertyCode, String propertyName, String unitOfMeasureSICode, String unitOfMeasureSIName,
 			String unitOfMeasureImperialCode, String unitOfMeasureImperialName) {
 		OWLObjectProperty property = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + propertyCode));
-		//OWLClass measureClass = createClass(ontology, IRI.create("http://www.ontology-of-units-of-measure.org/resource/om-2/Measure"));
-
-		if (propertyName != null && !propertyName.isEmpty()) {
-			//addAnnotation(ontology, property, IRI.create(RDFConstants.RDFS_LABEL), propertyName);
-		}
-		if (unitOfMeasureSICode != null && !unitOfMeasureSICode.isEmpty()) {
-			OWLNamedIndividual siUnitOfMeasure = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(prefixIRI + unitOfMeasureSICode);
-			OWLUtils.addClassAssertion(ontology, siUnitOfMeasure, IRI.create(prefixIRI + "InternationalSystemUnit"));
-			
-			if (unitOfMeasureSIName != null && !unitOfMeasureSIName.isEmpty()) {
-				OWLUtils.addAnnotation(ontology, siUnitOfMeasure, IRI.create(RDFConstants.RDFS_LABEL), unitOfMeasureSIName);
-			}
-		}
-		
-		if (unitOfMeasureImperialCode != null && !unitOfMeasureImperialCode.isEmpty()) {
-			OWLNamedIndividual imperialUnitOfMeasure = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(prefixIRI + unitOfMeasureImperialCode);
-			OWLUtils.addClassAssertion(ontology, imperialUnitOfMeasure, IRI.create(prefixIRI + "ImperialSystemUnit"));
-			if (unitOfMeasureImperialName != null && !unitOfMeasureImperialName.isEmpty()) {
-				OWLUtils.addAnnotation(ontology, imperialUnitOfMeasure, IRI.create(RDFConstants.RDFS_LABEL), unitOfMeasureImperialName);
-			}
-		}
 		
 		if (equipmentCode != null && !equipmentCode.isEmpty()) {
 			OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
@@ -161,25 +141,6 @@ public class CFIHOSUtils {
 			String unitOfMeasureImperialCode, String unitOfMeasureImperialName) {
 		OWLObjectProperty property = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + propertyCode));
 
-		//if (propertyName != null && !propertyName.isEmpty()) {
-			//addAnnotation(ontology, property, IRI.create(RDFConstants.RDFS_LABEL), propertyName);
-		//}
-		if (unitOfMeasureSICode != null && !unitOfMeasureSICode.isEmpty()) {
-			OWLNamedIndividual siUnitOfMeasure = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(prefixIRI + unitOfMeasureSICode);
-			OWLUtils.addClassAssertion(ontology, siUnitOfMeasure, IRI.create(prefixIRI + "InternationalSystemUnit"));
-			
-			if (unitOfMeasureSIName != null && !unitOfMeasureSIName.isEmpty()) {
-				OWLUtils.addAnnotation(ontology, siUnitOfMeasure, IRI.create(RDFConstants.RDFS_LABEL), unitOfMeasureSIName);
-			}
-		}
-		
-		if (unitOfMeasureImperialCode != null && !unitOfMeasureImperialCode.isEmpty()) {
-			OWLNamedIndividual imperialUnitOfMeasure = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(prefixIRI + unitOfMeasureImperialCode);
-			OWLUtils.addClassAssertion(ontology, imperialUnitOfMeasure, IRI.create(prefixIRI + "ImperialSystemUnit"));
-			if (unitOfMeasureImperialName != null && !unitOfMeasureImperialName.isEmpty()) {
-				OWLUtils.addAnnotation(ontology, imperialUnitOfMeasure, IRI.create(RDFConstants.RDFS_LABEL), unitOfMeasureImperialName);
-			}
-		}
 		
 		if (tagCode != null && !tagCode.isEmpty()) {
 			OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
@@ -407,6 +368,86 @@ public class CFIHOSUtils {
 			OWLUtils.addObjectSomeValuesFromRestriction(ontology, hasDocumentType, documentRequiredPerClassClass, documentTypeClass);
 		}
 		
+	}
+
+	public static void addUnitOfMeasurement(OWLOntology ontology, String prefixIRI, String unitCFIHOSCode,
+			String uneceCode, String unitName, String unitSymbol, String unitDimensionCFIHOSCode,
+			String unitDimensionCode, String unitDimensionName, String measurementSystemCFIHOSCode,
+			String measurementSystemCode, String unitSynonymName) {
+		if (unitCFIHOSCode == null) {
+			return;
+		}
+		OWLNamedIndividual unitOfMeasure = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(prefixIRI + unitCFIHOSCode);
+		OWLUtils.addAnnotation(ontology, unitOfMeasure, IRI.create(prefixIRI + "hasCFIHOSCode"), unitCFIHOSCode);
+		if(uneceCode != null) {
+			OWLUtils.addAnnotation(ontology, unitOfMeasure, IRI.create(prefixIRI + "hasUNECECode"), uneceCode);
+		}
+		
+		if(unitName != null) {
+			OWLUtils.addAnnotation(ontology, unitOfMeasure, IRI.create(RDFConstants.RDFS_LABEL), unitName);
+		}
+		
+		if(unitSymbol != null) {
+			OWLUtils.addAnnotation(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_NS + "symbol"), unitSymbol);
+		}
+		if (unitDimensionCode != null) {
+			OWLNamedIndividual dimension = addDimension(ontology, prefixIRI, unitDimensionCFIHOSCode, unitDimensionCode, unitDimensionName);
+			OWLUtils.addIndividualRelation(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_NS + "hasDimension"), dimension);
+		}
+		
+		if (measurementSystemCFIHOSCode != null) {
+			OWLNamedIndividual system = addMeasurementSystem(ontology, prefixIRI, measurementSystemCFIHOSCode, measurementSystemCode);
+			OWLUtils.addIndividualRelation(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_NS + "hasMeasurementSystem"), system);
+			if(CFIHOS_SYSTEME_INTERNATIONAL_CODE.equals(measurementSystemCFIHOSCode)) {
+				OWLUtils.addClassAssertion(ontology, unitOfMeasure, IRI.create(prefixIRI + "InternationalSystemUnit"));
+			} else if (CFIHOS_IMPERIAL_SYSTEM_CODE.equals(measurementSystemCFIHOSCode)) {
+				OWLUtils.addClassAssertion(ontology, unitOfMeasure, IRI.create(prefixIRI + "ImperialSystemUnit"));
+			} 
+		} else {
+			OWLUtils.addClassAssertion(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_NS + "Unit"));
+		}
+		if(unitSynonymName != null) {
+			OWLUtils.addAnnotation(ontology, unitOfMeasure, IRI.create(OWLUtils.SKOS_ALT_LABEL_IRI), unitSynonymName);
+		}
+		
+	}
+
+	private static OWLNamedIndividual addMeasurementSystem(OWLOntology ontology, String prefixIRI,
+			String measurementSystemCFIHOSCode, String measurementSystemCode) {
+		String systemIRI = prefixIRI + measurementSystemCFIHOSCode;
+		if(ontology.containsIndividualInSignature(IRI.create(systemIRI))) {
+			return ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(systemIRI);
+		}
+		
+		OWLNamedIndividual system = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(systemIRI);
+		OWLUtils.addAnnotation(ontology, system, IRI.create(prefixIRI + "hasCFIHOSCode"), measurementSystemCFIHOSCode);
+		if(measurementSystemCode != null) {
+			OWLUtils.addAnnotation(ontology, system, IRI.create(RDFConstants.RDFS_LABEL), measurementSystemCode);
+		}
+		
+		return system;
+	}
+
+	private static OWLNamedIndividual addDimension(OWLOntology ontology, String prefixIRI, String unitDimensionCFIHOSCode,
+			String unitDimensionCode, String unitDimensionName) {
+		String dimensionIRI = prefixIRI + unitDimensionCFIHOSCode;
+		if(ontology.containsIndividualInSignature(IRI.create(dimensionIRI))) {
+			return ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(dimensionIRI);
+		}
+		
+		OWLNamedIndividual dimension = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(dimensionIRI);
+		OWLUtils.addAnnotation(ontology, dimension, IRI.create(prefixIRI + "hasCFIHOSCode"), unitDimensionCFIHOSCode);
+		OWLUtils.addClassAssertion(ontology, dimension, IRI.create(OWLUtils.OM2_NS + "Dimension"));
+		
+		if(unitDimensionCode != null) {
+			OWLUtils.addAnnotation(ontology, dimension, IRI.create(OWLUtils.SKOS_ALT_LABEL_IRI), unitDimensionCode);
+		}
+		
+		if(unitDimensionName != null) {
+			OWLUtils.addAnnotation(ontology, dimension, IRI.create(RDFConstants.RDFS_LABEL), unitDimensionName);
+		}
+		
+		return dimension;
 	}
 
 }

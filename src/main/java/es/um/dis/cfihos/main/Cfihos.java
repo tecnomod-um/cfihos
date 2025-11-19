@@ -30,6 +30,7 @@ import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
 import org.semanticweb.owlapi.util.SimpleIRIMapper;
 
+import es.um.dis.utils.AnnotationEnricher;
 import es.um.dis.utils.OWLUtils;
 
 public class Cfihos {
@@ -55,6 +56,7 @@ public class Cfihos {
 	private static final String PROPERTY_PICKLIST_VALUES_SHEET_NAME = "property picklist values";
 	private static final String PROPERTY_SHEET_NAME = "property";
 	private static final String DOCUMENT_REQUIRED_PER_CLASS_SHEET_NAME = "document required per class";
+	private static final String UNIT_OF_MEASURE_SHEET_NAME = "unit of measure";
 	
 	/* IDO */
 	private static final IRI IDO_ONTOLOGY_IRI = IRI.create("http://rds.posccaesar.org/ontology/lis14/ont/core");
@@ -135,6 +137,11 @@ public class Cfihos {
 		OWLClass cfihosUnitClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.OM2_NS + "Unit");
 		OWLUtils.addSubclassOf(ontology, cfihosUnitClass, idoInformationObjectClass);
 		
+		/* om2:dimension subclass of physical quantity */
+		OWLClass idoPhysicalQuantityClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "PhysicalQuantity");
+		OWLClass cfihosDimensionClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.OM2_NS + "Dimension");
+		OWLUtils.addSubclassOf(ontology, cfihosDimensionClass, idoPhysicalQuantityClass);
+		
 		/* Add equivalent classes */
 		/* om2:Unit equivalent to IDO UnitOfMeasure */
 		OWLClass idoUnitOfMeasureClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "UnitOfMeasure");
@@ -167,6 +174,7 @@ public class Cfihos {
 		Workbook workbook = new XSSFWorkbook(is);
 
 		includeBaseEntities(ontology);
+		includeUnitsOfMeasurement(workbook, ontology);
 		includeProperties(workbook, ontology);
 		includeEquipmentClasses(workbook, ontology);
 		includeEquipmentProperties(workbook, ontology);
@@ -181,14 +189,81 @@ public class Cfihos {
 		includePropertyPickListValues(workbook, ontology);
 		includeDocumentRequiredPerClass(workbook, ontology);
 		includeDisjointClasses(ontology);
+		enrichWithExternalAnnotations(ontology);
 		return ontology;
 	}
+
+	
+
+	
 
 	private static void includeDisjointClasses(OWLOntology ontology) {
 		OWLReasoner reasoner = new StructuralReasonerFactory().createReasoner(ontology);
 		OWLClass thing = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLThing();
 		Collection<OWLClass> parentClasses = reasoner.subClasses(thing, true).filter(x -> !x.isOWLNothing()).collect(Collectors.toSet());
 		OWLUtils.setDisjointClasses(ontology, parentClasses);
+	}
+	
+	private static void includeUnitsOfMeasurement(Workbook workbook, OWLOntology ontology) {
+		Sheet sheet = workbook.getSheet(UNIT_OF_MEASURE_SHEET_NAME);
+		String prefixIRI = getPrefixIRI();
+		for(Row row : sheet) {
+			if (row.getRowNum() == 0) {
+				continue;
+			}
+			String unitCFIHOSCode = null;
+			String uneceCode = null;
+			String unitName = null;
+			String unitSymbol = null;
+			String unitDimensionCFIHOSCode = null;
+			String unitDimensionCode = null;
+			String unitDimensionName = null;
+			String measurementSystemCFIHOSCode = null;
+			String measurementSystemCode = null;
+			String unitSynonymName = null;
+			
+			if(row.getCell(0) != null) {
+				unitCFIHOSCode = row.getCell(0).getStringCellValue();
+			}
+			
+			if(row.getCell(1) != null) {
+				uneceCode = row.getCell(1).getStringCellValue();
+			}
+			
+			if(row.getCell(2) != null) {
+				unitName = row.getCell(2).getStringCellValue();
+			}
+			
+			if(row.getCell(3) != null) {
+				unitSymbol = row.getCell(3).getStringCellValue();
+			}
+			
+			if(row.getCell(4) != null) {
+				unitDimensionCFIHOSCode = row.getCell(4).getStringCellValue();
+			}
+			
+			if(row.getCell(5) != null) {
+				unitDimensionCode = row.getCell(5).getStringCellValue();
+			}
+			
+			if(row.getCell(6) != null) {
+				unitDimensionName = row.getCell(6).getStringCellValue();
+			}
+			
+			if(row.getCell(7) != null) {
+				measurementSystemCFIHOSCode = row.getCell(7).getStringCellValue();
+			}
+			
+			if(row.getCell(8) != null) {
+				measurementSystemCode = row.getCell(8).getStringCellValue();
+			}
+			
+			if(row.getCell(9) != null) {
+				unitSynonymName = row.getCell(9).getStringCellValue();
+			}
+			
+			CFIHOSUtils.addUnitOfMeasurement(ontology, prefixIRI, unitCFIHOSCode, uneceCode, unitName, unitSymbol, unitDimensionCFIHOSCode, unitDimensionCode, unitDimensionName, measurementSystemCFIHOSCode, measurementSystemCode, unitSynonymName);
+		}
 	}
 
 	private static void includeDocumentRequiredPerClass(Workbook workbook, OWLOntology ontology) {
@@ -479,8 +554,16 @@ public class Cfihos {
 		//OWLClass measureClass = OWLUtils.createClass(ontology, IRI.create("http://www.ontology-of-units-of-measure.org/resource/om-2/Measure"));
 		//OWLDataProperty hasValue = OWLUtils.createDataProperty(ontology, IRI.create("http://purl.org/biotop/btl2.owl#hasValue"));
 		//OWLObjectProperty hasUnit = OWLUtils.createObjectProperty(ontology, IRI.create("http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit"));
+		OWLClass sourceStandardDocumentAndDataRequirementClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "SourceStandardDocumentAndDataRequirement"));
+		OWLUtils.addAnnotation(ontology, sourceStandardDocumentAndDataRequirementClass, IRI.create(RDFConstants.RDFS_LABEL), "source standard document and data requirement");
+		OWLUtils.addAnnotation(ontology, sourceStandardDocumentAndDataRequirementClass, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "Relates equipments, tags, and required document types.");
+		
+		OWLClass standardClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "Standard"));
+		OWLUtils.addAnnotation(ontology, standardClass, IRI.create(RDFConstants.RDFS_LABEL), "standard");
+		OWLUtils.addAnnotation(ontology, standardClass, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "Something established by authority, custom, or general consent as a model, example, or point of reference.");
+		
 		OWLClass unitClass = OWLUtils.createClass(ontology, IRI.create(OWLUtils.OM2_NS + "Unit"));
-		OWLUtils.addAnnotation(ontology, unitClass, IRI.create(RDFConstants.RDFS_LABEL), "unit");
+		//OWLUtils.addAnnotation(ontology, unitClass, IRI.create(RDFConstants.RDFS_LABEL), "unit");
 		OWLClass internationalSystemUnitClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "InternationalSystemUnit"));
 		OWLUtils.addAnnotation(ontology, internationalSystemUnitClass, IRI.create(RDFConstants.RDFS_LABEL), "international system unit");
 		OWLClass imperialSystemUnitClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "ImperialSystemUnit"));
@@ -739,6 +822,11 @@ public class Cfihos {
 		}
 		
 		
+	}
+	
+	private static void enrichWithExternalAnnotations(OWLOntology ontology) {
+		AnnotationEnricher annotationEnricher = new AnnotationEnricher(ontology);
+		annotationEnricher.enrichOntology();
 	}
 
 }
