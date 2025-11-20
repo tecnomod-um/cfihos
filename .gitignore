@@ -17,3 +17,4 @@ buildNumber.properties
 .classpath
 .settings
 catalog-v001.xml
+.DS_Store
