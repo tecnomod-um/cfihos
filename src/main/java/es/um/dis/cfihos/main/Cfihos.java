@@ -35,7 +35,7 @@ import es.um.dis.utils.OWLUtils;
 
 public class Cfihos {
 	/* Input parameters */
-	private static final String EXCEL_FILE = "CORE-CFIHOS-V2.0-excel-FINAL.xlsx";
+	public static final String EXCEL_FILE = "CORE-CFIHOS-V2.0-excel-FINAL.xlsx";
 	private static final String OUTPUT_FILE = "CORE-CFIHOS-V2.0.owl";
 
 	private static final String OUTPUT_FILE_IDO = "CORE-CFIHOS-V2.0_ido.owl";
@@ -89,19 +89,21 @@ public class Cfihos {
 		manager.getIRIMappers().add(mapper);
 		
 		/* Load imported ontologies*/
-		OWLOntology cfihosOntology = manager.loadOntology(CFIHOS_ONTOLOGY_IRI);
-		OWLOntology idoOntology = manager.loadOntology(CFIHOS_ONTOLOGY_IRI);
+		manager.loadOntology(CFIHOS_ONTOLOGY_IRI);
+		manager.loadOntology(CFIHOS_ONTOLOGY_IRI);
 		
 		/* Add subclasses */
-		/* CFIHOS equipment sub class of IDO physical object */
-		OWLClass idoPhysicalObjectClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "PhysicalObject");
+		/* CFIHOS equipment sub class of IDO physical artefact and IDO inanimate physical object */
+		OWLClass idoPhysicalArtefactClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "PhysicalArtefact");
+		OWLClass idoInanimatePhysicalObjectClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "InanimatePhysicalObject");
 		OWLClass cfihosEquipmentClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRIForEquipment() + "CFIHOS-30000311");
-		OWLUtils.addSubclassOf(ontology, cfihosEquipmentClass, idoPhysicalObjectClass);
+		OWLUtils.addSubclassOf(ontology, cfihosEquipmentClass, idoPhysicalArtefactClass);
+		OWLUtils.addSubclassOf(ontology, cfihosEquipmentClass, idoInanimatePhysicalObjectClass);
 		
-		/* CFIHOS tag sub class of IDO function */
-		OWLClass idoFunctionClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "Function");
+		/* CFIHOS tag sub class of IDO functional object */
+		OWLClass idoFunctionalObjectClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "FunctionalObject");
 		OWLClass cfihosTagClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRIForTags() + "CFIHOS-30000311");
-		OWLUtils.addSubclassOf(ontology, cfihosTagClass, idoFunctionClass);
+		OWLUtils.addSubclassOf(ontology, cfihosTagClass, idoFunctionalObjectClass);
 		
 		/* CFIHOS document sub class of IDO information object */
 		OWLClass idoInformationObjectClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "InformationObject");
@@ -148,9 +150,9 @@ public class Cfihos {
 		OWLUtils.addEquivalentClass(ontology, cfihosUnitClass, idoUnitOfMeasureClass);
 		
 		/* Add equivalent properties */
-		OWLObjectProperty idoHasFunction = manager.getOWLDataFactory().getOWLObjectProperty(OWLUtils.IDO_NS + "hasFunction");
-		OWLObjectProperty cfihosHasTag = manager.getOWLDataFactory().getOWLObjectProperty(getPrefixIRI() + "hasTag");
-		OWLUtils.addEquivalentProperties(ontology, cfihosHasTag, idoHasFunction);
+//		OWLObjectProperty idoHasFunction = manager.getOWLDataFactory().getOWLObjectProperty(OWLUtils.IDO_NS + "hasFunction");
+//		OWLObjectProperty cfihosHasTag = manager.getOWLDataFactory().getOWLObjectProperty(getPrefixIRI() + "hasTag");
+//		OWLUtils.addEquivalentProperties(ontology, cfihosHasTag, idoHasFunction);
 		return ontology;
 	}
 
@@ -169,7 +171,7 @@ public class Cfihos {
 		return prefixIRI;
 	}
 	
-	private static OWLOntology generateOntology(InputStream is) throws OWLOntologyCreationException, IOException {
+	public static OWLOntology generateOntology(InputStream is) throws OWLOntologyCreationException, IOException {
 		OWLOntology ontology = OWLManager.createOWLOntologyManager().createOntology(CFIHOS_ONTOLOGY_IRI);
 		Workbook workbook = new XSSFWorkbook(is);
 

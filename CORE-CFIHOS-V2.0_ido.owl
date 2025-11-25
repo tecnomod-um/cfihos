@@ -1,45 +1,20 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://infohub.siemens-energy.com/CFIHOS-IDO#"
      xml:base="http://infohub.siemens-energy.com/CFIHOS-IDO"
-     xmlns:schema="http://schema.org/"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:obo="http://purl.obolibrary.org/obo/"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:CFIHOS="http://infohub.siemens-energy.com/CFIHOS#"
-     xmlns:om-2="http://www.ontology-of-units-of-measure.org/resource/om-2/"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:om-2="http://www.ontology-of-units-of-measure.org/resource/om-2/"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:obo="http://purl.obolibrary.org/obo/">
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:CFIHOS="http://infohub.siemens-energy.com/CFIHOS#"
+     xmlns:schema="http://schema.org/">
     <owl:Ontology rdf:about="http://infohub.siemens-energy.com/CFIHOS-IDO">
         <owl:imports rdf:resource="http://infohub.siemens-energy.com/CFIHOS"/>
         <owl:imports rdf:resource="http://rds.posccaesar.org/ontology/lis14/ont/core"/>
     </owl:Ontology>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Object Properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://infohub.siemens-energy.com/CFIHOS#hasTag -->
-
-    <rdf:Description rdf:about="http://infohub.siemens-energy.com/CFIHOS#hasTag">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasFunction"/>
-    </rdf:Description>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasFunction -->
-
-    <owl:ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasFunction"/>
     
 
 
@@ -51,10 +26,12 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+
     
 
 
     <!-- http://infohub.siemens-energy.com/CFIHOS#Discipline -->
+
 
     <rdf:Description rdf:about="http://infohub.siemens-energy.com/CFIHOS#Discipline">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Role"/>
@@ -64,6 +41,7 @@
 
     <!-- http://infohub.siemens-energy.com/CFIHOS#DisciplineDocumentType -->
 
+
     <rdf:Description rdf:about="http://infohub.siemens-energy.com/CFIHOS#DisciplineDocumentType">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
     </rdf:Description>
@@ -71,6 +49,7 @@
 
 
     <!-- http://infohub.siemens-energy.com/CFIHOS#Document -->
+
 
     <rdf:Description rdf:about="http://infohub.siemens-energy.com/CFIHOS#Document">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
@@ -80,6 +59,7 @@
 
     <!-- http://infohub.siemens-energy.com/CFIHOS#PropertyPicklist -->
 
+
     <rdf:Description rdf:about="http://infohub.siemens-energy.com/CFIHOS#PropertyPicklist">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
     </rdf:Description>
@@ -87,6 +67,7 @@
 
 
     <!-- http://infohub.siemens-energy.com/CFIHOS#SourceStandardDocumentAndDataRequirement -->
+
 
     <rdf:Description rdf:about="http://infohub.siemens-energy.com/CFIHOS#SourceStandardDocumentAndDataRequirement">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
@@ -96,6 +77,7 @@
 
     <!-- http://infohub.siemens-energy.com/CFIHOS#Standard -->
 
+
     <rdf:Description rdf:about="http://infohub.siemens-energy.com/CFIHOS#Standard">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
     </rdf:Description>
@@ -104,39 +86,53 @@
 
     <!-- http://infohub.siemens-energy.com/CFIHOS/equipment#CFIHOS-30000311 -->
 
+
     <rdf:Description rdf:about="http://infohub.siemens-energy.com/CFIHOS/equipment#CFIHOS-30000311">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject"/>
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InanimatePhysicalObject"/>
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalArtefact"/>
     </rdf:Description>
     
 
 
     <!-- http://infohub.siemens-energy.com/CFIHOS/tag#CFIHOS-30000311 -->
 
+
     <rdf:Description rdf:about="http://infohub.siemens-energy.com/CFIHOS/tag#CFIHOS-30000311">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Function"/>
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/FunctionalObject"/>
     </rdf:Description>
     
 
 
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Function -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/FunctionalObject -->
 
-    <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Function"/>
+
+    <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/FunctionalObject"/>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/InanimatePhysicalObject -->
+
+
+    <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/InanimatePhysicalObject"/>
     
 
 
     <!-- http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject -->
 
+
     <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
     
 
 
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalArtefact -->
 
-    <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject"/>
+
+    <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalArtefact"/>
     
 
 
     <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity -->
+
 
     <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
     
@@ -144,17 +140,22 @@
 
     <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Role -->
 
+
     <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Role"/>
     
 
 
     <!-- http://rds.posccaesar.org/ontology/lis14/rdl/UnitOfMeasure -->
 
-    <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/UnitOfMeasure"/>
+
+    <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/UnitOfMeasure">
+        <owl:equivalentClass rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"/>
+    </owl:Class>
     
 
 
     <!-- http://www.ontology-of-units-of-measure.org/resource/om-2/Dimension -->
+
 
     <rdf:Description rdf:about="http://www.ontology-of-units-of-measure.org/resource/om-2/Dimension">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
@@ -164,13 +165,14 @@
 
     <!-- http://www.ontology-of-units-of-measure.org/resource/om-2/Unit -->
 
+
     <rdf:Description rdf:about="http://www.ontology-of-units-of-measure.org/resource/om-2/Unit">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/UnitOfMeasure"/>
     </rdf:Description>
 </rdf:RDF>
 
 
 
-<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 5.1.10.2019-03-12T22:31:15Z) https://github.com/owlcs/owlapi/ -->
+
 
