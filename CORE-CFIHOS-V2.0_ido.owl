@@ -21,6 +21,71 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/datumUOM -->
+
+
+    <owl:ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/datumUOM">
+        <owl:equivalentProperty rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasContentPart -->
+
+
+    <owl:ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasContentPart"/>
+    
+
+
+    <!-- http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit -->
+
+
+    <rdf:Description rdf:about="http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasContentPart"/>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/datumValue -->
+
+
+    <owl:DatatypeProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/datumValue">
+        <owl:equivalentProperty rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue -->
+
+
+    <rdf:Description rdf:about="http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // Classes
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -52,6 +117,15 @@
 
 
     <rdf:Description rdf:about="http://infohub.siemens-energy.com/CFIHOS#Document">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://infohub.siemens-energy.com/CFIHOS#PropertyGroup -->
+
+
+    <rdf:Description rdf:about="http://infohub.siemens-energy.com/CFIHOS#PropertyGroup">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
     </rdf:Description>
     
@@ -138,10 +212,26 @@
     
 
 
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/QualityDatum -->
+
+
+    <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/QualityDatum"/>
+    
+
+
     <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Role -->
 
 
     <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Role"/>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/ScalarQuantityDatum -->
+
+
+    <owl:Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/ScalarQuantityDatum">
+        <owl:equivalentClass rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/Measure"/>
+    </owl:Class>
     
 
 
@@ -159,6 +249,15 @@
 
     <rdf:Description rdf:about="http://www.ontology-of-units-of-measure.org/resource/om-2/Dimension">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.ontology-of-units-of-measure.org/resource/om-2/Measure -->
+
+
+    <rdf:Description rdf:about="http://www.ontology-of-units-of-measure.org/resource/om-2/Measure">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/QualityDatum"/>
     </rdf:Description>
     
 

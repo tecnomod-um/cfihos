@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -26,15 +28,18 @@ public class AnnotationEnricher {
 	
 	private OWLOntologyManager ontologyManager;
 	private OWLOntology ontology;
+	private Optional<Set<OWLOntology>> externalOntologiesToUse;
 
 	public AnnotationEnricher(OWLOntology ontology) {
 		this.ontology = ontology;
 		this.ontologyManager = ontology.getOWLOntologyManager();
+		this.setExternalOntologiesToUse(Optional.empty());
 	}
 	
 	public AnnotationEnricher(InputStream inputStream) throws OWLOntologyCreationException {
 		this.ontologyManager = OWLManager.createOWLOntologyManager();
 		this.ontology = this.ontologyManager.loadOntologyFromOntologyDocument(inputStream);
+		this.setExternalOntologiesToUse(Optional.empty());
 	}
 	
 	public AnnotationEnricher(File ontologyFile) throws OWLOntologyCreationException, FileNotFoundException {
@@ -44,6 +49,7 @@ public class AnnotationEnricher {
 	public AnnotationEnricher(IRI ontologyIRI) throws OWLOntologyCreationException {
 		this.ontologyManager = OWLManager.createOWLOntologyManager();
 		this.ontology = this.ontologyManager.loadOntologyFromOntologyDocument(ontologyIRI);
+		this.setExternalOntologiesToUse(Optional.empty());
 	}
 	
 	public void enrichOntology() {
@@ -90,12 +96,20 @@ public class AnnotationEnricher {
 						axiomsToAdd.add(annotationAssertionAxiom);
 					}
 				});
-				
-				
 			} catch (OWLOntologyCreationException ontologyCreationException) {
 				LOGGER.log(Level.WARNING, String.format("Error obtanining data for %s", entity.getIRI().toQuotedString()));
 			} catch(Exception e) {
 				LOGGER.log(Level.SEVERE, "Not controlled exception", e);
+			}
+			
+			if(this.externalOntologiesToUse.isPresent()) {
+				for(OWLOntology externalOntology : this.externalOntologiesToUse.get()) {
+					externalOntology.annotationAssertionAxioms(entity.getIRI()).forEach(annotationAssertionAxiom -> {
+						if (!this.ontology.containsAxiom(annotationAssertionAxiom)) {
+							axiomsToAdd.add(annotationAssertionAxiom);
+						}
+					});
+				}
 			}
 		});
 		return axiomsToAdd;
@@ -131,6 +145,28 @@ public class AnnotationEnricher {
 	public void setOntology(OWLOntology ontology) {
 		this.ontology = ontology;
 	}
+
+	public Optional<Set<OWLOntology>> getExternalOntologiesToUse() {
+		return externalOntologiesToUse;
+	}
+
+	public void setExternalOntologiesToUse(Optional<Set<OWLOntology>> externalOntologiesToUse) {
+		this.externalOntologiesToUse = externalOntologiesToUse;
+	}
 	
-	
+	public void addExternalOntologyToUse (IRI ontologyIRI) {
+		OWLOntologyManager externalManager = OWLManager.createOWLOntologyManager();
+		OWLOntology externalOntology;
+		try {
+			externalOntology = externalManager.loadOntology(ontologyIRI);
+			if (this.externalOntologiesToUse.isEmpty()) {
+				this.externalOntologiesToUse = Optional.of(new HashSet<OWLOntology>());
+			}
+			this.externalOntologiesToUse.get().add(externalOntology);
+		} catch (OWLOntologyCreationException e) {
+			LOGGER.log(Level.SEVERE, String.format("Error loading ontology from %s", ontologyIRI.toString()), e);
+		}
+		
+	}
+		
 }

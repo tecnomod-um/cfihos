@@ -12,6 +12,7 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
+import org.semanticweb.owlapi.model.OWLDataPropertyExpression;
 import org.semanticweb.owlapi.model.OWLDataRange;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLLiteral;
@@ -34,6 +35,17 @@ public class OWLUtils {
 	public static final String OM2_NS = "http://www.ontology-of-units-of-measure.org/resource/om-2/";
 	public static final String DECIMAL_IRI = XSD_NS + "decimal";
 	public static final String DOUBLE_IRI = XSD_NS + "double";
+	public static final String SCHEMA_NS = "http://schema.org/";
+	public static final String SCHEMA_IDENTIFIER = SCHEMA_NS + "identifier";
+	public static final String SCHEMA_CATEGORY = OWLUtils.SCHEMA_NS + "category";
+	public static final String OM2_DIMENSION = OWLUtils.OM2_NS + "Dimension";
+	public static final String OM2_SYMBOL = OWLUtils.OM2_NS + "symbol";
+	public static final String OM2_HAS_UNIT = OWLUtils.OM2_NS + "hasUnit";
+	public static final String OM2_HAS_NUMERICAL_VALUE = OWLUtils.OM2_NS + "hasNumericalValue";
+	public static final String OM2_UNIT = OWLUtils.OM2_NS + "Unit";
+	public static final String OM2_MEASURE = OWLUtils.OM2_NS + "Measure";
+	public static final String OM2_HAS_DIMENSION = OWLUtils.OM2_NS + "hasDimension";
+	public static final String OM2_SOURCE_RAW_IRI = "https://raw.githubusercontent.com/HajoRijgersberg/OM/refs/heads/master/om-2.0.rdf";
 
 	public static void addDataPropertyRange(OWLOntology ontology, OWLDataProperty property, OWL2Datatype range) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
@@ -74,15 +86,43 @@ public class OWLUtils {
 		ontology.add(axiom);
 	}
 	
+	public static void addSubPropertyOf(OWLOntology ontology, OWLProperty property, OWLProperty parentProperty) {
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLAxiom axiom = null;
+		if (property.isObjectPropertyExpression() && parentProperty.isObjectPropertyExpression()) {
+			axiom = df.getOWLSubObjectPropertyOfAxiom(property.asObjectPropertyExpression(), parentProperty.asObjectPropertyExpression());
+		}
+		
+		if (property.isDataPropertyExpression() && parentProperty.isDataPropertyExpression()) {
+			axiom = df.getOWLSubDataPropertyOfAxiom(property.asDataPropertyExpression(), parentProperty.asDataPropertyExpression());
+		}
+		
+		if (property.isOWLAnnotationProperty() && parentProperty.isOWLAnnotationProperty()) {
+			axiom = df.getOWLSubAnnotationPropertyOfAxiom(property.asOWLAnnotationProperty(), parentProperty.asOWLAnnotationProperty());
+		}
+		
+		if (axiom != null) {
+			ontology.add(axiom);
+		} else {
+			System.out.println("addSubPropertyOf - incompatible properties");
+		}
+	}
+	
 	public static void addEquivalentClass(OWLOntology ontology, OWLClass entity, OWLClassExpression equivalentEntity) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAxiom axiom = df.getOWLEquivalentClassesAxiom(entity, equivalentEntity);
 		ontology.add(axiom);
 	}
 	
-	public static void addEquivalentProperties(OWLOntology ontology, OWLObjectPropertyExpression property1, OWLObjectPropertyExpression property2) {
+	public static void addEquivalentObjectProperties(OWLOntology ontology, OWLObjectPropertyExpression property1, OWLObjectPropertyExpression property2) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAxiom axiom = df.getOWLEquivalentObjectPropertiesAxiom(property1, property2);
+		ontology.add(axiom);
+	}
+	
+	public static void addEquivalentDataProperties(OWLOntology ontology, OWLDataPropertyExpression property1, OWLDataPropertyExpression property2) {
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLAxiom axiom = df.getOWLEquivalentDataPropertiesAxiom(property1, property2);
 		ontology.add(axiom);
 	}
 	
@@ -119,6 +159,14 @@ public class OWLUtils {
 		OWLAxiom axiom = df.getOWLDeclarationAxiom(owlObjectProperty);
 		ontology.add(axiom);
 		return owlObjectProperty;
+	}
+	
+	public static OWLAnnotationProperty createAnnotationProperty(OWLOntology ontology, IRI propertyIRI) {
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLAnnotationProperty annotationProperty = df.getOWLAnnotationProperty(propertyIRI);
+		OWLAxiom axiom = df.getOWLDeclarationAxiom(annotationProperty);
+		ontology.add(axiom);
+		return annotationProperty;
 	}
 	
 	public static OWLNamedIndividual createIndividual(OWLOntology ontology, IRI individualIRI, OWLClass type) {
@@ -233,4 +281,5 @@ public class OWLUtils {
 		OWLAxiom axiom = df.getOWLDisjointClassesAxiom(classes);
 		ontology.add(axiom);
 	}
+	
 }

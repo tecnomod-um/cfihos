@@ -10,6 +10,8 @@ import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataFactory;
+import org.semanticweb.owlapi.model.OWLEntity;
+import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectOneOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
@@ -17,17 +19,43 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLProperty;
 import org.semanticweb.owlapi.rdf.rdfxml.parser.RDFConstants;
 import org.semanticweb.owlapi.search.EntitySearcher;
+import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
 
 import es.um.dis.utils.OWLUtils;
 
 public class CFIHOSUtils {
+	
+	public static final String HAS_TAG = "hasTag";
+	public static final String HAS_UNECE_CODE = "hasUNECECode";
+	public static final String HAS_SOURCE_STANDARD = "hasSourceStandard";
+	public static final String HAS_REPRESENTATION_TYPE = "hasRepresentationType";
+	public static final String HAS_ASSET_TYPE_REFERENCE = "hasAssetTypeReference";
+	public static final String HAS_CFIHOS_CODE = "hasCFIHOSCode";
+	public static final String HAS_MEASUREMENT_SYSTEM = "hasMeasurementSystem";
+	public static final String HAS_EQUIPMENT = "hasEquipment";
+	public static final String HAS_DOCUMENT_TYPE = "hasDocumentType";
+	public static final String HAS_DISCIPLINE = "hasDiscipline";
+	public static final String QUALITATIVE_PROPERTY = "qualitativeProperty";
+	public static final String QUANTITATIVE_PROPERTY = "quantitativeProperty";
+	public static final String PROPERTY = "property";
+	public static final String PROPERTY_GROUP = "PropertyGroup";
+	public static final String PURPOSE = "Purpose";
+	public static final String PROPERTY_PICKLIST = "PropertyPicklist";
+	public static final String STANDARD = "Standard";
+	public static final String SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT = "SourceStandardDocumentAndDataRequirement";
+	public static final String MEASURE = "Measure";
+	public static final String IMPERIAL_SYSTEM_UNIT = "ImperialSystemUnit";
+	public static final String INTERNATIONAL_SYSTEM_UNIT = "InternationalSystemUnit";
+	
 	private static final String CFIHOS_SYSTEME_INTERNATIONAL_CODE = "CFIHOS-60001649";
 	private static final String CFIHOS_IMPERIAL_SYSTEM_CODE = "CFIHOS-60001650";
+	private static final String CFIHOS_HAS_CFIHOS_CODE = "hasCFIHOSCode";
+	private static final String CFIHOS_HAS_PURPOSE_CODE = "hasPurpose";
 	public static void addEquipmentClass(OWLOntology ontology, String prefixIRI, String prefixIRIForEquipment,
 			String classCode, String parentClassCode, String className, String classDefinition, String classSynonym) {
 
 		OWLClass owlClass = OWLUtils.createClass(ontology, IRI.create(prefixIRIForEquipment + classCode));
-		OWLUtils.addAnnotation(ontology, owlClass, IRI.create(prefixIRI + "hasCFIHOSCode"), classCode);
+		OWLUtils.addAnnotation(ontology, owlClass, getHasCFIHOSCode (prefixIRI), classCode);
 
 		if (parentClassCode != null && !parentClassCode.isEmpty()) {
 			OWLClass parentClass = ontology.getOWLOntologyManager().getOWLDataFactory()
@@ -45,6 +73,14 @@ public class CFIHOSUtils {
 				OWLUtils.addAnnotation(ontology, owlClass, IRI.create(OWLUtils.SKOS_ALT_LABEL_IRI), synonym.strip());
 			}
 		}
+	}
+	
+	private static IRI getHasCFIHOSCode (String prefixIRI) {
+		return IRI.create(prefixIRI + CFIHOS_HAS_CFIHOS_CODE);
+	}
+	
+	private static IRI getHasPurpose (String prefixIRI) {
+		return IRI.create(prefixIRI + CFIHOS_HAS_PURPOSE_CODE);
 	}
 	
 	public static void addEquipmentProperty(OWLOntology ontology, String prefixIRI, String prefixIRIForEquipment, String equipmentCode,
@@ -70,10 +106,10 @@ public class CFIHOSUtils {
 			String disciplineCode, String disciplineName, String disciplineDescription, OWLClass parentClass) {
 		
 		OWLClass owlClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + disciplineCFIHOSCode));
-		OWLUtils.addAnnotation(ontology, owlClass, IRI.create(prefixIRI + "hasCFIHOSCode"), disciplineCFIHOSCode);
+		OWLUtils.addAnnotation(ontology, owlClass, getHasCFIHOSCode (prefixIRI), disciplineCFIHOSCode);
 		OWLUtils.addSubclassOf(ontology, owlClass, parentClass);
 		if (disciplineCode != null && !disciplineCode.isEmpty()) {
-			OWLUtils.addAnnotation(ontology, owlClass, IRI.create("http://schema.org/identifier"), disciplineCode);
+			OWLUtils.addAnnotation(ontology, owlClass, IRI.create(OWLUtils.SCHEMA_IDENTIFIER), disciplineCode);
 		}
 		if (disciplineName != null && !disciplineName.isEmpty()) {
 			OWLUtils.addAnnotation(ontology, owlClass, IRI.create(RDFConstants.RDFS_LABEL), disciplineName);
@@ -89,11 +125,11 @@ public class CFIHOSUtils {
 			String documentTypeClassification, String documentTypeSynonym, OWLClass parentClass) {
 		
 		OWLClass owlClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + documentCFIHOSCode));
-		OWLUtils.addAnnotation(ontology, owlClass, IRI.create(prefixIRI + "hasCFIHOSCode"), documentCFIHOSCode);
+		OWLUtils.addAnnotation(ontology, owlClass, getHasCFIHOSCode (prefixIRI), documentCFIHOSCode);
 		OWLUtils.addSubclassOf(ontology, owlClass, parentClass);
 		
 		if (documentShortCode != null && !documentShortCode.isEmpty()) {
-			OWLUtils.addAnnotation(ontology, owlClass, IRI.create("http://schema.org/identifier"), documentShortCode);
+			OWLUtils.addAnnotation(ontology, owlClass, IRI.create(OWLUtils.SCHEMA_IDENTIFIER), documentShortCode);
 		}
 		if (documentName != null && !documentName.isEmpty()) {
 			OWLUtils.addAnnotation(ontology, owlClass, IRI.create(RDFConstants.RDFS_LABEL), documentName);
@@ -116,7 +152,7 @@ public class CFIHOSUtils {
 			return;
 		}
 		OWLClass owlClass = OWLUtils.createClass(ontology, IRI.create(prefixIRIForTags + tagClassCode));
-		OWLUtils.addAnnotation(ontology, owlClass, IRI.create(prefixIRI + "hasCFIHOSCode"), tagClassCode);
+		OWLUtils.addAnnotation(ontology, owlClass, getHasCFIHOSCode (prefixIRI), tagClassCode);
 
 		if (parentTagClassCode != null && !parentTagClassCode.isEmpty()) {
 			OWLClass parentClass = ontology.getOWLOntologyManager().getOWLDataFactory()
@@ -175,30 +211,30 @@ public class CFIHOSUtils {
 			return;
 		}
 		OWLClass disciplineDocumentClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + disciplineDocumentCode));
-		OWLUtils.addAnnotation(ontology, disciplineDocumentClass, IRI.create(prefixIRI + "hasCFIHOSCode"), disciplineDocumentCode);
+		OWLUtils.addAnnotation(ontology, disciplineDocumentClass, getHasCFIHOSCode (prefixIRI), disciplineDocumentCode);
 		
 		if (disciplineCode != null && !disciplineCode.isEmpty()) {
-			OWLObjectProperty hasDiscipline = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectProperty(prefixIRI + "hasDiscipline");
+			OWLObjectProperty hasDiscipline = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectProperty(prefixIRI + HAS_DISCIPLINE);
 			OWLClass disciplineClass = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClass(prefixIRI + disciplineCode);
 			OWLUtils.addObjectSomeValuesFromRestriction(ontology, hasDiscipline, disciplineDocumentClass, disciplineClass);
 		}
 		
 		if(documentCode != null && !documentCode.isEmpty()) {
-			OWLObjectProperty hasDocumentType = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectProperty(prefixIRI + "hasDocumentType");
+			OWLObjectProperty hasDocumentType = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectProperty(prefixIRI + HAS_DOCUMENT_TYPE);
 			OWLClass document = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClass(prefixIRI + documentCode);
 			OWLUtils.addObjectSomeValuesFromRestriction(ontology, hasDocumentType, disciplineDocumentClass, document);
 		}
 		
 		if(disciplineDocumentShortCode != null && !disciplineDocumentShortCode.isEmpty()) {
-			OWLUtils.addAnnotation(ontology, disciplineDocumentClass, IRI.create("http://schema.org/identifier"), disciplineDocumentShortCode);
+			OWLUtils.addAnnotation(ontology, disciplineDocumentClass, IRI.create(OWLUtils.SCHEMA_IDENTIFIER), disciplineDocumentShortCode);
 		}
 		
 		if(assetTypeReference != null && !assetTypeReference.isEmpty()) {
-			OWLUtils.addAnnotation(ontology, disciplineDocumentClass, IRI.create(prefixIRI + "hasAssetTypeReference"), assetTypeReference);
+			OWLUtils.addAnnotation(ontology, disciplineDocumentClass, IRI.create(prefixIRI + HAS_ASSET_TYPE_REFERENCE), assetTypeReference);
 		}
 		
 		if(representationType != null && !representationType.isEmpty()) {
-			OWLUtils.addAnnotation(ontology, disciplineDocumentClass, IRI.create(prefixIRI + "hasRepresentationType"), representationType);
+			OWLUtils.addAnnotation(ontology, disciplineDocumentClass, IRI.create(prefixIRI + HAS_REPRESENTATION_TYPE), representationType);
 		}
 		
 		if (parentClass != null) {
@@ -218,7 +254,7 @@ public class CFIHOSUtils {
 		ontology.add(axiom);
 		
 
-		OWLUtils.addAnnotation(ontology, standard, IRI.create(prefixIRI + "hasCFIHOSCode"), standardCFIHOSCode);
+		OWLUtils.addAnnotation(ontology, standard, getHasCFIHOSCode (prefixIRI), standardCFIHOSCode);
 		
 		
 		if(standardName != null && !standardName.isEmpty()) {
@@ -244,11 +280,11 @@ public class CFIHOSUtils {
 		OWLNamedIndividual standard = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(prefixIRI + sourceStandardCode);
 		if(ontology.containsClassInSignature(equipmentIRI)) {
 			OWLClass equipmentClass = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClass(equipmentIRI);
-			OWLUtils.addAnnotation(ontology, equipmentClass, IRI.create(prefixIRI + "hasSourceStandard"), standard.getIRI());
+			OWLUtils.addAnnotation(ontology, equipmentClass, IRI.create(prefixIRI + HAS_SOURCE_STANDARD), standard.getIRI());
 		}
 		if(ontology.containsClassInSignature(tagIRI)) {
 			OWLClass tagClass = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClass(tagIRI);
-			OWLUtils.addAnnotation(ontology, tagClass, IRI.create(prefixIRI + "hasSourceStandard"), standard.getIRI());
+			OWLUtils.addAnnotation(ontology, tagClass, IRI.create(prefixIRI + HAS_SOURCE_STANDARD), standard.getIRI());
 		}
 		
 	}
@@ -265,12 +301,12 @@ public class CFIHOSUtils {
 		if(propertyPicklistValueCFIHOSCode == null || propertyPicklistValueCFIHOSCode.isEmpty()) {
 			return;
 		}
-		OWLClass parentPicklistClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "PropertyPicklist"));
+		OWLClass parentPicklistClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + PROPERTY_PICKLIST));
 		OWLClass picklistClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + propertyPicklistCFIHOSCode));
 		OWLAxiom axiom = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLSubClassOfAxiom(picklistClass, parentPicklistClass);
 		ontology.add(axiom);
 		
-		OWLUtils.addAnnotation(ontology, picklistClass, IRI.create(prefixIRI + "hasCFIHOSCode"), propertyPicklistCFIHOSCode);
+		OWLUtils.addAnnotation(ontology, picklistClass, getHasCFIHOSCode (prefixIRI), propertyPicklistCFIHOSCode);
 		if (propertyPicklistName != null && !propertyPicklistName.isEmpty()) {
 			OWLUtils.addAnnotation(ontology, picklistClass, IRI.create(RDFConstants.RDFS_LABEL), propertyPicklistName);
 		}
@@ -279,7 +315,7 @@ public class CFIHOSUtils {
 //		OWLClass propertyPickListValue = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "PropertyPickListValue"));
 //		axiom = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClassAssertionAxiom(propertyPickListValue, propertyValue);
 //		ontology.add(axiom);
-		OWLUtils.addAnnotation(ontology, propertyValue, IRI.create(prefixIRI + "hasCFIHOSCode"), propertyPicklistValueCFIHOSCode);
+		OWLUtils.addAnnotation(ontology, propertyValue, getHasCFIHOSCode (prefixIRI), propertyPicklistValueCFIHOSCode);
 		if(propertyPicklistValueCode != null && !propertyPicklistValueCode.isEmpty()) {
 			OWLUtils.addAnnotation(ontology, propertyValue, IRI.create(RDFConstants.RDFS_LABEL), propertyPicklistValueCode);
 		}
@@ -288,7 +324,7 @@ public class CFIHOSUtils {
 		}
 		
 		if(sourceStandardCFIHOSCode != null && !sourceStandardCFIHOSCode.isEmpty()) {
-			OWLUtils.addAnnotation(ontology, picklistClass, IRI.create(prefixIRI + "hasSourceStandard"), IRI.create(prefixIRI + sourceStandardCFIHOSCode));
+			OWLUtils.addAnnotation(ontology, picklistClass, IRI.create(prefixIRI + HAS_SOURCE_STANDARD), IRI.create(prefixIRI + sourceStandardCFIHOSCode));
 		}
 	}
 
@@ -312,12 +348,16 @@ public class CFIHOSUtils {
 		
 	}
 	public static void addProperty(OWLOntology ontology, String prefixIRI, String propertyCFIHOSCode,
-			String propertyName, String propertyDefinition, String propertyRange) {
+			String propertyName, String propertyDefinition, String propertyDataType, String unitOfMeasureDimension, String propertyRange) {
 		if (propertyCFIHOSCode == null || propertyCFIHOSCode.isEmpty()) {
 			return;
 		}
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLObjectProperty objectProperty = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + propertyCFIHOSCode));
-		OWLUtils.addAnnotation(ontology, objectProperty, IRI.create(prefixIRI + "hasCFIHOSCode"), propertyCFIHOSCode);
+		OWLUtils.addAnnotation(ontology, objectProperty, getHasCFIHOSCode (prefixIRI), propertyCFIHOSCode);
+		
+		OWLObjectProperty quantitativeProperty = df.getOWLObjectProperty(prefixIRI + QUANTITATIVE_PROPERTY);
+		OWLObjectProperty qualitativeProperty = df.getOWLObjectProperty(prefixIRI + QUALITATIVE_PROPERTY);
 		
 		if (propertyName != null && !propertyName.isEmpty()) {
 			OWLUtils.addAnnotation(ontology, objectProperty, IRI.create(RDFConstants.RDFS_LABEL), propertyName);
@@ -327,11 +367,48 @@ public class CFIHOSUtils {
 			OWLUtils.addAnnotation(ontology, objectProperty, IRI.create(OWLUtils.IAO_DEFINITION_IRI), propertyDefinition);
 		}
 		
+		/* If property picklist is defined -> qualitative property */
 		if (propertyRange != null && !propertyRange.isEmpty()) {
 			OWLClass rangeClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + propertyRange));
 			OWLAxiom axiom = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectPropertyRangeAxiom(objectProperty, rangeClass);
 			ontology.add(axiom);
+			
+			OWLUtils.addSubPropertyOf(ontology, objectProperty, qualitativeProperty);
 		}
+		
+		/* If unit of measure dimension is defined -> quantitative property*/
+		if (unitOfMeasureDimension != null && !unitOfMeasureDimension.isEmpty()) {
+			OWLNamedIndividual dimension = df.getOWLNamedIndividual(prefixIRI + unitOfMeasureDimension);
+			OWLClass unit = df.getOWLClass(OWLUtils.OM2_UNIT);
+			OWLObjectProperty hasDimension = df.getOWLObjectProperty(OWLUtils.OM2_HAS_DIMENSION);
+			OWLClassExpression hasDimensionClassExpression = df.getOWLObjectHasValue(hasDimension, dimension);
+			OWLClassExpression unitAndHasDimensionExpression = df.getOWLObjectIntersectionOf(unit, hasDimensionClassExpression);
+			
+			OWLObjectProperty hasUnit = df.getOWLObjectProperty(OWLUtils.OM2_HAS_UNIT);
+			OWLClassExpression hasUnitSomeUnitAndHasDimensionExpression = df.getOWLObjectSomeValuesFrom(hasUnit, unitAndHasDimensionExpression);
+			
+			OWLClass measure = df.getOWLClass(OWLUtils.OM2_MEASURE);
+			OWLClassExpression classExpression = df.getOWLObjectIntersectionOf(measure, hasUnitSomeUnitAndHasDimensionExpression);
+			
+			OWLUtils.addRange(ontology, objectProperty, classExpression);
+			
+			
+			OWLUtils.addSubPropertyOf(ontology, objectProperty, quantitativeProperty);
+		}
+		
+		/* If the property does not have picklist nor dimension */
+		if ((unitOfMeasureDimension == null || unitOfMeasureDimension.isBlank()) 
+				&& (propertyRange == null || propertyRange.isBlank())) {
+			/* If the datatype is numeric -> quantitative property */
+			if ("Number".equals(propertyDataType)) {
+				OWLUtils.addSubPropertyOf(ontology, objectProperty, quantitativeProperty);
+			} 
+			/* Else -> qualitative property */
+			else {
+				OWLUtils.addSubPropertyOf(ontology, objectProperty, qualitativeProperty);
+			}
+		}
+			
 	}
 
 	public static void addDocumentRequiredPerClass(OWLOntology ontology, String prefixIRI, String equipmentPrefixIRI,
@@ -340,30 +417,30 @@ public class CFIHOSUtils {
 		if (dataRequirementCFIHOSCode == null || dataRequirementCFIHOSCode.isEmpty()) {
 			return;
 		}
-		OWLClass documentRequiredPerClassParentClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "SourceStandardDocumentAndDataRequirement"));
+		OWLClass documentRequiredPerClassParentClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI+ SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT));
 		OWLClass documentRequiredPerClassClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + dataRequirementCFIHOSCode));
 		OWLUtils.addSubclassOf(ontology, documentRequiredPerClassClass, documentRequiredPerClassParentClass);
-		OWLUtils.addAnnotation(ontology, documentRequiredPerClassClass, IRI.create(prefixIRI + "hasCFIHOSCode"), dataRequirementCFIHOSCode);
+		OWLUtils.addAnnotation(ontology, documentRequiredPerClassClass, getHasCFIHOSCode (prefixIRI), dataRequirementCFIHOSCode);
 		
 		if(tagOrEquipmentCFIHOSCode != null && !tagOrEquipmentCFIHOSCode.isEmpty()) {
 			if(ontology.containsClassInSignature(IRI.create(equipmentPrefixIRI + tagOrEquipmentCFIHOSCode))) {
 				OWLClass equipmentClass = OWLUtils.createClass(ontology, IRI.create(equipmentPrefixIRI + tagOrEquipmentCFIHOSCode));
-				OWLObjectProperty hasEquipment = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + "hasEquipment"));
+				OWLObjectProperty hasEquipment = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + HAS_EQUIPMENT));
 				OWLUtils.addObjectSomeValuesFromRestriction(ontology, hasEquipment, documentRequiredPerClassClass, equipmentClass);
 			}
 			if(ontology.containsClassInSignature(IRI.create(tagPrefixIRI + tagOrEquipmentCFIHOSCode))) {
 				OWLClass tagClass = OWLUtils.createClass(ontology, IRI.create(tagPrefixIRI + tagOrEquipmentCFIHOSCode));
-				OWLObjectProperty hasTag = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + "hasTag"));
+				OWLObjectProperty hasTag = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + HAS_TAG));
 				OWLUtils.addObjectSomeValuesFromRestriction(ontology, hasTag, documentRequiredPerClassClass, tagClass);
 			}
 		}
 		
 		if(standardCFIHOSCode != null && !standardCFIHOSCode.isEmpty()) {
-			OWLUtils.addAnnotation(ontology, documentRequiredPerClassClass, IRI.create(prefixIRI + "hasSourceStandard"), IRI.create(prefixIRI + standardCFIHOSCode));
+			OWLUtils.addAnnotation(ontology, documentRequiredPerClassClass, IRI.create(prefixIRI + HAS_SOURCE_STANDARD), IRI.create(prefixIRI + standardCFIHOSCode));
 		}
 		
 		if (documentTypeCFIHOSCode != null && !documentTypeCFIHOSCode.isEmpty()) {
-			OWLProperty hasDocumentType = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectProperty(prefixIRI + "hasDocumentType");
+			OWLProperty hasDocumentType = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectProperty(prefixIRI + HAS_DOCUMENT_TYPE);
 			OWLClass documentTypeClass = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClass(prefixIRI + documentTypeCFIHOSCode);
 			OWLUtils.addObjectSomeValuesFromRestriction(ontology, hasDocumentType, documentRequiredPerClassClass, documentTypeClass);
 		}
@@ -378,9 +455,9 @@ public class CFIHOSUtils {
 			return;
 		}
 		OWLNamedIndividual unitOfMeasure = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(prefixIRI + unitCFIHOSCode);
-		OWLUtils.addAnnotation(ontology, unitOfMeasure, IRI.create(prefixIRI + "hasCFIHOSCode"), unitCFIHOSCode);
+		OWLUtils.addAnnotation(ontology, unitOfMeasure, getHasCFIHOSCode (prefixIRI), unitCFIHOSCode);
 		if(uneceCode != null) {
-			OWLUtils.addAnnotation(ontology, unitOfMeasure, IRI.create(prefixIRI + "hasUNECECode"), uneceCode);
+			OWLUtils.addAnnotation(ontology, unitOfMeasure, IRI.create(prefixIRI + HAS_UNECE_CODE), uneceCode);
 		}
 		
 		if(unitName != null) {
@@ -388,23 +465,23 @@ public class CFIHOSUtils {
 		}
 		
 		if(unitSymbol != null) {
-			OWLUtils.addAnnotation(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_NS + "symbol"), unitSymbol);
+			OWLUtils.addAnnotation(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_SYMBOL), unitSymbol);
 		}
 		if (unitDimensionCode != null) {
 			OWLNamedIndividual dimension = addDimension(ontology, prefixIRI, unitDimensionCFIHOSCode, unitDimensionCode, unitDimensionName);
-			OWLUtils.addIndividualRelation(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_NS + "hasDimension"), dimension);
+			OWLUtils.addIndividualRelation(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_HAS_DIMENSION), dimension);
 		}
 		
 		if (measurementSystemCFIHOSCode != null) {
 			OWLNamedIndividual system = addMeasurementSystem(ontology, prefixIRI, measurementSystemCFIHOSCode, measurementSystemCode);
-			OWLUtils.addIndividualRelation(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_NS + "hasMeasurementSystem"), system);
+			OWLUtils.addIndividualRelation(ontology, unitOfMeasure, IRI.create(prefixIRI + HAS_MEASUREMENT_SYSTEM), system);
 			if(CFIHOS_SYSTEME_INTERNATIONAL_CODE.equals(measurementSystemCFIHOSCode)) {
-				OWLUtils.addClassAssertion(ontology, unitOfMeasure, IRI.create(prefixIRI + "InternationalSystemUnit"));
+				OWLUtils.addClassAssertion(ontology, unitOfMeasure, IRI.create(prefixIRI + INTERNATIONAL_SYSTEM_UNIT));
 			} else if (CFIHOS_IMPERIAL_SYSTEM_CODE.equals(measurementSystemCFIHOSCode)) {
-				OWLUtils.addClassAssertion(ontology, unitOfMeasure, IRI.create(prefixIRI + "ImperialSystemUnit"));
+				OWLUtils.addClassAssertion(ontology, unitOfMeasure, IRI.create(prefixIRI + IMPERIAL_SYSTEM_UNIT));
 			} 
 		} else {
-			OWLUtils.addClassAssertion(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_NS + "Unit"));
+			OWLUtils.addClassAssertion(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_UNIT));
 		}
 		if(unitSynonymName != null) {
 			OWLUtils.addAnnotation(ontology, unitOfMeasure, IRI.create(OWLUtils.SKOS_ALT_LABEL_IRI), unitSynonymName);
@@ -420,7 +497,7 @@ public class CFIHOSUtils {
 		}
 		
 		OWLNamedIndividual system = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(systemIRI);
-		OWLUtils.addAnnotation(ontology, system, IRI.create(prefixIRI + "hasCFIHOSCode"), measurementSystemCFIHOSCode);
+		OWLUtils.addAnnotation(ontology, system, getHasCFIHOSCode (prefixIRI), measurementSystemCFIHOSCode);
 		if(measurementSystemCode != null) {
 			OWLUtils.addAnnotation(ontology, system, IRI.create(RDFConstants.RDFS_LABEL), measurementSystemCode);
 		}
@@ -436,8 +513,8 @@ public class CFIHOSUtils {
 		}
 		
 		OWLNamedIndividual dimension = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(dimensionIRI);
-		OWLUtils.addAnnotation(ontology, dimension, IRI.create(prefixIRI + "hasCFIHOSCode"), unitDimensionCFIHOSCode);
-		OWLUtils.addClassAssertion(ontology, dimension, IRI.create(OWLUtils.OM2_NS + "Dimension"));
+		OWLUtils.addAnnotation(ontology, dimension, getHasCFIHOSCode (prefixIRI), unitDimensionCFIHOSCode);
+		OWLUtils.addClassAssertion(ontology, dimension, IRI.create(OWLUtils.OM2_DIMENSION));
 		
 		if(unitDimensionCode != null) {
 			OWLUtils.addAnnotation(ontology, dimension, IRI.create(OWLUtils.SKOS_ALT_LABEL_IRI), unitDimensionCode);
@@ -448,6 +525,123 @@ public class CFIHOSUtils {
 		}
 		
 		return dimension;
+	}
+
+//	public static OWLObjectProperty createPropertyGroup(OWLOntology ontology, String prefixIRI, String propertyGroupCFIHOSUniqueCode, String propertyGroupCode,
+//			String propertyGroupDescription) {
+//		
+//		if (propertyGroupCFIHOSUniqueCode == null || propertyGroupCFIHOSUniqueCode.isBlank()) {
+//			return null;
+//		}
+//		IRI propertyGroupIRI = IRI.create(prefixIRI + propertyGroupCFIHOSUniqueCode);
+//		if(ontology.containsObjectPropertyInSignature(propertyGroupIRI)) {
+//			return ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectProperty(propertyGroupIRI);
+//		}
+//		
+//		OWLObjectProperty propertyGroup = OWLUtils.createObjectProperty(ontology, propertyGroupIRI);
+//		OWLUtils.addAnnotation(ontology, propertyGroup, getHasCFIHOSCode (prefixIRI), propertyGroupCFIHOSUniqueCode);
+//		
+//		if (propertyGroupDescription != null && !propertyGroupDescription.isBlank()) {
+//			OWLUtils.addAnnotation(ontology, propertyGroup, IRI.create(RDFConstants.RDFS_LABEL), propertyGroupDescription);
+//			OWLUtils.addAnnotation(ontology, propertyGroup, IRI.create(OWLUtils.IAO_DEFINITION_IRI), propertyGroupDescription);
+//		}
+//		
+//		if (propertyGroupCode != null && !propertyGroupCode.isBlank()) {
+//			OWLUtils.addAnnotation(ontology, propertyGroup, IRI.create(OWLUtils.SCHEMA_IDENTIFIER), propertyGroupCode);
+//		}
+//		return propertyGroup;
+//	}
+	
+	public static OWLClass createPropertyGroup(OWLOntology ontology, String prefixIRI, String propertyGroupCFIHOSUniqueCode, String propertyGroupCode,
+			String propertyGroupDescription) {
+		
+		if (propertyGroupCFIHOSUniqueCode == null || propertyGroupCFIHOSUniqueCode.isBlank()) {
+			return null;
+		}
+		IRI propertyGroupIRI = IRI.create(prefixIRI + propertyGroupCFIHOSUniqueCode);
+		if(ontology.containsClassInSignature(propertyGroupIRI)) {
+			return ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClass(propertyGroupIRI);
+		}
+		
+		OWLClass propertyGroup = OWLUtils.createClass(ontology, propertyGroupIRI);
+		OWLUtils.addAnnotation(ontology, propertyGroup, getHasCFIHOSCode (prefixIRI), propertyGroupCFIHOSUniqueCode);
+		
+		if (propertyGroupDescription != null && !propertyGroupDescription.isBlank()) {
+			OWLUtils.addAnnotation(ontology, propertyGroup, IRI.create(RDFConstants.RDFS_LABEL), propertyGroupDescription);
+			OWLUtils.addAnnotation(ontology, propertyGroup, IRI.create(OWLUtils.IAO_DEFINITION_IRI), propertyGroupDescription);
+		}
+		
+		if (propertyGroupCode != null && !propertyGroupCode.isBlank()) {
+			OWLUtils.addAnnotation(ontology, propertyGroup, IRI.create(OWLUtils.SCHEMA_IDENTIFIER), propertyGroupCode);
+		}
+		
+		OWLClass propertyGroupClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + PROPERTY_GROUP));
+		OWLUtils.addSubclassOf(ontology, propertyGroup, propertyGroupClass);
+		return propertyGroup;
+	}
+	
+	private static OWLEntity addPropertyGroupingOrDecompositionPurpose (OWLOntology ontology, String prefixIRI, String propertyGroupingOrDecompositionPurposeCFIHOSUniqueCode, String propertyGroupingPurposeCode,
+			String propertyGroupingPurposeDescription) {
+		if (propertyGroupingOrDecompositionPurposeCFIHOSUniqueCode == null || propertyGroupingOrDecompositionPurposeCFIHOSUniqueCode.isBlank()) {
+			return null;
+		}
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		IRI propertyGroupingOrDecompositionPurposeIRI = IRI.create(prefixIRI + propertyGroupingOrDecompositionPurposeCFIHOSUniqueCode);
+		if (ontology.containsClassInSignature(propertyGroupingOrDecompositionPurposeIRI)) {
+			return df.getOWLClass(propertyGroupingOrDecompositionPurposeIRI);
+		}
+		
+		OWLClass propertyGroupingOrDecompositionPurpose = df.getOWLClass(propertyGroupingOrDecompositionPurposeIRI);
+		OWLUtils.addAnnotation(ontology, propertyGroupingOrDecompositionPurpose, getHasCFIHOSCode(prefixIRI), propertyGroupingOrDecompositionPurposeCFIHOSUniqueCode);
+		
+		if(propertyGroupingPurposeCode != null && !propertyGroupingPurposeCode.isBlank()) {
+			OWLUtils.addAnnotation(ontology, propertyGroupingOrDecompositionPurpose, OWLRDFVocabulary.RDFS_LABEL.getIRI(), propertyGroupingPurposeCode);
+		}
+		
+		if(propertyGroupingPurposeDescription != null && !propertyGroupingPurposeDescription.isBlank()) {
+			OWLUtils.addAnnotation(ontology, propertyGroupingOrDecompositionPurpose, IRI.create(OWLUtils.IAO_DEFINITION_IRI), propertyGroupingPurposeDescription);
+		}
+
+		OWLClass purposeClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + "Purpose"));
+		OWLUtils.addSubclassOf(ontology, propertyGroupingOrDecompositionPurpose, purposeClass);
+		return propertyGroupingOrDecompositionPurpose;
+	}
+	
+	private static OWLObjectProperty addPropertyGroupAllowedForPurpose (OWLOntology ontology, String prefixIRI, String propertyGroupAllowedForPurposeCFIHOSUniqueCode, String propertyGroupingOrDecompositionPurposeCFIHOSUniqueCode, String propertyGroupingPurposeCode,
+			String propertyGroupingPurposeDescription) {
+		if (propertyGroupAllowedForPurposeCFIHOSUniqueCode == null || propertyGroupAllowedForPurposeCFIHOSUniqueCode.isBlank()) {
+			return null;
+		}
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		IRI propertyGroupAllowedForPurposeIRI = IRI.create(prefixIRI + propertyGroupAllowedForPurposeCFIHOSUniqueCode);
+		OWLObjectProperty propertyGroupAllowedForPurpose = df.getOWLObjectProperty(propertyGroupAllowedForPurposeIRI);
+		OWLUtils.addAnnotation(ontology, propertyGroupAllowedForPurpose, getHasCFIHOSCode(prefixIRI), propertyGroupAllowedForPurposeCFIHOSUniqueCode);
+		OWLEntity purpose = addPropertyGroupingOrDecompositionPurpose (ontology, prefixIRI, propertyGroupingOrDecompositionPurposeCFIHOSUniqueCode, propertyGroupingPurposeCode,
+				propertyGroupingPurposeDescription);
+		if(purpose != null) {
+			OWLUtils.addAnnotation(ontology, propertyGroupAllowedForPurpose, getHasPurpose(prefixIRI), purpose.getIRI());
+		}
+		return propertyGroupAllowedForPurpose;
+	}
+	public static void addPropertyGrouping(OWLOntology ontology, String prefixIRI, String propertyGroupAllowedForPurposeCFIHOSUniqueCode,
+			String propertyGroupingOrDecompositionPurposeCFIHOSUniqueCode, String propertyGroupingPurposeCode,
+			String propertyGroupingPurposeDescription, String propertyGroupCFIHOSUniqueCode, String propertyGroupCode,
+			String propertyGroupDescription, String propertyToGroupAssignmentCFIHOSUniqueCode,
+			String propertyCFIHOSUniqueCode) {
+		
+		OWLClass propertyGroup = createPropertyGroup(ontology, prefixIRI, propertyGroupCFIHOSUniqueCode, propertyGroupCode, propertyGroupDescription);
+		if (propertyGroup != null) {
+			IRI propertyIRI = IRI.create(prefixIRI + propertyCFIHOSUniqueCode);
+			OWLObjectProperty property = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectProperty(propertyIRI);
+			//OWLUtils.addSubPropertyOf(ontology, property, propertyGroup);
+			OWLUtils.addAnnotation(ontology, property, IRI.create(OWLUtils.SCHEMA_CATEGORY), propertyGroup.getIRI());
+		}
+//		OWLObjectProperty propertyGroupAllowedForPurpose = addPropertyGroupAllowedForPurpose (ontology, prefixIRI, propertyGroupAllowedForPurposeCFIHOSUniqueCode, propertyGroupingOrDecompositionPurposeCFIHOSUniqueCode, propertyGroupingPurposeCode,
+//				propertyGroupingPurposeDescription);
+//		
+//		if(propertyGroupAllowedForPurpose != null) {
+//			OWLUtils.addSubPropertyOf(ontology, propertyGroup, propertyGroupAllowedForPurpose);
+//		}
 	}
 
 }
