@@ -255,7 +255,10 @@ public class OWLUtils {
 		
 	}
 	
-
+	public static void addObjectAllValuesFromRestriction(OWLOntology ontology, OWLObjectProperty property, OWLClass owlClass, OWLClassExpression classExpression) {
+		OWLClassExpression allValuesFromExpression = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectAllValuesFrom(property, classExpression);
+		addSubclassOf(ontology, owlClass, allValuesFromExpression);
+	}
 	
 	public static List<OWLNamedIndividual> getIndividualsFromList(OWLOntology ontology, String prefixIRI, List<String> listOfNames, OWLClass type) {
 		List<OWLNamedIndividual> result = new ArrayList<>();

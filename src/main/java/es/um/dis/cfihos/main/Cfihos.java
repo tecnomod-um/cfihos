@@ -73,7 +73,7 @@ public class Cfihos {
 		OWLOntology ontology = generateOntology(inputStream);
 		ontology.saveOntology(new FileOutputStream(new File(OUTPUT_FILE)));
 		
-		OWLOntology ontologyIDO = generateIDOCompliantOntology(OUTPUT_FILE);
+		OWLOntology ontologyIDO = generateIDOCompliantOntology(OUTPUT_FILE, getPrefixIRI());
 		ontologyIDO.saveOntology(new FileOutputStream(new File(OUTPUT_FILE_IDO)));
 	}
 	
@@ -89,7 +89,7 @@ public class Cfihos {
 		return prefixIRI;
 	}
 	
-	private static String getPrefixIRIForTags() {
+	public static String getPrefixIRIForTags() {
 		String prefixIRI = CFIHOS_ONTOLOGY_IRI.getIRIString() + "/tag" + "#";
 		return prefixIRI;
 	}
@@ -192,7 +192,7 @@ public class Cfihos {
 		OWLObjectProperty hasMeasurementSystem = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.HAS_MEASUREMENT_SYSTEM));
 		OWLUtils.addAnnotation(ontology, hasMeasurementSystem, IRI.create(RDFConstants.RDFS_LABEL), "has measurement system");
 		
-		OWLAnnotationProperty hasCFIHOSCode = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.HAS_CFIHOS_CODE));
+		OWLAnnotationProperty hasCFIHOSCode = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_HAS_CFIHOS_CODE));
 		OWLUtils.addAnnotation(ontology, hasCFIHOSCode, IRI.create(RDFConstants.RDFS_LABEL), "has CFIHOS code");
 		
 		OWLAnnotationProperty hasAssetTypeReference = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.HAS_ASSET_TYPE_REFERENCE));
@@ -862,7 +862,7 @@ public class Cfihos {
 		
 	}
 	
-	private static OWLOntology generateIDOCompliantOntology(String cfihosOntologyPath) throws OWLOntologyCreationException {
+	private static OWLOntology generateIDOCompliantOntology(String cfihosOntologyPath, String cfihosPrefix) throws OWLOntologyCreationException {
 		/* Create ontology */
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology ontology = manager.createOntology(CFIHOS_IDO_ONTOLOGY_IRI);
@@ -929,10 +929,10 @@ public class Cfihos {
 		OWLClass cfihosUnitClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.OM2_UNIT);
 		OWLUtils.addSubclassOf(ontology, cfihosUnitClass, idoInformationObjectClass);
 		
-		/* om2:dimension subclass of physical quantity */
-		OWLClass idoPhysicalQuantityClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "PhysicalQuantity");
+		/* om2:dimension subclass of information object */
+		//OWLClass idoPhysicalQuantityClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "PhysicalQuantity");
 		OWLClass cfihosDimensionClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.OM2_NS + "Dimension");
-		OWLUtils.addSubclassOf(ontology, cfihosDimensionClass, idoPhysicalQuantityClass);
+		OWLUtils.addSubclassOf(ontology, cfihosDimensionClass, idoInformationObjectClass);
 		
 		/* om2:Measure as subclass of quality datum*/
 		OWLClass idoQualityDatumClass = manager.getOWLDataFactory().getOWLClass(OWLUtils.IDO_NS + "QualityDatum");
@@ -970,6 +970,10 @@ public class Cfihos {
 		OWLDataProperty idoDatumValue = manager.getOWLDataFactory().getOWLDataProperty(OWLUtils.IDO_NS + "datumValue");
 		OWLDataProperty cfihosHasNumericalValue = manager.getOWLDataFactory().getOWLDataProperty(OWLUtils.OM2_HAS_NUMERICAL_VALUE);
 		OWLUtils.addEquivalentDataProperties(ontology, cfihosHasNumericalValue, idoDatumValue);
+		
+
+		/*Qualities do not appear in CFIHOS, but we create them from the properties to make them interoperable with IDO */
+		CFIHOSUtils.includeQualitiesForIDO(ontology,cfihosPrefix);
 		return ontology;
 	}
 	

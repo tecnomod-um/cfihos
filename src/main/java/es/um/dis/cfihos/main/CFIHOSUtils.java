@@ -3,21 +3,27 @@ package es.um.dis.cfihos.main;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.rdf4j.model.vocabulary.RDFS;
+import org.semanticweb.owlapi.model.HasComponents;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLAnnotationValue;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLEntity;
-import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectOneOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLProperty;
 import org.semanticweb.owlapi.rdf.rdfxml.parser.RDFConstants;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
 
@@ -25,12 +31,12 @@ import es.um.dis.utils.OWLUtils;
 
 public class CFIHOSUtils {
 	
+	private static final String CFIHOS_TAG_CODE = "CFIHOS-30000311";
 	public static final String HAS_TAG = "hasTag";
 	public static final String HAS_UNECE_CODE = "hasUNECECode";
 	public static final String HAS_SOURCE_STANDARD = "hasSourceStandard";
 	public static final String HAS_REPRESENTATION_TYPE = "hasRepresentationType";
 	public static final String HAS_ASSET_TYPE_REFERENCE = "hasAssetTypeReference";
-	public static final String HAS_CFIHOS_CODE = "hasCFIHOSCode";
 	public static final String HAS_MEASUREMENT_SYSTEM = "hasMeasurementSystem";
 	public static final String HAS_EQUIPMENT = "hasEquipment";
 	public static final String HAS_DOCUMENT_TYPE = "hasDocumentType";
@@ -47,10 +53,10 @@ public class CFIHOSUtils {
 	public static final String IMPERIAL_SYSTEM_UNIT = "ImperialSystemUnit";
 	public static final String INTERNATIONAL_SYSTEM_UNIT = "InternationalSystemUnit";
 	
-	private static final String CFIHOS_SYSTEME_INTERNATIONAL_CODE = "CFIHOS-60001649";
-	private static final String CFIHOS_IMPERIAL_SYSTEM_CODE = "CFIHOS-60001650";
-	private static final String CFIHOS_HAS_CFIHOS_CODE = "hasCFIHOSCode";
-	private static final String CFIHOS_HAS_PURPOSE_CODE = "hasPurpose";
+	public static final String CFIHOS_SYSTEME_INTERNATIONAL_CODE = "CFIHOS-60001649";
+	public static final String CFIHOS_IMPERIAL_SYSTEM_CODE = "CFIHOS-60001650";
+	public static final String CFIHOS_HAS_CFIHOS_CODE = "hasCFIHOSCode";
+	public static final String CFIHOS_HAS_PURPOSE_CODE = "hasPurpose";
 	public static void addEquipmentClass(OWLOntology ontology, String prefixIRI, String prefixIRIForEquipment,
 			String classCode, String parentClassCode, String className, String classDefinition, String classSynonym) {
 
@@ -642,6 +648,70 @@ public class CFIHOSUtils {
 //		if(propertyGroupAllowedForPurpose != null) {
 //			OWLUtils.addSubPropertyOf(ontology, propertyGroup, propertyGroupAllowedForPurpose);
 //		}
+	}
+
+	/**
+	 * Create quiality classes from the properties defined by CFIHOS for interoperability with IDO.
+	 * @param ontology
+	 */
+	public static void includeQualitiesForIDO(OWLOntology ontology, String cfihosPrefix) {
+		/* Create quality classes */
+		OWLObjectProperty qualitativeProperty = OWLUtils.createObjectProperty(ontology, IRI.create(cfihosPrefix + QUALITATIVE_PROPERTY));
+		OWLObjectProperty quantitativeProperty = OWLUtils.createObjectProperty(ontology, IRI.create(cfihosPrefix + 	QUANTITATIVE_PROPERTY));
+		List<OWLObjectProperty> qualitativeProperties = EntitySearcher.getSubProperties(qualitativeProperty, ontology.importsClosure()).collect(Collectors.toList());
+		List<OWLObjectProperty> quantitativeProperties = EntitySearcher.getSubProperties(quantitativeProperty, ontology.importsClosure()).collect(Collectors.toList());
+		
+		OWLClass parentQualityClass = OWLUtils.createClass(ontology, IRI.create(OWLUtils.IDO_NS + "Quality"));
+		for(OWLObjectProperty property : qualitativeProperties) {
+			includeQualityForIDO(ontology, property, cfihosPrefix, parentQualityClass);
+		}
+		
+		parentQualityClass = OWLUtils.createClass(ontology, IRI.create(OWLUtils.IDO_NS + "PhysicalQuantity"));
+		for(OWLObjectProperty property : quantitativeProperties) {
+			includeQualityForIDO(ontology, property, cfihosPrefix, parentQualityClass);
+		}
+		
+		/* Add OWL axioms to tags */
+		OWLClass tagParentClass = OWLUtils.createClass(ontology, IRI.create(Cfihos.getPrefixIRIForTags() + CFIHOS_TAG_CODE));
+		OWLObjectProperty hasPhysicalQuantity = OWLUtils.createObjectProperty(ontology, IRI.create(OWLUtils.IDO_NS + "hasPhysicalQuantity"));
+		OWLObjectProperty qualityQuantifiedAs = OWLUtils.createObjectProperty(ontology, IRI.create(OWLUtils.IDO_NS + "qualityQuantifiedAs"));
+		OWLReasoner reasoner = new StructuralReasonerFactory().createReasoner(ontology);
+		Set<OWLClass> tagClasses = reasoner.subClasses(tagParentClass, false).collect(Collectors.toSet());
+		for(OWLClass tagClass : tagClasses) {
+			EntitySearcher.getSuperClasses(tagClass, ontology.importsClosure()).filter(subClassOfExpression -> (subClassOfExpression.isAnonymous()))
+			.forEach(subClassOfExpression -> {
+				/* Identify object property and class expression */
+				List<?> components = subClassOfExpression.componentsWithoutAnnotations().collect(Collectors.toList());
+				OWLObjectProperty objectProperty = (OWLObjectProperty) components.get(0);
+				OWLClassExpression classExpression = (OWLClassExpression) components.get(1);
+				
+				/* Convert them into IDO schema */
+				IRI qualityClassIRI = IRI.create(objectProperty.getIRI().toString() + "Quality");
+				OWLClass qualityClass = OWLUtils.createClass(ontology, qualityClassIRI);
+				
+				OWLUtils.addObjectAllValuesFromRestriction(ontology, hasPhysicalQuantity, tagClass, qualityClass);
+				OWLUtils.addObjectAllValuesFromRestriction(ontology, qualityQuantifiedAs, qualityClass, classExpression);
+				
+			});
+		}
+		
+	}
+	
+	public static void includeQualityForIDO(OWLOntology ontology, OWLObjectProperty property, String cfihosPrefix, OWLClass parentQualityClass) {
+		IRI qualityClassIRI = IRI.create(property.getIRI().toString() + "Quality");
+		OWLClass qualityClass = OWLUtils.createClass(ontology, qualityClassIRI);
+		OWLUtils.addSubclassOf(ontology, qualityClass, parentQualityClass);
+		OWLUtils.addAnnotation(ontology, qualityClass, IRI.create("http://purl.org/pav/derivedFrom"), property.getIRI());
+		ontology.importsClosure().forEach(importedOntology -> {
+			EntitySearcher.getAnnotationAssertionAxioms(property, importedOntology).forEach(annotationAssertionAxiom -> {
+				OWLAnnotationProperty annotationProperty = annotationAssertionAxiom.getProperty();
+				if (!annotationProperty.getIRI().toString().equals(cfihosPrefix + CFIHOS_HAS_CFIHOS_CODE)) {
+					OWLAnnotationValue value = annotationAssertionAxiom.getValue();
+					OWLUtils.addAnnotation(ontology, qualityClass, annotationProperty.getIRI(), value);
+				}
+			});
+		});
+		
 	}
 
 }
