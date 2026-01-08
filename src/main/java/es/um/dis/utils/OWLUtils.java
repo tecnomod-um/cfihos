@@ -3,8 +3,11 @@ package es.um.dis.utils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLAnnotationValue;
 import org.semanticweb.owlapi.model.OWLAxiom;
@@ -80,10 +83,31 @@ public class OWLUtils {
 		ontology.add(axiom);
 	}
 
-	public static void addSubclassOf(OWLOntology ontology, OWLClass entity, OWLClassExpression parentEntity) {
+	public static void addAnnotation(OWLOntology ontology, OWLAxiom owlAxiom, IRI annotationPropertyIRI,
+			OWLAnnotationValue annotationValue) {
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLAnnotationProperty annotationProperty = df.getOWLAnnotationProperty(annotationPropertyIRI);
+		OWLAnnotation annotation = df.getOWLAnnotation(annotationProperty, annotationValue);
+		Set<OWLAnnotation> newAnnotations = owlAxiom.annotations().collect(Collectors.toSet());
+		newAnnotations.add(annotation);
+		
+		OWLAxiom annotatedAxiom = owlAxiom.getAnnotatedAxiom(newAnnotations);
+		ontology.add(annotatedAxiom);
+		ontology.remove(owlAxiom);
+	}
+	
+	public static void addAnnotation(OWLOntology ontology, OWLAxiom owlAxiom, IRI annotationPropertyIRI,
+			String literal) {
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLLiteral annotationValue = df.getOWLLiteral(literal);
+		addAnnotation(ontology, owlAxiom, annotationPropertyIRI, annotationValue);
+	}
+	
+	public static OWLAxiom addSubclassOf(OWLOntology ontology, OWLClass entity, OWLClassExpression parentEntity) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAxiom axiom = df.getOWLSubClassOfAxiom(entity, parentEntity);
 		ontology.add(axiom);
+		return axiom;
 	}
 	
 	public static void addSubPropertyOf(OWLOntology ontology, OWLProperty property, OWLProperty parentProperty) {
@@ -244,20 +268,22 @@ public class OWLUtils {
 		ontology.add(axiom);
 	}
 	
-	public static void addObjectSomeValuesFromRestriction(OWLOntology ontology, OWLProperty property, OWLClass owlClass, OWLClassExpression classExpression) {
+	public static OWLClassExpression addObjectSomeValuesFromRestriction(OWLOntology ontology, OWLProperty property, OWLClass owlClass, OWLClassExpression classExpression) {
 		OWLClassExpression someValuesFromExpression = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectSomeValuesFrom((OWLObjectPropertyExpression) property, classExpression);
 		addSubclassOf(ontology, owlClass, someValuesFromExpression);
-		
+		return someValuesFromExpression;
 	}
-	public static void addDataSomeValuesFromRestriction(OWLOntology ontology, OWLDataProperty property, OWLClass owlClass, OWLDataRange datatype) {
+	public static OWLAxiom addDataSomeValuesFromRestriction(OWLOntology ontology, OWLDataProperty property, OWLClass owlClass, OWLDataRange datatype) {
 		OWLClassExpression someValuesFromExpression = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLDataSomeValuesFrom(property, datatype);
-		addSubclassOf(ontology, owlClass, someValuesFromExpression);
+		OWLAxiom axiom = addSubclassOf(ontology, owlClass, someValuesFromExpression);
+		return axiom;
 		
 	}
 	
-	public static void addObjectAllValuesFromRestriction(OWLOntology ontology, OWLObjectProperty property, OWLClass owlClass, OWLClassExpression classExpression) {
+	public static OWLAxiom addObjectAllValuesFromRestriction(OWLOntology ontology, OWLObjectProperty property, OWLClass owlClass, OWLClassExpression classExpression) {
 		OWLClassExpression allValuesFromExpression = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectAllValuesFrom(property, classExpression);
-		addSubclassOf(ontology, owlClass, allValuesFromExpression);
+		OWLAxiom axiom = addSubclassOf(ontology, owlClass, allValuesFromExpression);
+		return axiom;
 	}
 	
 	public static List<OWLNamedIndividual> getIndividualsFromList(OWLOntology ontology, String prefixIRI, List<String> listOfNames, OWLClass type) {

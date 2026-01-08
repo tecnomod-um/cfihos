@@ -43,8 +43,8 @@ public class Cfihos {
 	private static final String OUTPUT_FILE = "CORE-CFIHOS-V2.0.owl";
 
 	private static final String OUTPUT_FILE_IDO = "CORE-CFIHOS-V2.0_ido.owl";
-	private static final IRI CFIHOS_ONTOLOGY_IRI = IRI.create("http://infohub.siemens-energy.com/CFIHOS");
-	private static final IRI CFIHOS_IDO_ONTOLOGY_IRI = IRI.create("http://infohub.siemens-energy.com/CFIHOS-IDO");
+	public static final IRI CFIHOS_ONTOLOGY_IRI = IRI.create("http://infohub.siemens-energy.com/CFIHOS");
+	public static final IRI CFIHOS_IDO_ONTOLOGY_IRI = IRI.create("http://infohub.siemens-energy.com/CFIHOS-IDO");
 	
 	/* Internal constants */
 	private static final String DISCIPLINE_DOCUMENT_TYPE_SHEET_NAME = "discipline document type";
@@ -74,6 +74,7 @@ public class Cfihos {
 		ontology.saveOntology(new FileOutputStream(new File(OUTPUT_FILE)));
 		
 		OWLOntology ontologyIDO = generateIDOCompliantOntology(OUTPUT_FILE, getPrefixIRI());
+		ontologyIDO.imports().filter(x -> x.getOntologyID().getOntologyIRI().get().equals(CFIHOS_ONTOLOGY_IRI)).findFirst().get().saveOntology(new FileOutputStream(new File(OUTPUT_FILE)));
 		ontologyIDO.saveOntology(new FileOutputStream(new File(OUTPUT_FILE_IDO)));
 	}
 	

@@ -655,6 +655,9 @@ public class CFIHOSUtils {
 	 * @param ontology
 	 */
 	public static void includeQualitiesForIDO(OWLOntology ontology, String cfihosPrefix) {
+		/* Get CFIHOS ontology */
+		OWLOntology cfihosOntology = ontology.imports().filter(ont -> (Cfihos.CFIHOS_ONTOLOGY_IRI.equals(ont.getOntologyID().getOntologyIRI().get()))).findFirst().get();
+		
 		/* Create quality classes */
 		OWLObjectProperty qualitativeProperty = OWLUtils.createObjectProperty(ontology, IRI.create(cfihosPrefix + QUALITATIVE_PROPERTY));
 		OWLObjectProperty quantitativeProperty = OWLUtils.createObjectProperty(ontology, IRI.create(cfihosPrefix + 	QUANTITATIVE_PROPERTY));
@@ -678,8 +681,9 @@ public class CFIHOSUtils {
 		OWLReasoner reasoner = new StructuralReasonerFactory().createReasoner(ontology);
 		Set<OWLClass> tagClasses = reasoner.subClasses(tagParentClass, false).collect(Collectors.toSet());
 		for(OWLClass tagClass : tagClasses) {
-			EntitySearcher.getSuperClasses(tagClass, ontology.importsClosure()).filter(subClassOfExpression -> (subClassOfExpression.isAnonymous()))
-			.forEach(subClassOfExpression -> {
+			cfihosOntology.subClassAxiomsForSubClass(tagClass).filter(axiom -> axiom.getSuperClass().isAnonymous()).forEach(subClassOfAxiom -> {
+				OWLClassExpression subClassOfExpression = subClassOfAxiom.getSuperClass();
+				
 				/* Identify object property and class expression */
 				List<?> components = subClassOfExpression.componentsWithoutAnnotations().collect(Collectors.toList());
 				OWLObjectProperty objectProperty = (OWLObjectProperty) components.get(0);
@@ -689,9 +693,17 @@ public class CFIHOSUtils {
 				IRI qualityClassIRI = IRI.create(objectProperty.getIRI().toString() + "Quality");
 				OWLClass qualityClass = OWLUtils.createClass(ontology, qualityClassIRI);
 				
-				OWLUtils.addObjectAllValuesFromRestriction(ontology, hasPhysicalQuantity, tagClass, qualityClass);
-				OWLUtils.addObjectAllValuesFromRestriction(ontology, qualityQuantifiedAs, qualityClass, classExpression);
+				OWLAxiom classExpression1 = OWLUtils.addObjectAllValuesFromRestriction(ontology, hasPhysicalQuantity, tagClass, qualityClass);
+				OWLAxiom classExpression2 = OWLUtils.addObjectAllValuesFromRestriction(ontology, qualityQuantifiedAs, qualityClass, classExpression);
 				
+				/* Add comment to CFIHOS ontology indicating the translation from object property to IDO schema */
+				
+				StringBuilder comment = new StringBuilder();
+				comment.append("Conversion to IDO schema:\n");
+				comment.append(classExpression1.toString()).append('\n');
+				comment.append(classExpression2.toString());
+				
+				OWLUtils.addAnnotation(cfihosOntology, subClassOfAxiom, OWLRDFVocabulary.RDFS_COMMENT.getIRI(), comment.toString());
 			});
 		}
 		
