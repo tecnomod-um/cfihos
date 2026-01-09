@@ -268,10 +268,9 @@ public class OWLUtils {
 		ontology.add(axiom);
 	}
 	
-	public static OWLClassExpression addObjectSomeValuesFromRestriction(OWLOntology ontology, OWLProperty property, OWLClass owlClass, OWLClassExpression classExpression) {
+	public static OWLAxiom addObjectSomeValuesFromRestriction(OWLOntology ontology, OWLProperty property, OWLClass owlClass, OWLClassExpression classExpression) {
 		OWLClassExpression someValuesFromExpression = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectSomeValuesFrom((OWLObjectPropertyExpression) property, classExpression);
-		addSubclassOf(ontology, owlClass, someValuesFromExpression);
-		return someValuesFromExpression;
+		return addSubclassOf(ontology, owlClass, someValuesFromExpression);
 	}
 	public static OWLAxiom addDataSomeValuesFromRestriction(OWLOntology ontology, OWLDataProperty property, OWLClass owlClass, OWLDataRange datatype) {
 		OWLClassExpression someValuesFromExpression = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLDataSomeValuesFrom(property, datatype);

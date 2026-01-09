@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="User Entered Import Resolution" name="http://infohub.siemens-energy.com/CFIHOS-IDO" uri="CORE-CFIHOS-V2.0_ido.owl"/>
     <uri id="User Entered Import Resolution" name="http://infohub.siemens-energy.com/CFIHOS" uri="CORE-CFIHOS-V2.0.owl"/>
 </catalog>

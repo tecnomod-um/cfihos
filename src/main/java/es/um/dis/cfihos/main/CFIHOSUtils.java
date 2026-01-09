@@ -669,14 +669,15 @@ public class CFIHOSUtils {
 			includeQualityForIDO(ontology, property, cfihosPrefix, parentQualityClass);
 		}
 		
-		parentQualityClass = OWLUtils.createClass(ontology, IRI.create(OWLUtils.IDO_NS + "PhysicalQuantity"));
+		OWLClass parentPhysicalQuantityClass = OWLUtils.createClass(ontology, IRI.create(OWLUtils.IDO_NS + "PhysicalQuantity"));
 		for(OWLObjectProperty property : quantitativeProperties) {
-			includeQualityForIDO(ontology, property, cfihosPrefix, parentQualityClass);
+			includeQualityForIDO(ontology, property, cfihosPrefix, parentPhysicalQuantityClass);
 		}
 		
 		/* Add OWL axioms to tags */
 		OWLClass tagParentClass = OWLUtils.createClass(ontology, IRI.create(Cfihos.getPrefixIRIForTags() + CFIHOS_TAG_CODE));
 		OWLObjectProperty hasPhysicalQuantity = OWLUtils.createObjectProperty(ontology, IRI.create(OWLUtils.IDO_NS + "hasPhysicalQuantity"));
+		OWLObjectProperty hasQuality = OWLUtils.createObjectProperty(ontology, IRI.create(OWLUtils.IDO_NS + "hasQuality"));
 		OWLObjectProperty qualityQuantifiedAs = OWLUtils.createObjectProperty(ontology, IRI.create(OWLUtils.IDO_NS + "qualityQuantifiedAs"));
 		OWLReasoner reasoner = new StructuralReasonerFactory().createReasoner(ontology);
 		Set<OWLClass> tagClasses = reasoner.subClasses(tagParentClass, false).collect(Collectors.toSet());
@@ -692,9 +693,13 @@ public class CFIHOSUtils {
 				/* Convert them into IDO schema */
 				IRI qualityClassIRI = IRI.create(objectProperty.getIRI().toString() + "Quality");
 				OWLClass qualityClass = OWLUtils.createClass(ontology, qualityClassIRI);
-				
-				OWLAxiom classExpression1 = OWLUtils.addObjectAllValuesFromRestriction(ontology, hasPhysicalQuantity, tagClass, qualityClass);
-				OWLAxiom classExpression2 = OWLUtils.addObjectAllValuesFromRestriction(ontology, qualityQuantifiedAs, qualityClass, classExpression);
+				/* If the quality is a physical quantity, use "Tag hasPhysicalQuantity Quality"; if not, use "Tag hasQuality Quality". */
+				OWLObjectProperty tagToQualityRelationship = hasQuality;
+				if(reasoner.getSuperClasses(qualityClass).containsEntity(parentPhysicalQuantityClass)) {
+					tagToQualityRelationship = hasPhysicalQuantity;
+				}
+				OWLAxiom classExpression1 = OWLUtils.addObjectSomeValuesFromRestriction(ontology, tagToQualityRelationship, tagClass, qualityClass);
+				OWLAxiom classExpression2 = OWLUtils.addObjectSomeValuesFromRestriction(ontology, qualityQuantifiedAs, qualityClass, classExpression);
 				
 				/* Add comment to CFIHOS ontology indicating the translation from object property to IDO schema */
 				
