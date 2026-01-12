@@ -454,8 +454,8 @@ public class CFIHOSUtils {
 	}
 
 	public static void addUnitOfMeasurement(OWLOntology ontology, String prefixIRI, String unitCFIHOSCode,
-			String uneceCode, String unitName, String unitSymbol, String unitDimensionCFIHOSCode,
-			String unitDimensionCode, String unitDimensionName, String measurementSystemCFIHOSCode,
+			String uneceCode, String unitName, String unitSymbol, String unitDimensionsCFIHOSCodes,
+			String unitDimensionsCodes, String unitDimensionsNames, String measurementSystemCFIHOSCode,
 			String measurementSystemCode, String unitSynonymName) {
 		if (unitCFIHOSCode == null) {
 			return;
@@ -473,9 +473,16 @@ public class CFIHOSUtils {
 		if(unitSymbol != null) {
 			OWLUtils.addAnnotation(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_SYMBOL), unitSymbol);
 		}
-		if (unitDimensionCode != null) {
-			OWLNamedIndividual dimension = addDimension(ontology, prefixIRI, unitDimensionCFIHOSCode, unitDimensionCode, unitDimensionName);
-			OWLUtils.addIndividualRelation(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_HAS_DIMENSION), dimension);
+		
+		/* A unit of measurement can describe more than one dimension. They appear separated by ";". */
+		if (unitDimensionsCodes != null) {
+			String [] unitDimensionsCFIHOSCodesSplit = unitDimensionsCFIHOSCodes.split(";");
+			String [] unitDimensionsCodesSplit = unitDimensionsCodes.split(";");
+			String [] unitDimensionsNamesSplit = unitDimensionsNames.split(";");
+			for(int i = 0; i < unitDimensionsCodesSplit.length; i++) {
+				OWLNamedIndividual dimension = addDimension(ontology, prefixIRI, unitDimensionsCFIHOSCodesSplit[i], unitDimensionsCodesSplit[i], unitDimensionsNamesSplit[i]);
+				OWLUtils.addIndividualRelation(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_HAS_DIMENSION), dimension);
+			}
 		}
 		
 		if (measurementSystemCFIHOSCode != null) {
