@@ -25,6 +25,7 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLProperty;
+import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
 public class OWLUtils {
@@ -41,11 +42,11 @@ public class OWLUtils {
 	public static final String SCHEMA_NS = "http://schema.org/";
 	public static final String SCHEMA_IDENTIFIER = SCHEMA_NS + "identifier";
 	public static final String SCHEMA_CATEGORY = OWLUtils.SCHEMA_NS + "category";
-	public static final String OM2_DIMENSION = OWLUtils.OM2_NS + "Dimension";
+	//public static final String OM2_DIMENSION = OWLUtils.OM2_NS + "Dimension";
 	public static final String OM2_SYMBOL = OWLUtils.OM2_NS + "symbol";
 	public static final String OM2_HAS_UNIT = OWLUtils.OM2_NS + "hasUnit";
 	public static final String OM2_HAS_NUMERICAL_VALUE = OWLUtils.OM2_NS + "hasNumericalValue";
-	public static final String OM2_UNIT = OWLUtils.OM2_NS + "Unit";
+	//public static final String OM2_UNIT = OWLUtils.OM2_NS + "Unit";
 	public static final String OM2_MEASURE = OWLUtils.OM2_NS + "Measure";
 	public static final String OM2_HAS_DIMENSION = OWLUtils.OM2_NS + "hasDimension";
 	public static final String OM2_SOURCE_RAW_IRI = "https://raw.githubusercontent.com/HajoRijgersberg/OM/refs/heads/master/om-2.0.rdf";
@@ -308,6 +309,20 @@ public class OWLUtils {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAxiom axiom = df.getOWLDisjointClassesAxiom(classes);
 		ontology.add(axiom);
+	}
+	
+	public static boolean containsAnnotation(OWLOntology ontology, OWLEntity entity, OWLAnnotationProperty annotationProperty) {
+		
+		return EntitySearcher.getAnnotationObjects(entity, ontology).anyMatch(annotation -> {
+			return annotation.getProperty().equals(annotationProperty);
+		});
+	}
+	
+	public static boolean containsAnnotation(OWLOntology ontology, OWLEntity entity, IRI annotationPropertyIRI) {
+		
+		return EntitySearcher.getAnnotationObjects(entity, ontology).anyMatch(annotation -> {
+			return annotation.getProperty().getIRI().equals(annotationPropertyIRI);
+		});
 	}
 	
 }

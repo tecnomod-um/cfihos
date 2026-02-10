@@ -41,17 +41,24 @@ public class CFIHOSUtils {
 	public static final String HAS_EQUIPMENT = "hasEquipment";
 	public static final String HAS_DOCUMENT_TYPE = "hasDocumentType";
 	public static final String HAS_DISCIPLINE = "hasDiscipline";
-	public static final String QUALITATIVE_PROPERTY = "qualitativeProperty";
-	public static final String QUANTITATIVE_PROPERTY = "quantitativeProperty";
-	public static final String PROPERTY = "property";
-	public static final String PROPERTY_GROUP = "PropertyGroup";
-	public static final String PURPOSE = "Purpose";
-	public static final String PROPERTY_PICKLIST = "PropertyPicklist";
-	public static final String STANDARD = "Standard";
-	public static final String SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT = "SourceStandardDocumentAndDataRequirement";
+	public static final String EQUIPMENT_CODE = "CFIHOS-30000311";
+	public static final String TAG_CODE = "CFIHOS-30000311";
+	public static final String QUALITATIVE_PROPERTY_CODE = "CFIHOS-00000071";
+	public static final String QUANTITATIVE_PROPERTY_CODE = "CFIHOS-00000070";
+	public static final String PROPERTY_CODE = "CFIHOS-00000029";
+	public static final String PROPERTY_GROUP_CODE = "CFIHOS-00000141";
+	public static final String PURPOSE_CODE = "Purpose";
+	public static final String PROPERTY_PICKLIST_CODE = "CFIHOS-00000019";
+	public static final String STANDARD_CODE = "CFIHOS-00000061";
+	public static final String SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_CODE = "CFIHOS-00000132";
 	public static final String MEASURE = "Measure";
 	public static final String IMPERIAL_SYSTEM_UNIT = "ImperialSystemUnit";
 	public static final String INTERNATIONAL_SYSTEM_UNIT = "InternationalSystemUnit";
+	public static final String DISCIPLINE_CODE = "CFIHOS-00000021";
+	public static final String DOCUMENT_TYPE_CODE = "CFIHOS-00000032";
+	public static final String DIMENSION_CODE = "CFIHOS-00000072";
+	public static final String DISCIPLINE_DOCUMENT_TYPE_CODE = "CFIHOS-00000027";
+	public static final String UNIT_OF_MEASUREMENT_CODE = "CFIHOS-00000073";
 	
 	public static final String CFIHOS_SYSTEME_INTERNATIONAL_CODE = "CFIHOS-60001649";
 	public static final String CFIHOS_IMPERIAL_SYSTEM_CODE = "CFIHOS-60001650";
@@ -307,7 +314,7 @@ public class CFIHOSUtils {
 		if(propertyPicklistValueCFIHOSCode == null || propertyPicklistValueCFIHOSCode.isEmpty()) {
 			return;
 		}
-		OWLClass parentPicklistClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + PROPERTY_PICKLIST));
+		OWLClass parentPicklistClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + PROPERTY_PICKLIST_CODE));
 		OWLClass picklistClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + propertyPicklistCFIHOSCode));
 		OWLAxiom axiom = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLSubClassOfAxiom(picklistClass, parentPicklistClass);
 		ontology.add(axiom);
@@ -362,8 +369,8 @@ public class CFIHOSUtils {
 		OWLObjectProperty objectProperty = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + propertyCFIHOSCode));
 		OWLUtils.addAnnotation(ontology, objectProperty, getHasCFIHOSCode (prefixIRI), propertyCFIHOSCode);
 		
-		OWLObjectProperty quantitativeProperty = df.getOWLObjectProperty(prefixIRI + QUANTITATIVE_PROPERTY);
-		OWLObjectProperty qualitativeProperty = df.getOWLObjectProperty(prefixIRI + QUALITATIVE_PROPERTY);
+		OWLObjectProperty quantitativeProperty = df.getOWLObjectProperty(prefixIRI + QUANTITATIVE_PROPERTY_CODE);
+		OWLObjectProperty qualitativeProperty = df.getOWLObjectProperty(prefixIRI + QUALITATIVE_PROPERTY_CODE);
 		
 		if (propertyName != null && !propertyName.isEmpty()) {
 			OWLUtils.addAnnotation(ontology, objectProperty, IRI.create(RDFConstants.RDFS_LABEL), propertyName);
@@ -385,7 +392,7 @@ public class CFIHOSUtils {
 		/* If unit of measure dimension is defined -> quantitative property*/
 		if (unitOfMeasureDimension != null && !unitOfMeasureDimension.isEmpty()) {
 			OWLNamedIndividual dimension = df.getOWLNamedIndividual(prefixIRI + unitOfMeasureDimension);
-			OWLClass unit = df.getOWLClass(OWLUtils.OM2_UNIT);
+			OWLClass unit = df.getOWLClass(prefixIRI + UNIT_OF_MEASUREMENT_CODE);
 			OWLObjectProperty hasDimension = df.getOWLObjectProperty(OWLUtils.OM2_HAS_DIMENSION);
 			OWLClassExpression hasDimensionClassExpression = df.getOWLObjectHasValue(hasDimension, dimension);
 			OWLClassExpression unitAndHasDimensionExpression = df.getOWLObjectIntersectionOf(unit, hasDimensionClassExpression);
@@ -423,7 +430,7 @@ public class CFIHOSUtils {
 		if (dataRequirementCFIHOSCode == null || dataRequirementCFIHOSCode.isEmpty()) {
 			return;
 		}
-		OWLClass documentRequiredPerClassParentClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI+ SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT));
+		OWLClass documentRequiredPerClassParentClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI+ SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_CODE));
 		OWLClass documentRequiredPerClassClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + dataRequirementCFIHOSCode));
 		OWLUtils.addSubclassOf(ontology, documentRequiredPerClassClass, documentRequiredPerClassParentClass);
 		OWLUtils.addAnnotation(ontology, documentRequiredPerClassClass, getHasCFIHOSCode (prefixIRI), dataRequirementCFIHOSCode);
@@ -494,7 +501,7 @@ public class CFIHOSUtils {
 				OWLUtils.addClassAssertion(ontology, unitOfMeasure, IRI.create(prefixIRI + IMPERIAL_SYSTEM_UNIT));
 			} 
 		} else {
-			OWLUtils.addClassAssertion(ontology, unitOfMeasure, IRI.create(OWLUtils.OM2_UNIT));
+			OWLUtils.addClassAssertion(ontology, unitOfMeasure, IRI.create(prefixIRI + UNIT_OF_MEASUREMENT_CODE));
 		}
 		if(unitSynonymName != null) {
 			OWLUtils.addAnnotation(ontology, unitOfMeasure, IRI.create(OWLUtils.SKOS_ALT_LABEL_IRI), unitSynonymName);
@@ -527,7 +534,7 @@ public class CFIHOSUtils {
 		
 		OWLNamedIndividual dimension = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(dimensionIRI);
 		OWLUtils.addAnnotation(ontology, dimension, getHasCFIHOSCode (prefixIRI), unitDimensionCFIHOSCode);
-		OWLUtils.addClassAssertion(ontology, dimension, IRI.create(OWLUtils.OM2_DIMENSION));
+		OWLUtils.addClassAssertion(ontology, dimension, IRI.create(prefixIRI + DIMENSION_CODE));
 		
 		if(unitDimensionCode != null) {
 			OWLUtils.addAnnotation(ontology, dimension, IRI.create(OWLUtils.SKOS_ALT_LABEL_IRI), unitDimensionCode);
@@ -588,7 +595,7 @@ public class CFIHOSUtils {
 			OWLUtils.addAnnotation(ontology, propertyGroup, IRI.create(OWLUtils.SCHEMA_IDENTIFIER), propertyGroupCode);
 		}
 		
-		OWLClass propertyGroupClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + PROPERTY_GROUP));
+		OWLClass propertyGroupClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + PROPERTY_GROUP_CODE));
 		OWLUtils.addSubclassOf(ontology, propertyGroup, propertyGroupClass);
 		return propertyGroup;
 	}
@@ -666,8 +673,8 @@ public class CFIHOSUtils {
 		OWLOntology cfihosOntology = ontology.imports().filter(ont -> (Cfihos.CFIHOS_ONTOLOGY_IRI.equals(ont.getOntologyID().getOntologyIRI().get()))).findFirst().get();
 		
 		/* Create quality classes */
-		OWLObjectProperty qualitativeProperty = OWLUtils.createObjectProperty(ontology, IRI.create(cfihosPrefix + QUALITATIVE_PROPERTY));
-		OWLObjectProperty quantitativeProperty = OWLUtils.createObjectProperty(ontology, IRI.create(cfihosPrefix + 	QUANTITATIVE_PROPERTY));
+		OWLObjectProperty qualitativeProperty = OWLUtils.createObjectProperty(ontology, IRI.create(cfihosPrefix + QUALITATIVE_PROPERTY_CODE));
+		OWLObjectProperty quantitativeProperty = OWLUtils.createObjectProperty(ontology, IRI.create(cfihosPrefix + 	QUANTITATIVE_PROPERTY_CODE));
 		List<OWLObjectProperty> qualitativeProperties = EntitySearcher.getSubProperties(qualitativeProperty, ontology.importsClosure()).collect(Collectors.toList());
 		List<OWLObjectProperty> quantitativeProperties = EntitySearcher.getSubProperties(quantitativeProperty, ontology.importsClosure()).collect(Collectors.toList());
 		
