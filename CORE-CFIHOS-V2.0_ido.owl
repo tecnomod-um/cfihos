@@ -237,6 +237,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000001Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>RDS373094</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The actual length of the functional or physical object.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000001"/>
         <rdfs:label>actual length</rdfs:label>
@@ -1371,6 +1372,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000062Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Quality"/>
+        <CFIHOS:CFIHOS-00000052>610865</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A nomenclature provides important information about the way in which three phase windings are connected and any phase displacement that occurs</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000062"/>
         <rdfs:label>connection symbol</rdfs:label>
@@ -1574,6 +1576,7 @@
                 <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-50000024"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550471</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>Specify the direction of rotation of the functional or physical object.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000075"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000061"/>
@@ -2539,6 +2542,7 @@
                 <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550473</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>Dimensions and output series for rotating electrical machines in conformity with IEC 60072</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000134"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000131"/>
@@ -3127,6 +3131,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000175Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Quality"/>
+        <CFIHOS:CFIHOS-00000052>193412</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A structured review and examination of the current status of a process, procedure or condition of plant equipment.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000175"/>
         <rdfs:label>inspection</rdfs:label>
@@ -3157,6 +3162,7 @@
                 <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-50000034"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>790456</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The class of electrical insulation used by a  physical object.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000177"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000136"/>
@@ -3708,6 +3714,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>551353</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>Is a distance measured in the direction of the longest side of an item or in the direction of its main axis.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000201"/>
         <rdfs:label>length</rdfs:label>
@@ -4090,6 +4097,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000223Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Quality"/>
+        <CFIHOS:CFIHOS-00000052>160177</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>Is a possessed aspect being a role of the substance of an artefact when used to construct the artefact from. Therefore the substance should be in a solid state at the conditions at which the artefact exists.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000223"/>
         <rdfs:label>material</rdfs:label>
@@ -4281,6 +4289,7 @@
                 <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>910235</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>Mounting arrangement in conformity with IEC 34-7</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000234"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000007"/>
@@ -4597,6 +4606,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>552882</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>Specify the nominal wall thickness of the equipment at the upstream boundary of the section.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000249"/>
         <rdfs:label>nominal wall thickness</rdfs:label>
@@ -5138,6 +5148,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550971</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The mass flow rate at which a functional or physical object is expected to operate normally.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000275"/>
         <rdfs:label>normal operating mass flow rate</rdfs:label>
@@ -6288,6 +6299,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000330Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>550432</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The rotational speed which is the rotational speed a functional or physical object has been designed to operate under specified condition.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000330"/>
         <rdfs:label>rated rotational speed</rdfs:label>
@@ -6364,6 +6376,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550432</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The rotational speed a functional or physical object is designed to deliver under specified conditions.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000332"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000057"/>
@@ -6407,6 +6420,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>552231</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A volume flow rate a functional or physical object is designed to deliver at specified conditions.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000333"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000055"/>
@@ -7834,6 +7848,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000432Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Quality"/>
+        <CFIHOS:CFIHOS-00000052>553031</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>Is a possessed aspect being a role of the substance of an artefact when used to construct the artefact from. Therefore the substance should be in a solid state at the conditions at which the artefact exists.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000432"/>
         <rdfs:label>tube material</rdfs:label>
@@ -8822,6 +8837,8 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000486Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Quality"/>
+        <CFIHOS:CFIHOS-00000052>1626</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>220132</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>Injection process where steam is injected in another material</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000486"/>
         <rdfs:label>steam injection</rdfs:label>
@@ -8840,6 +8857,8 @@
                 <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>3959</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>910175</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A specification according to which an item is intended to be designed</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000487"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000196"/>
@@ -8860,6 +8879,8 @@
                 <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>10440</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>4093</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A specification defined by specified circumstances in which piping components may be applied.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000488"/>
         <rdfs:label>piping class</rdfs:label>
@@ -8872,6 +8893,8 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000489Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>552314</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>5667</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A volume that can be contained</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000489"/>
         <rdfs:label>capacity (volume)</rdfs:label>
@@ -8910,6 +8933,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>5711</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A back pressure that does not change under any conditions of operation.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000490"/>
         <rdfs:label>constant back pressure</rdfs:label>
@@ -8948,6 +8972,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550092</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>5719</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A thickness that is the upper limit of allowed corrosion of a metal structure.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000491"/>
         <rdfs:label>corrosion allowance</rdfs:label>
@@ -8986,6 +9012,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>5729</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The area of a cross section</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000492"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000143"/>
@@ -9028,6 +9055,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550188</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>5789</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>Intercept made by the circumference on a straight line through the centre of a circle.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000493"/>
         <rdfs:label>diameter</rdfs:label>
@@ -9066,6 +9095,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>5825</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A weight of an object excluding any operating or process fluids.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000494"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000041"/>
@@ -9107,6 +9137,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550331</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>5833</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>Ratio of an output power to an input power</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000495"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000071"/>
@@ -9149,6 +9181,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550126</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6006</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A distance from the bottom to the top of something standing upright.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000496"/>
         <rdfs:label>height</rdfs:label>
@@ -9187,6 +9221,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550354</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6017</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A test pressure applicable when using water to establish the test pressure.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000497"/>
         <rdfs:label>hydrostatic test pressure</rdfs:label>
@@ -9199,6 +9235,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000498Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>6025</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A voltage which is the resultant of reactive and resistance component</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000498"/>
         <rdfs:label>impedance voltage</rdfs:label>
@@ -9237,6 +9274,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>6053</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A thickness of an insulation layer.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000499"/>
         <rdfs:label>insulation thickness</rdfs:label>
@@ -9249,6 +9287,8 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000500Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>550362</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6096</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A straight linear distance which is the total length of the cylindrical section/part of a cylindrical vessel, i.e. including the cylindrical sections of the vessel heads.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000500"/>
         <rdfs:label>length tan tan</rdfs:label>
@@ -9261,6 +9301,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000501Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>6117</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The absorbed active power at rated frequency and reference temperature associated with a pair of windings when rated current is flowing through the line terminals of one of the windings and the terminals of the other windings are short-circuited</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000501"/>
         <rdfs:label>load loss</rdfs:label>
@@ -9299,6 +9340,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>6132</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A rotational speed which is the lowest rotational speed at witch the manufacturer&apos; design will permit continuous operation.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000502"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000172"/>
@@ -9339,6 +9381,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550397</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6164</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The lowest temperature at which a functional or physical object is designed.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000503"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000193"/>
@@ -9379,6 +9423,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550182</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6189</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A temperature that is the lowest temperature at which a functional or physical object is expected to operate.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000504"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000055"/>
@@ -9418,6 +9464,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>6192</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A volume flow rate that is the lowest volume flow rate at which a functional or physical object is expected to operate.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000505"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000055"/>
@@ -9459,6 +9506,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550022</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6323</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The sum of all the atomic weights of the constituent atoms of a substance.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000506"/>
         <rdfs:label>molecular weight</rdfs:label>
@@ -9497,6 +9546,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>6340</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>NPSH for a particular pumping system at a certain flow rate and temperature.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000507"/>
         <rdfs:label>net positive suction head available</rdfs:label>
@@ -9509,6 +9559,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000508Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>6353</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The active power absorbed when rated voltage at rated frequency is applied to the terminals of one of the windings, the other windings being open-circuit</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000508"/>
         <rdfs:label>no-load loss</rdfs:label>
@@ -9547,6 +9598,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>551563</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6359</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A diameter which is an expected (theoretical/as designed) diameter.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000509"/>
         <rdfs:label>nominal diameter</rdfs:label>
@@ -9559,6 +9612,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000510Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>6392</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A flow velocity at which a functional or physical object is expected to operate normally.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000510"/>
         <rdfs:label>normal operating flow velocity</rdfs:label>
@@ -9597,6 +9651,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>6393</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>An inlet pressure at which a functional or physical object is expected to operate normally.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000511"/>
         <rdfs:label>normal operating inlet pressure</rdfs:label>
@@ -9635,6 +9690,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550189</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6395</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A pressure at which a functional or physical object is expected to operate normally.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000512"/>
         <rdfs:label>normal operating pressure</rdfs:label>
@@ -9647,6 +9704,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000513Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>6396</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A pressure drop at which a functional or physical object is expected to operate normally.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000513"/>
         <rdfs:label>normal operating pressure drop</rdfs:label>
@@ -9685,6 +9743,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550410</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6398</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A temperature at which a functional or physical object is expected to operate normally.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000514"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000055"/>
@@ -9698,6 +9758,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000515Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>6400</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A vapour pressure at which a functional or physical object is expected to operate normally.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000515"/>
         <rdfs:label>normal operating vapour pressure</rdfs:label>
@@ -9710,6 +9771,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000516Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>6429</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A weight that is the weight an object is expected to have during operation, i.e. including process fluids etc.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000516"/>
         <rdfs:label>operating weight</rdfs:label>
@@ -9722,6 +9784,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000517Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>6431</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A cross section area of an orifice plate, orifice ring, or valve.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000517"/>
         <rdfs:label>orifice area</rdfs:label>
@@ -9760,6 +9823,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>6432</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>An orifice area that is calculated.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000518"/>
         <rdfs:label>orifice area calculated</rdfs:label>
@@ -9798,6 +9862,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550206</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6444</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A diameter that is across the outside cross section of a circular object.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000519"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000041"/>
@@ -9811,6 +9877,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000520Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>6451</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>An area that is a total outside area of a surface.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000520"/>
         <rdfs:label>outside surface area</rdfs:label>
@@ -9849,6 +9916,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>552460</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6583</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The r.m.s. or DC value of the current for which an apparatus has been designed</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000521"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000005"/>
@@ -9891,6 +9960,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>552835</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6587</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>An electrical frequency of a machine at rated output</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000522"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000006"/>
@@ -9933,6 +10004,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>551751</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6591</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A power that is the power a motor has been designed to deliver under specified conditions.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000523"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000071"/>
@@ -9977,6 +10050,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>6592</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A power consumption at rated conditions.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000524"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000195"/>
@@ -10017,6 +10091,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>6594</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A rated voltage that is the voltage between lines at the terminals of the primary winding on a transformer at rated output</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000525"/>
         <rdfs:label>rated primary winding voltage</rdfs:label>
@@ -10055,6 +10130,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>6596</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A rated voltage that is the voltage between lines at the terminals of the secondary winding on a transformer at rated output</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000526"/>
         <rdfs:label>rated secondary winding voltage</rdfs:label>
@@ -10093,6 +10169,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>6597</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A rotational speed that is a rotational speed of an electric rotating machine working at its full load.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000527"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000057"/>
@@ -10135,6 +10212,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550301</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6600</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A voltage that is the voltage between lines at the terminals of the machine at rated output</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000528"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000004"/>
@@ -10153,6 +10232,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000529Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>6605</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The imaginary part of impedance. Reactance are characterised by the storage of energy rather than by its dissipation, as in resistance.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000529"/>
         <rdfs:label>reactance</rdfs:label>
@@ -10191,6 +10271,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550254</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6700</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A pressure at which an object is activated.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000530"/>
         <rdfs:label>set pressure</rdfs:label>
@@ -10203,6 +10285,8 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000531Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>550707</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6816</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>An electric current that is a peak-current occurring when starting an electric energy transducer</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000531"/>
         <rdfs:label>starting current</rdfs:label>
@@ -10241,6 +10325,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550726</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>6887</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A pressure to which an object should be subjected to test for leakage and structural integrity.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000532"/>
         <rdfs:label>test pressure</rdfs:label>
@@ -10253,6 +10339,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000533Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>6944</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A weight that is a sum of the weights of identified parts of an assembly.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000533"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000061"/>
@@ -10271,6 +10358,7 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000534Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>6962</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A distance that is the length of a tube.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000534"/>
         <rdfs:label>tube length</rdfs:label>
@@ -10309,6 +10397,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550163</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>7004</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The highest pressure at which a functional or physical object is designed for.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000535"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000039"/>
@@ -10350,6 +10440,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>551241</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>7005</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The highest temperature at which a functional or physical object is designed.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000536"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000193"/>
@@ -10390,6 +10482,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550164</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>7033</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A pressure which is the highest pressure at which a functional or physical object is expected to operate.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000537"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000043"/>
@@ -10430,6 +10524,8 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>550388</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>7034</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A temperature that is the highest temperature at which a functional or physical object is expected to operate.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000538"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000055"/>
@@ -10470,6 +10566,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>7104</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A back pressure that varies due to changes in operation of one or more pressure relief valves connected into a common discharge header.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000539"/>
         <rdfs:label>variable back pressure</rdfs:label>
@@ -10482,6 +10579,8 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000540Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>550303</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>7141</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A thickness which is the thickness of the part of an object normally called wall: wall thickness of a pipe, thickness of a building wall, etc.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000540"/>
         <rdfs:label>wall thickness</rdfs:label>
@@ -10494,6 +10593,8 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000541Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity"/>
+        <CFIHOS:CFIHOS-00000052>550464</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>7162</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A straight linear distance describing one of three orthogonal extreme dimensions of a thing relative to a reference system:   height, width, and length, which can be looked at as the sides of a box in the three dim space enclosing the thing exactly.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000541"/>
         <rdfs:label>width</rdfs:label>
@@ -10506,6 +10607,8 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000542Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Quality"/>
+        <CFIHOS:CFIHOS-00000052>400039</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>7247</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A fluid regulator that relieves pressure from an enclosed space when the pressure reaches a predetermined value.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000542"/>
         <rdfs:label>pressure relief device</rdfs:label>
@@ -10524,6 +10627,8 @@
                 <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>193002</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>955</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>Tracing by supply of heat</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000543"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000061"/>
@@ -11439,6 +11544,7 @@
                 <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>6699</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>The level at which an instrument is set to trigger an action - e.g. PSVs, bursting discs, regulators, etc.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000581"/>
         <rdfs:label>set point</rdfs:label>
@@ -11559,6 +11665,8 @@
 
     <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000589Quality">
         <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Quality"/>
+        <CFIHOS:CFIHOS-00000052>10595</CFIHOS:CFIHOS-00000052>
+        <CFIHOS:CFIHOS-00000052>RDS720359</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A shaft seal that is a sealing element intended to prevent leakage of fluids/gas between a valve stem and the surrounding body/bonnet.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000589"/>
         <rdfs:label>stem sealing type</rdfs:label>
@@ -12041,6 +12149,7 @@
                 <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>4023</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>A code that indicates a type of product for that an item is intended to be used.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000615"/>
         <rdfs:label>service code</rdfs:label>
@@ -12401,6 +12510,7 @@
                 <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <CFIHOS:CFIHOS-00000052>102</CFIHOS:CFIHOS-00000052>
         <obo:IAO_0000115>Storing under atmospheric pressure.</obo:IAO_0000115>
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40000625"/>
         <rdfs:label>atmospheric</rdfs:label>

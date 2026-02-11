@@ -64,6 +64,7 @@ public class Cfihos {
 	private static final String UNIT_OF_MEASURE_SHEET_NAME = "unit of measure";
 	private static final String PROPERTY_GROUPINGS_SHEET_NAME = "property groupings";
 	private static final String RDL_MASTER_OBJECT_SHEET_NAME = "RDL master object";
+	private static final String CFIHOS_EQUIVALENT_MAPPING_SHEET_NAME = "CFIHOS object equivalent mappin";
 
 	
 	/* IDO */
@@ -118,11 +119,39 @@ public class Cfihos {
 		includeTagOrEquipmentStandards(workbook, ontology);
 		includePropertyPickListValues(workbook, ontology);
 		includeDocumentRequiredPerClass(workbook, ontology);
+		includeCFIHOSEquivalentMapping(workbook, ontology);
 		includeNamesAndDescriptions(workbook, ontology);
 		includeDisjointClasses(ontology);
-		//enrichWithExternalAnnotations(ontology);
+		enrichWithExternalAnnotations(ontology);
 		return ontology;
 	}
+
+	private static void includeCFIHOSEquivalentMapping(Workbook workbook, OWLOntology ontology) {
+		Sheet sheet = workbook.getSheet(CFIHOS_EQUIVALENT_MAPPING_SHEET_NAME);
+		String prefixIRI = getPrefixIRI();
+		String equipmentPrefixIRI = getPrefixIRIForEquipment();
+		String tagPrefixIRI = getPrefixIRIForTags();
+		for(Row row : sheet) {
+			if (row.getRowNum() == 0) {
+				continue;
+			}
+			String cfihosCode = null;
+			String codingSourceCode = null;
+			String cfihosEquivalentCode = null;
+			if(row.getCell(0) != null) {
+				cfihosCode = row.getCell(0).getStringCellValue();
+			}
+			if(row.getCell(1) != null) {
+				codingSourceCode = row.getCell(1).getStringCellValue();
+			}
+			if(row.getCell(2) != null) {
+				cfihosEquivalentCode = row.getCell(2).getStringCellValue();
+			}
+			CFIHOSUtils.includeCFIHOSEquivalentMapping(ontology, prefixIRI, equipmentPrefixIRI, tagPrefixIRI, cfihosCode, codingSourceCode, cfihosEquivalentCode);
+		}
+	}
+
+
 
 	private static void includeNamesAndDescriptions(Workbook workbook, OWLOntology ontology) {
 		Sheet sheet = workbook.getSheet(RDL_MASTER_OBJECT_SHEET_NAME);
@@ -178,6 +207,15 @@ public class Cfihos {
 			}
 			if (ontology.containsIndividualInSignature(entityIRI)) {
 				entity = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(entityIRI);
+				if(name != null && !OWLUtils.containsAnnotation(ontology, entity, labelIRI)) {
+					OWLUtils.addAnnotation(ontology, entity, labelIRI, name);
+				}
+				if(description != null && !OWLUtils.containsAnnotation(ontology, entity, descriptionIRI)) {
+					OWLUtils.addAnnotation(ontology, entity, descriptionIRI, description);
+				}
+			}
+			if (ontology.containsAnnotationPropertyInSignature(entityIRI)) {
+				entity = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLAnnotationProperty(entityIRI);
 				if(name != null && !OWLUtils.containsAnnotation(ontology, entity, labelIRI)) {
 					OWLUtils.addAnnotation(ontology, entity, labelIRI, name);
 				}
@@ -298,6 +336,8 @@ public class Cfihos {
 		
 		OWLAnnotationProperty hasUNECECode = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.HAS_UNECE_CODE));
 		OWLUtils.addAnnotation(ontology, hasUNECECode, IRI.create(RDFConstants.RDFS_LABEL), "has UNECE code");
+		
+		OWLAnnotationProperty equivalentMapping = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_OBJECT_EQUIVALENT_MAPPING));		
 		
 	}
 

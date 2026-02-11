@@ -27,6 +27,7 @@ import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
 
+import es.um.dis.utils.OWLEntityType;
 import es.um.dis.utils.OWLUtils;
 
 public class CFIHOSUtils {
@@ -59,6 +60,7 @@ public class CFIHOSUtils {
 	public static final String DIMENSION_CODE = "CFIHOS-00000072";
 	public static final String DISCIPLINE_DOCUMENT_TYPE_CODE = "CFIHOS-00000027";
 	public static final String UNIT_OF_MEASUREMENT_CODE = "CFIHOS-00000073";
+	public static final String CFIHOS_OBJECT_EQUIVALENT_MAPPING = "CFIHOS-00000052";
 	
 	public static final String CFIHOS_SYSTEME_INTERNATIONAL_CODE = "CFIHOS-60001649";
 	public static final String CFIHOS_IMPERIAL_SYSTEM_CODE = "CFIHOS-60001650";
@@ -744,5 +746,96 @@ public class CFIHOSUtils {
 		});
 		
 	}
+	
+	public static OWLEntity getEntityFromCFIHOS(OWLOntology ontology, String prefixIRI, String cfihosCode, OWLEntityType entityType) {
+		OWLEntity entity = null;
+		IRI entityIRI = IRI.create(prefixIRI + cfihosCode);
+		if(entityType.equals(OWLEntityType.CLASS)) {
+			if(ontology.containsClassInSignature(entityIRI)) {
+				return ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClass(entityIRI);
+			} else {
+				return null;
+			}
+		} else if (entityType.equals(OWLEntityType.OBJECT_PROPERTY)) {
+			if(ontology.containsObjectPropertyInSignature(entityIRI)) {
+				return ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectProperty(entityIRI);
+			} else {
+				return null;
+			}
+		} else if (entityType.equals(OWLEntityType.DATA_PROPERTY)) {
+			if(ontology.containsDataPropertyInSignature(entityIRI)) {
+				return ontology.getOWLOntologyManager().getOWLDataFactory().getOWLDataProperty(entityIRI);
+			} else {
+				return null;
+			}
+			
+		} else if (entityType.equals(OWLEntityType.INDIVIDUAL)) {
+			if(ontology.containsIndividualInSignature(entityIRI)) {
+				return ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(entityIRI);
+			} else {
+				return null;
+			}
+			
+		} else if (entityType.equals(OWLEntityType.ANNOTATION_PROPERTY)) {
+			if(ontology.containsAnnotationPropertyInSignature(entityIRI)) {
+				return ontology.getOWLOntologyManager().getOWLDataFactory().getOWLAnnotationProperty(entityIRI);
+			} else {
+				return null;
+			}
+			
+		}
+		return entity;
+	}
+
+	public static void includeCFIHOSEquivalentMapping(OWLOntology ontology, String prefixIRI, String equipmentPrefixIRI,
+			String tagPrefixIRI, String cfihosCode, String codingSourceCode, String cfihosEquivalentCode) {
+		OWLEntity entity = null;
+		IRI equivalentMappingPropertyIRI = IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_OBJECT_EQUIVALENT_MAPPING);
+		entity = getEntityFromCFIHOS(ontology, prefixIRI, cfihosCode, OWLEntityType.CLASS);
+		if(entity != null) {
+			OWLUtils.addAnnotationWithComment(ontology, entity, equivalentMappingPropertyIRI, cfihosEquivalentCode, codingSourceCode);
+		}
+		
+		entity = getEntityFromCFIHOS(ontology, equipmentPrefixIRI, cfihosCode, OWLEntityType.CLASS);
+		if(entity != null) {
+			OWLUtils.addAnnotationWithComment(ontology, entity, equivalentMappingPropertyIRI, cfihosEquivalentCode, codingSourceCode);
+		}
+		
+		
+		entity = getEntityFromCFIHOS(ontology, tagPrefixIRI, cfihosCode, OWLEntityType.CLASS);
+		if(entity != null) {
+			OWLUtils.addAnnotationWithComment(ontology, entity, equivalentMappingPropertyIRI, cfihosEquivalentCode, codingSourceCode);
+		}
+		
+		
+		entity = getEntityFromCFIHOS(ontology, prefixIRI, cfihosCode, OWLEntityType.OBJECT_PROPERTY);
+		if(entity != null) {
+			OWLUtils.addAnnotationWithComment(ontology, entity, equivalentMappingPropertyIRI, cfihosEquivalentCode, codingSourceCode);
+		}
+		
+		
+		entity = getEntityFromCFIHOS(ontology, prefixIRI, cfihosCode, OWLEntityType.DATA_PROPERTY);
+		if(entity != null) {
+			OWLUtils.addAnnotationWithComment(ontology, entity, equivalentMappingPropertyIRI, cfihosEquivalentCode, codingSourceCode);
+		}
+		
+		
+		entity = getEntityFromCFIHOS(ontology, prefixIRI, cfihosCode, OWLEntityType.INDIVIDUAL);
+		if(entity != null) {
+			OWLUtils.addAnnotationWithComment(ontology, entity, equivalentMappingPropertyIRI, cfihosEquivalentCode, codingSourceCode);
+		}
+		
+		
+		entity = getEntityFromCFIHOS(ontology, prefixIRI, cfihosCode, OWLEntityType.ANNOTATION_PROPERTY);
+		if(entity != null) {
+			OWLUtils.addAnnotationWithComment(ontology, entity, equivalentMappingPropertyIRI, cfihosEquivalentCode, codingSourceCode);
+		}
+		
+		
+
+		
+	}
+
+
 
 }

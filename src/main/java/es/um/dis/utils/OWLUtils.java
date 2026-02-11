@@ -1,6 +1,7 @@
 package es.um.dis.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +28,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLProperty;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
+import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
 
 public class OWLUtils {
 
@@ -74,6 +76,18 @@ public class OWLUtils {
 	public static void addAnnotation(OWLOntology ontology, OWLEntity entity, IRI annotationPropertyIRI,
 			String annotationValue) {
 		addAnnotation(ontology, entity, annotationPropertyIRI, annotationValue, null);
+	}
+	
+	public static void addAnnotationWithComment(OWLOntology ontology, OWLEntity entity, IRI annotationPropertyIRI,
+			String annotationValue, String comment) {
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLAnnotationProperty annotationProperty = df.getOWLAnnotationProperty(annotationPropertyIRI);
+		OWLAnnotationProperty rdfsComment = df.getOWLAnnotationProperty(OWLRDFVocabulary.RDFS_COMMENT);
+		OWLAnnotation commentAnnotation = df.getOWLAnnotation(rdfsComment, df.getOWLLiteral(comment));
+		OWLAnnotation annotation = df.getOWLAnnotation(annotationProperty, df.getOWLLiteral(annotationValue));
+		
+		OWLAxiom axiom = df.getOWLAnnotationAssertionAxiom(entity.getIRI(), annotation, Arrays.asList(commentAnnotation));
+		ontology.add(axiom);
 	}
 	
 	public static void addAnnotation(OWLOntology ontology, OWLEntity entity, IRI annotationPropertyIRI,
