@@ -51,7 +51,6 @@ public class CFIHOSUtils {
 	public static final String PURPOSE_CODE = "Purpose";
 	public static final String PROPERTY_PICKLIST_CODE = "CFIHOS-00000019";
 	public static final String STANDARD_CODE = "CFIHOS-00000061";
-	public static final String SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_CODE = "CFIHOS-00000132";
 	public static final String MEASURE = "Measure";
 	public static final String IMPERIAL_SYSTEM_UNIT = "ImperialSystemUnit";
 	public static final String INTERNATIONAL_SYSTEM_UNIT = "InternationalSystemUnit";
@@ -60,7 +59,15 @@ public class CFIHOSUtils {
 	public static final String DIMENSION_CODE = "CFIHOS-00000072";
 	public static final String DISCIPLINE_DOCUMENT_TYPE_CODE = "CFIHOS-00000027";
 	public static final String UNIT_OF_MEASUREMENT_CODE = "CFIHOS-00000073";
-	public static final String CFIHOS_OBJECT_EQUIVALENT_MAPPING = "CFIHOS-00000052";
+	public static final String CFIHOS_OBJECT_EQUIVALENT_MAPPING_CODE = "CFIHOS-00000052";
+	public static final String CFIHOS_DELIVERABLE_FORMAT_CODE = "CFIHOS-00000137";
+	public static final String SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_CODE = "CFIHOS-00000132";
+	public static final String SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_NUMBER_CODE = "CFIHOS-10000267";
+	public static final String SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_TITLE_CODE = "CFIHOS-10000268";
+	public static final String SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_TYPICAL_DELIVERABLE_CODE = "CFIHOS-10000269";
+	public static final String SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_DESCRIPTION_CODE = "CFIHOS-10000270";
+	public static final String SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_COMMENT_CODE = "CFIHOS-10000283";
+	public static final String ENGINEERING_STANDARD_SOURCE_CHAPTER_CODE = "CFIHOS-10000271";
 	
 	public static final String CFIHOS_SYSTEME_INTERNATIONAL_CODE = "CFIHOS-60001649";
 	public static final String CFIHOS_IMPERIAL_SYSTEM_CODE = "CFIHOS-60001650";
@@ -790,7 +797,7 @@ public class CFIHOSUtils {
 	public static void includeCFIHOSEquivalentMapping(OWLOntology ontology, String prefixIRI, String equipmentPrefixIRI,
 			String tagPrefixIRI, String cfihosCode, String codingSourceCode, String cfihosEquivalentCode) {
 		OWLEntity entity = null;
-		IRI equivalentMappingPropertyIRI = IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_OBJECT_EQUIVALENT_MAPPING);
+		IRI equivalentMappingPropertyIRI = IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_OBJECT_EQUIVALENT_MAPPING_CODE);
 		entity = getEntityFromCFIHOS(ontology, prefixIRI, cfihosCode, OWLEntityType.CLASS);
 		if(entity != null) {
 			OWLUtils.addAnnotationWithComment(ontology, entity, equivalentMappingPropertyIRI, cfihosEquivalentCode, codingSourceCode);
@@ -834,6 +841,72 @@ public class CFIHOSUtils {
 		
 
 		
+	}
+
+	public static void includeJip33InfoRequiredSpec(OWLOntology ontology, String prefixIRI, String equipmentPrefixIRI,
+			String tagPrefixIRI, String sourceStandardDocumentAndDataRequirementCFIHOSCode, String tagClassCFIHOSCode,
+			String sourceStandardCFIHOSCode, String sourceStandardDocumentAndDataRequirementNumber,
+			String sourceStandardDocumentAndDataRequirementTitle,
+			String sourceStandardDocumentAndDataRequirementTypicalDeliverable,
+			String sourceStandardDocumentAndDataRequirementDescription,
+			String sourceStandardDocumentAndDataRequirementComment,
+			String sourceStandardDocumentAndDataRequirementGroupCode, String engineeringStandardSourceChapter,
+			String disciplineCFIHOSCode, String documentTypeCFIHOSCode) {
+		
+		if(sourceStandardDocumentAndDataRequirementCFIHOSCode == null || sourceStandardDocumentAndDataRequirementCFIHOSCode.isBlank()) {
+			return;
+		}
+		OWLClass sourceStandardDocumentAndDataRequirement = OWLUtils.createClass(ontology, IRI.create(sourceStandardDocumentAndDataRequirementCFIHOSCode));
+		OWLClass parentClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_CODE));
+		OWLUtils.addSubclassOf(ontology, sourceStandardDocumentAndDataRequirement, parentClass);
+		
+		if (sourceStandardDocumentAndDataRequirementNumber != null && !sourceStandardDocumentAndDataRequirementNumber.isBlank()) {
+			OWLUtils.addAnnotation(ontology, sourceStandardDocumentAndDataRequirement, IRI.create(prefixIRI + SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_NUMBER_CODE), sourceStandardDocumentAndDataRequirementNumber);
+		}
+		
+		if (sourceStandardDocumentAndDataRequirementTitle != null && !sourceStandardDocumentAndDataRequirementTitle.isBlank()) {
+			OWLUtils.addAnnotation(ontology, sourceStandardDocumentAndDataRequirement, IRI.create(prefixIRI + SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_TITLE_CODE), sourceStandardDocumentAndDataRequirementTitle);
+		}
+		
+		if (sourceStandardDocumentAndDataRequirementTypicalDeliverable != null && !sourceStandardDocumentAndDataRequirementTypicalDeliverable.isBlank()) {
+			OWLUtils.addAnnotation(ontology, sourceStandardDocumentAndDataRequirement, IRI.create(prefixIRI + SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_TYPICAL_DELIVERABLE_CODE), sourceStandardDocumentAndDataRequirementTypicalDeliverable);
+		}
+		
+		if (sourceStandardDocumentAndDataRequirementDescription != null && !sourceStandardDocumentAndDataRequirementDescription.isBlank()) {
+			OWLUtils.addAnnotation(ontology, sourceStandardDocumentAndDataRequirement, IRI.create(prefixIRI + SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_DESCRIPTION_CODE), sourceStandardDocumentAndDataRequirementDescription);
+		}
+		
+		if (sourceStandardDocumentAndDataRequirementComment != null && !sourceStandardDocumentAndDataRequirementComment.isBlank()) {
+			OWLUtils.addAnnotation(ontology, sourceStandardDocumentAndDataRequirement, IRI.create(prefixIRI + SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_COMMENT_CODE), sourceStandardDocumentAndDataRequirementComment);
+		}
+		
+		if (sourceStandardDocumentAndDataRequirementGroupCode != null && !sourceStandardDocumentAndDataRequirementGroupCode.isBlank()) {
+			OWLUtils.addAnnotation(ontology, sourceStandardDocumentAndDataRequirement, IRI.create(OWLUtils.SCHEMA_CATEGORY), sourceStandardDocumentAndDataRequirementGroupCode);
+		}
+		
+		if (engineeringStandardSourceChapter != null && !engineeringStandardSourceChapter.isBlank()) {
+			OWLUtils.addAnnotation(ontology, sourceStandardDocumentAndDataRequirement, IRI.create(prefixIRI + ENGINEERING_STANDARD_SOURCE_CHAPTER_CODE), engineeringStandardSourceChapter);
+		}
+		
+		if (tagClassCFIHOSCode != null && !tagClassCFIHOSCode.isBlank()) {
+			OWLClass tagClass = OWLUtils.createClass(ontology, IRI.create(tagPrefixIRI + tagClassCFIHOSCode));
+			OWLObjectProperty hasTag = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + HAS_TAG));
+			OWLUtils.addObjectSomeValuesFromRestriction(ontology, hasTag, sourceStandardDocumentAndDataRequirement, tagClass);
+		}
+		
+		if (sourceStandardCFIHOSCode != null && !sourceStandardCFIHOSCode.isBlank()) {
+			OWLUtils.addAnnotation(ontology, sourceStandardDocumentAndDataRequirement, IRI.create(prefixIRI + HAS_SOURCE_STANDARD), IRI.create(prefixIRI + sourceStandardCFIHOSCode));
+		}
+		
+		if (disciplineCFIHOSCode != null && !disciplineCFIHOSCode.isBlank()) {
+			//TODO: is this needed?
+		}
+
+		if (documentTypeCFIHOSCode != null && !documentTypeCFIHOSCode.isBlank()) {
+			OWLProperty hasDocumentType = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectProperty(prefixIRI + HAS_DOCUMENT_TYPE);
+			OWLClass documentTypeClass = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClass(prefixIRI + documentTypeCFIHOSCode);
+			OWLUtils.addObjectSomeValuesFromRestriction(ontology, hasDocumentType, sourceStandardDocumentAndDataRequirement, documentTypeClass);
+		}
 	}
 
 

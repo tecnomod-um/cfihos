@@ -65,6 +65,7 @@ public class Cfihos {
 	private static final String PROPERTY_GROUPINGS_SHEET_NAME = "property groupings";
 	private static final String RDL_MASTER_OBJECT_SHEET_NAME = "RDL master object";
 	private static final String CFIHOS_EQUIVALENT_MAPPING_SHEET_NAME = "CFIHOS object equivalent mappin";
+	private static final String JIP_33_INFO_REQUIRED_SPEC_SHEET_NAME = "Jip33 info required spec";
 
 	
 	/* IDO */
@@ -121,10 +122,76 @@ public class Cfihos {
 		includeDocumentRequiredPerClass(workbook, ontology);
 		includeCFIHOSEquivalentMapping(workbook, ontology);
 		includeNamesAndDescriptions(workbook, ontology);
+		includeJip33InfoRequiredSpec(workbook, ontology);
 		includeDisjointClasses(ontology);
 		enrichWithExternalAnnotations(ontology);
 		return ontology;
 	}
+
+	private static void includeJip33InfoRequiredSpec(Workbook workbook, OWLOntology ontology) {
+		Sheet sheet = workbook.getSheet(JIP_33_INFO_REQUIRED_SPEC_SHEET_NAME);
+		String prefixIRI = getPrefixIRI();
+		String equipmentPrefixIRI = getPrefixIRIForEquipment();
+		String tagPrefixIRI = getPrefixIRIForTags();
+		for(Row row : sheet) {
+			if (row.getRowNum() == 0) {
+				continue;
+			}
+			String sourceStandardDocumentAndDataRequirementCFIHOSCode = null;
+			String tagClassCFIHOSCode = null;
+			String sourceStandardCFIHOSCode = null;
+			String sourceStandardDocumentAndDataRequirementNumber = null;
+			String sourceStandardDocumentAndDataRequirementTitle = null;
+			String sourceStandardDocumentAndDataRequirementTypicalDeliverable = null;
+			String sourceStandardDocumentAndDataRequirementDescription = null;
+			String sourceStandardDocumentAndDataRequirementComment = null;
+			String sourceStandardDocumentAndDataRequirementGroupCode = null;
+			String engineeringStandardSourceChapter = null;
+			String disciplineCFIHOSCode = null;
+			String documentTypeCFIHOSCode = null;
+			
+			if(row.getCell(0) != null) {
+				sourceStandardDocumentAndDataRequirementCFIHOSCode = row.getCell(0).getStringCellValue();
+			}
+			if(row.getCell(1) != null) {
+				tagClassCFIHOSCode = row.getCell(1).getStringCellValue();
+			}
+			if(row.getCell(3) != null) {
+				sourceStandardCFIHOSCode = row.getCell(3).getStringCellValue();
+			}
+			if(row.getCell(5) != null) {
+				sourceStandardDocumentAndDataRequirementNumber = row.getCell(5).getStringCellValue();
+			}
+			if(row.getCell(6) != null) {
+				sourceStandardDocumentAndDataRequirementTitle = row.getCell(6).getStringCellValue();
+			}
+			if(row.getCell(7) != null) {
+				sourceStandardDocumentAndDataRequirementTypicalDeliverable = row.getCell(7).getStringCellValue();
+			}
+			if(row.getCell(8) != null) {
+				sourceStandardDocumentAndDataRequirementDescription = row.getCell(8).getStringCellValue();
+			}
+			if(row.getCell(9) != null) {
+				sourceStandardDocumentAndDataRequirementComment = row.getCell(9).getStringCellValue();
+			}
+			if(row.getCell(11) != null) {
+				sourceStandardDocumentAndDataRequirementGroupCode = row.getCell(11).getStringCellValue();
+			}
+			if(row.getCell(12) != null) {
+				engineeringStandardSourceChapter = row.getCell(12).getStringCellValue();
+			}
+			if(row.getCell(13) != null) {
+				disciplineCFIHOSCode = row.getCell(13).getStringCellValue();
+			}
+			if(row.getCell(15) != null) {
+				documentTypeCFIHOSCode = row.getCell(15).getStringCellValue();
+			}
+			
+			CFIHOSUtils.includeJip33InfoRequiredSpec(ontology, prefixIRI, equipmentPrefixIRI, tagPrefixIRI, sourceStandardDocumentAndDataRequirementCFIHOSCode, tagClassCFIHOSCode, sourceStandardCFIHOSCode, sourceStandardDocumentAndDataRequirementNumber, sourceStandardDocumentAndDataRequirementTitle, sourceStandardDocumentAndDataRequirementTypicalDeliverable, sourceStandardDocumentAndDataRequirementDescription, sourceStandardDocumentAndDataRequirementComment, sourceStandardDocumentAndDataRequirementGroupCode, engineeringStandardSourceChapter, disciplineCFIHOSCode, documentTypeCFIHOSCode);
+		}
+	}
+
+
 
 	private static void includeCFIHOSEquivalentMapping(Workbook workbook, OWLOntology ontology) {
 		Sheet sheet = workbook.getSheet(CFIHOS_EQUIVALENT_MAPPING_SHEET_NAME);
@@ -337,7 +404,17 @@ public class Cfihos {
 		OWLAnnotationProperty hasUNECECode = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.HAS_UNECE_CODE));
 		OWLUtils.addAnnotation(ontology, hasUNECECode, IRI.create(RDFConstants.RDFS_LABEL), "has UNECE code");
 		
-		OWLAnnotationProperty equivalentMapping = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_OBJECT_EQUIVALENT_MAPPING));		
+		OWLAnnotationProperty equivalentMapping = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_OBJECT_EQUIVALENT_MAPPING_CODE));
+		
+		OWLAnnotationProperty sourceStandardDocumentAndDataRequirementNumber = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_NUMBER_CODE));
+		
+		OWLAnnotationProperty sourceStandardDocumentAndDataRequirementTitle = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_TITLE_CODE));	
+		
+		OWLAnnotationProperty sourceStandardDocumentAndDataRequirementTypicalDeliverable = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_TYPICAL_DELIVERABLE_CODE));	
+		
+		OWLAnnotationProperty sourceStandardDocumentAndDataRequirementDescription = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_DESCRIPTION_CODE));	
+		
+		OWLAnnotationProperty sourceStandardDocumentAndDataRequirementComment = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_COMMENT_CODE));
 		
 	}
 
