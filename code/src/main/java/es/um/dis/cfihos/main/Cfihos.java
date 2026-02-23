@@ -416,6 +416,9 @@ public class Cfihos {
 		
 		OWLAnnotationProperty sourceStandardDocumentAndDataRequirementComment = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_COMMENT_CODE));
 		
+		OWLAnnotationProperty engineeringStandardSourceChapter = OWLUtils.createAnnotationProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.ENGINEERING_STANDARD_SOURCE_CHAPTER_CODE));
+		
+		
 	}
 
 	

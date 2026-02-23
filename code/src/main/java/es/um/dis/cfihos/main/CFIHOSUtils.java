@@ -856,7 +856,7 @@ public class CFIHOSUtils {
 		if(sourceStandardDocumentAndDataRequirementCFIHOSCode == null || sourceStandardDocumentAndDataRequirementCFIHOSCode.isBlank()) {
 			return;
 		}
-		OWLClass sourceStandardDocumentAndDataRequirement = OWLUtils.createClass(ontology, IRI.create(sourceStandardDocumentAndDataRequirementCFIHOSCode));
+		OWLClass sourceStandardDocumentAndDataRequirement = OWLUtils.createClass(ontology, IRI.create(prefixIRI + sourceStandardDocumentAndDataRequirementCFIHOSCode));
 		OWLClass parentClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_CODE));
 		OWLUtils.addSubclassOf(ontology, sourceStandardDocumentAndDataRequirement, parentClass);
 		
