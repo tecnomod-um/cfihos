@@ -15,6 +15,7 @@
      xmlns:CFIHOS="http://infohub.siemens-energy.com/CFIHOS#"
      xmlns:schema="http://schema.org/">
     <owl:Ontology rdf:about="http://infohub.siemens-energy.com/CFIHOS-IDO">
+        <owl:versionIRI rdf:resource="http://infohub.siemens-energy.com/CFIHOS-IDO/1.0.0"/>
         <dc:contributor>Alexander Garcia Castro</dc:contributor>
         <dc:contributor>Jesualdo Tomas Fernandez Breis</dc:contributor>
         <dc:creator>Francisco Abad</dc:creator>
