@@ -2,6 +2,8 @@
 <rdf:RDF xmlns="http://infohub.siemens-energy.com/CFIHOS-IDO#"
      xml:base="http://infohub.siemens-energy.com/CFIHOS-IDO"
      xmlns:obo="http://purl.obolibrary.org/obo/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:terms="http://purl.org/dc/terms/"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:pav="http://purl.org/pav/"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -13,6 +15,12 @@
      xmlns:CFIHOS="http://infohub.siemens-energy.com/CFIHOS#"
      xmlns:schema="http://schema.org/">
     <owl:Ontology rdf:about="http://infohub.siemens-energy.com/CFIHOS-IDO">
+        <dc:contributor>Alexander Garcia Castro</dc:contributor>
+        <dc:contributor>Jesualdo Tomas Fernandez Breis</dc:contributor>
+        <dc:creator>Francisco Abad</dc:creator>
+        <dc:description>Ontology integrating the CFIHOS standard with IDO.</dc:description>
+        <terms:license>Siemens Energy</terms:license>
+        <rdfs:label>CFIHOS-IDO</rdfs:label>
         <owl:imports rdf:resource="http://infohub.siemens-energy.com/CFIHOS"/>
         <owl:imports rdf:resource="http://rds.posccaesar.org/ontology/lis14/ont/core"/>
     </owl:Ontology>
@@ -28,7 +36,27 @@
      -->
 
 
+    <!-- http://purl.org/dc/elements/1.1/contributor -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/contributor"/>
     
+
+
+    <!-- http://purl.org/dc/elements/1.1/creator -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/creator"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/description -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/description"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/license -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/license"/>
 
 
     <!-- http://purl.org/pav/derivedFrom -->
