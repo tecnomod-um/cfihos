@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.semanticweb.owlapi.model.AddOntologyAnnotation;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
@@ -39,6 +40,13 @@ public class OWLUtils {
 	public static final String SKOS_ALT_LABEL_IRI = SKOS_NS + "altLabel";
 	public static final String IDO_NS = "http://rds.posccaesar.org/ontology/lis14/rdl/";
 	public static final String OM2_NS = "http://www.ontology-of-units-of-measure.org/resource/om-2/";
+	public static final String DC_ELEMENTS_NS = "http://purl.org/dc/elements/1.1/";
+	public static final String DC_TERMS_NS = "http://purl.org/dc/terms/";
+	public static final String DC_ELEMENTS_CONTRIBUTOR = DC_ELEMENTS_NS + "contributor";
+	public static final String DC_ELEMENTS_CREATOR = DC_ELEMENTS_NS + "creator";
+	public static final String DC_TERMS_LICENSE = DC_TERMS_NS + "license";
+	public static final String DC_ELEMENTS_DESCRIPTION = DC_ELEMENTS_NS + "description";
+
 	public static final String DECIMAL_IRI = XSD_NS + "decimal";
 	public static final String DOUBLE_IRI = XSD_NS + "double";
 	public static final String SCHEMA_NS = "http://schema.org/";
@@ -77,7 +85,7 @@ public class OWLUtils {
 			String annotationValue) {
 		addAnnotation(ontology, entity, annotationPropertyIRI, annotationValue, null);
 	}
-	
+
 	public static void addAnnotationWithComment(OWLOntology ontology, OWLEntity entity, IRI annotationPropertyIRI,
 			String annotationValue, String comment) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
@@ -85,11 +93,11 @@ public class OWLUtils {
 		OWLAnnotationProperty rdfsComment = df.getOWLAnnotationProperty(OWLRDFVocabulary.RDFS_COMMENT);
 		OWLAnnotation commentAnnotation = df.getOWLAnnotation(rdfsComment, df.getOWLLiteral(comment));
 		OWLAnnotation annotation = df.getOWLAnnotation(annotationProperty, df.getOWLLiteral(annotationValue));
-		
+
 		OWLAxiom axiom = df.getOWLAnnotationAssertionAxiom(entity.getIRI(), annotation, Arrays.asList(commentAnnotation));
 		ontology.add(axiom);
 	}
-	
+
 	public static void addAnnotation(OWLOntology ontology, OWLEntity entity, IRI annotationPropertyIRI,
 			OWLAnnotationValue annotationValue) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
@@ -105,66 +113,66 @@ public class OWLUtils {
 		OWLAnnotation annotation = df.getOWLAnnotation(annotationProperty, annotationValue);
 		Set<OWLAnnotation> newAnnotations = owlAxiom.annotations().collect(Collectors.toSet());
 		newAnnotations.add(annotation);
-		
+
 		OWLAxiom annotatedAxiom = owlAxiom.getAnnotatedAxiom(newAnnotations);
 		ontology.add(annotatedAxiom);
 		ontology.remove(owlAxiom);
 	}
-	
+
 	public static void addAnnotation(OWLOntology ontology, OWLAxiom owlAxiom, IRI annotationPropertyIRI,
 			String literal) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLLiteral annotationValue = df.getOWLLiteral(literal);
 		addAnnotation(ontology, owlAxiom, annotationPropertyIRI, annotationValue);
 	}
-	
+
 	public static OWLAxiom addSubclassOf(OWLOntology ontology, OWLClass entity, OWLClassExpression parentEntity) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAxiom axiom = df.getOWLSubClassOfAxiom(entity, parentEntity);
 		ontology.add(axiom);
 		return axiom;
 	}
-	
+
 	public static void addSubPropertyOf(OWLOntology ontology, OWLProperty property, OWLProperty parentProperty) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAxiom axiom = null;
 		if (property.isObjectPropertyExpression() && parentProperty.isObjectPropertyExpression()) {
 			axiom = df.getOWLSubObjectPropertyOfAxiom(property.asObjectPropertyExpression(), parentProperty.asObjectPropertyExpression());
 		}
-		
+
 		if (property.isDataPropertyExpression() && parentProperty.isDataPropertyExpression()) {
 			axiom = df.getOWLSubDataPropertyOfAxiom(property.asDataPropertyExpression(), parentProperty.asDataPropertyExpression());
 		}
-		
+
 		if (property.isOWLAnnotationProperty() && parentProperty.isOWLAnnotationProperty()) {
 			axiom = df.getOWLSubAnnotationPropertyOfAxiom(property.asOWLAnnotationProperty(), parentProperty.asOWLAnnotationProperty());
 		}
-		
+
 		if (axiom != null) {
 			ontology.add(axiom);
 		} else {
 			System.out.println("addSubPropertyOf - incompatible properties");
 		}
 	}
-	
+
 	public static void addEquivalentClass(OWLOntology ontology, OWLClass entity, OWLClassExpression equivalentEntity) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAxiom axiom = df.getOWLEquivalentClassesAxiom(entity, equivalentEntity);
 		ontology.add(axiom);
 	}
-	
+
 	public static void addEquivalentObjectProperties(OWLOntology ontology, OWLObjectPropertyExpression property1, OWLObjectPropertyExpression property2) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAxiom axiom = df.getOWLEquivalentObjectPropertiesAxiom(property1, property2);
 		ontology.add(axiom);
 	}
-	
+
 	public static void addEquivalentDataProperties(OWLOntology ontology, OWLDataPropertyExpression property1, OWLDataPropertyExpression property2) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAxiom axiom = df.getOWLEquivalentDataPropertiesAxiom(property1, property2);
 		ontology.add(axiom);
 	}
-	
+
 	public static void addDomain(OWLOntology ontology, OWLProperty property, OWLClassExpression classExpression) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAxiom axiom = null;
@@ -177,10 +185,16 @@ public class OWLUtils {
 			ontology.add(axiom);
 		}
 	}
-	
+
 	public static void addRange(OWLOntology ontology, OWLObjectProperty objectProperty, OWLClassExpression classExpression) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAxiom axiom = df.getOWLObjectPropertyRangeAxiom(objectProperty, classExpression);
+		ontology.add(axiom);
+	}
+
+	public static void addDomain(OWLOntology ontology, OWLObjectProperty objectProperty, OWLClassExpression classExpression) {
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLAxiom axiom = df.getOWLObjectPropertyDomainAxiom(objectProperty, classExpression);
 		ontology.add(axiom);
 	}
 
@@ -199,7 +213,7 @@ public class OWLUtils {
 		ontology.add(axiom);
 		return owlObjectProperty;
 	}
-	
+
 	public static OWLAnnotationProperty createAnnotationProperty(OWLOntology ontology, IRI propertyIRI) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAnnotationProperty annotationProperty = df.getOWLAnnotationProperty(propertyIRI);
@@ -207,7 +221,7 @@ public class OWLUtils {
 		ontology.add(axiom);
 		return annotationProperty;
 	}
-	
+
 	public static OWLNamedIndividual createIndividual(OWLOntology ontology, IRI individualIRI, OWLClass type) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLNamedIndividual individual = df.getOWLNamedIndividual(individualIRI);
@@ -219,7 +233,7 @@ public class OWLUtils {
 		ontology.add(axiom);
 		return individual;
 	}
-	
+
 	public static OWLDataProperty createDataProperty(OWLOntology ontology, IRI propertyIRI) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLDataProperty owlDataProperty = df.getOWLDataProperty(propertyIRI);
@@ -271,18 +285,18 @@ public class OWLUtils {
 	}
 
 
-	
+
 	public static void addClassAssertion(OWLOntology ontology, IRI individualIRI, IRI owlClassIRI) {
 		OWLNamedIndividual individual = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLNamedIndividual(individualIRI);
 		addClassAssertion(ontology, individual, owlClassIRI);
 	}
-	
+
 	public static void addClassAssertion(OWLOntology ontology, OWLNamedIndividual individual, IRI owlClassIRI) {
 		OWLClass owlClass = createClass(ontology, owlClassIRI);
 		OWLAxiom axiom = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClassAssertionAxiom(owlClass, individual);
 		ontology.add(axiom);
 	}
-	
+
 	public static OWLAxiom addObjectSomeValuesFromRestriction(OWLOntology ontology, OWLProperty property, OWLClass owlClass, OWLClassExpression classExpression) {
 		OWLClassExpression someValuesFromExpression = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectSomeValuesFrom((OWLObjectPropertyExpression) property, classExpression);
 		return addSubclassOf(ontology, owlClass, someValuesFromExpression);
@@ -291,15 +305,15 @@ public class OWLUtils {
 		OWLClassExpression someValuesFromExpression = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLDataSomeValuesFrom(property, datatype);
 		OWLAxiom axiom = addSubclassOf(ontology, owlClass, someValuesFromExpression);
 		return axiom;
-		
+
 	}
-	
+
 	public static OWLAxiom addObjectAllValuesFromRestriction(OWLOntology ontology, OWLObjectProperty property, OWLClass owlClass, OWLClassExpression classExpression) {
 		OWLClassExpression allValuesFromExpression = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLObjectAllValuesFrom(property, classExpression);
 		OWLAxiom axiom = addSubclassOf(ontology, owlClass, allValuesFromExpression);
 		return axiom;
 	}
-	
+
 	public static List<OWLNamedIndividual> getIndividualsFromList(OWLOntology ontology, String prefixIRI, List<String> listOfNames, OWLClass type) {
 		List<OWLNamedIndividual> result = new ArrayList<>();
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
@@ -311,7 +325,7 @@ public class OWLUtils {
 		}
 		return result;
 	}
-	
+
 	public static void addOneOfAxiom (OWLOntology ontology, OWLClass owlClass, List<OWLNamedIndividual> individuals) {
 		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLObjectOneOf oneOf = df.getOWLObjectOneOf(individuals);
@@ -324,19 +338,26 @@ public class OWLUtils {
 		OWLAxiom axiom = df.getOWLDisjointClassesAxiom(classes);
 		ontology.add(axiom);
 	}
-	
+
 	public static boolean containsAnnotation(OWLOntology ontology, OWLEntity entity, OWLAnnotationProperty annotationProperty) {
-		
+
 		return EntitySearcher.getAnnotationObjects(entity, ontology).anyMatch(annotation -> {
 			return annotation.getProperty().equals(annotationProperty);
 		});
 	}
-	
+
 	public static boolean containsAnnotation(OWLOntology ontology, OWLEntity entity, IRI annotationPropertyIRI) {
-		
+
 		return EntitySearcher.getAnnotationObjects(entity, ontology).anyMatch(annotation -> {
 			return annotation.getProperty().getIRI().equals(annotationPropertyIRI);
 		});
 	}
-	
+
+	public static void addOntologyAnnotation(OWLOntology ontology, IRI annotationPropertyIRI, String value) {
+		OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLAnnotationProperty owlAnnotationProperty = df.getOWLAnnotationProperty(annotationPropertyIRI);
+		OWLAnnotation owlAnnotation = df.getOWLAnnotation(owlAnnotationProperty, df.getOWLLiteral(value));
+		ontology.getOWLOntologyManager().applyChange(new AddOntologyAnnotation(ontology, owlAnnotation));
+	}
+
 }
