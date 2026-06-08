@@ -381,6 +381,8 @@ public class Cfihos {
 
 		OWLClass measureClass = OWLUtils.createClass(ontology, IRI.create(OWLUtils.OM2_NS + CFIHOSUtils.MEASURE));
 		OWLDataProperty hasNumericalValue = OWLUtils.createDataProperty(ontology, IRI.create(OWLUtils.OM2_HAS_NUMERICAL_VALUE));
+		OWLDataProperty hasValue = OWLUtils.createDataProperty(ontology, IRI.create(OWLUtils.QUDT_VALUE_IRI));
+		OWLUtils.addSubPropertyOf(ontology, hasNumericalValue, hasValue);
 		OWLUtils.addDomain(ontology, hasNumericalValue, measureClass);
 		OWLUtils.addDataPropertyRange(ontology, hasNumericalValue, OWL2Datatype.XSD_DECIMAL);
 		OWLObjectProperty hasUnit = OWLUtils.createObjectProperty(ontology, IRI.create(OWLUtils.OM2_HAS_UNIT));
@@ -389,14 +391,9 @@ public class Cfihos {
 
 		OWLClass sourceStandardDocumentAndDataRequirementClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + CFIHOSUtils.SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_CODE));
 		OWLUtils.addAnnotation(ontology, sourceStandardDocumentAndDataRequirementClass, IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_HAS_CFIHOS_CODE), CFIHOSUtils.SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_CODE);
-		//OWLUtils.addAnnotation(ontology, sourceStandardDocumentAndDataRequirementClass, IRI.create(RDFConstants.RDFS_LABEL), "source standard document and data requirement");
-		//OWLUtils.addAnnotation(ontology, sourceStandardDocumentAndDataRequirementClass, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "A requirement for document or data, as expressed in a source standard, irrespective of the equipment class.");
 
 		OWLClass standardClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + CFIHOSUtils.STANDARD_CODE));
 		OWLUtils.addAnnotation(ontology, standardClass, IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_HAS_CFIHOS_CODE), CFIHOSUtils.STANDARD_CODE);
-//		OWLUtils.addAnnotation(ontology, standardClass, IRI.create(RDFConstants.RDFS_LABEL), "standard");
-//		OWLUtils.addAnnotation(ontology, standardClass, IRI.create(OWLUtils.SKOS_ALT_LABEL_IRI), "source standard");
-//		OWLUtils.addAnnotation(ontology, standardClass, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "A standard used to define requirements like engineering, operations, etc..");
 
 
 		OWLClass disciplineClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + CFIHOSUtils.DISCIPLINE_CODE));
@@ -412,12 +409,6 @@ public class Cfihos {
 		OWLUtils.addAnnotation(ontology, documentClass, IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_HAS_CFIHOS_CODE), CFIHOSUtils.DOCUMENT_TYPE_CODE);
 
 
-		OWLClass pickListClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + CFIHOSUtils.PROPERTY_PICKLIST_CODE));
-		OWLUtils.addAnnotation(ontology, pickListClass, IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_HAS_CFIHOS_CODE), CFIHOSUtils.PROPERTY_PICKLIST_CODE);
-//		OWLUtils.addAnnotation(ontology, pickListClass, IRI.create(RDFConstants.RDFS_LABEL), "property picklist");
-//		OWLUtils.addAnnotation(ontology, pickListClass, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "A set of possible values that can be assigned to a property.");
-
-
 //		OWLClass purposeClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + CFIHOSUtils.PURPOSE));
 //		OWLUtils.addAnnotation(ontology, purposeClass, IRI.create(RDFConstants.RDFS_LABEL), "purpose");
 //		OWLUtils.addAnnotation(ontology, purposeClass, IRI.create(OWLUtils.SKOS_ALT_LABEL_IRI), "property grouping or decomposition purpose");
@@ -425,28 +416,41 @@ public class Cfihos {
 
 		OWLClass propertyGroupClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + CFIHOSUtils.PROPERTY_GROUP_CODE));
 		OWLUtils.addAnnotation(ontology, propertyGroupClass, IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_HAS_CFIHOS_CODE), CFIHOSUtils.PROPERTY_GROUP_CODE);
-		//OWLUtils.addAnnotation(ontology, propertyGroupClass, IRI.create(RDFConstants.RDFS_LABEL), "property group");
-		//OWLUtils.addAnnotation(ontology, propertyGroupClass, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "Property groups can be used for multiple purposes. But if a property group can be used for a given purpose, then it should be documented as a property group allowed for that purpose.");
+
+		OWLClass qualitativeValueClass = OWLUtils.createClass(ontology, IRI.create(getPrefixIRI() + CFIHOSUtils.QUALITATIVE_VALUE_CODE));
+		OWLUtils.addAnnotation(ontology, qualitativeValueClass, IRI.create(RDFConstants.RDFS_LABEL), "qualitative value");
+		OWLUtils.addAnnotation(ontology, qualitativeValueClass, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "Class representing qualitative values.");
+
+		OWLClass textValueClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + CFIHOSUtils.TEXT_VALUE_CODE));
+		OWLUtils.addAnnotation(ontology, textValueClass, IRI.create(RDFConstants.RDFS_LABEL), "text value");
+		OWLUtils.addAnnotation(ontology, textValueClass, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "Wrapper class to represent text.");
+		OWLUtils.addSubclassOf(ontology, textValueClass, qualitativeValueClass);
+		OWLUtils.addDataSomeValuesFromRestriction(ontology, hasValue, textValueClass, ontology.getOWLOntologyManager().getOWLDataFactory().getStringOWLDatatype());
+
+		OWLClass booleanValueClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + CFIHOSUtils.BOOLEAN_VALUE_CODE));
+		OWLUtils.addAnnotation(ontology, booleanValueClass, IRI.create(RDFConstants.RDFS_LABEL), "boolean value");
+		OWLUtils.addAnnotation(ontology, booleanValueClass, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "Wrapper class to represent boolean values.");
+		OWLUtils.addSubclassOf(ontology, booleanValueClass, qualitativeValueClass);
+		OWLUtils.addDataSomeValuesFromRestriction(ontology, hasValue, booleanValueClass, ontology.getOWLOntologyManager().getOWLDataFactory().getBooleanOWLDatatype());
+
+		OWLClass pickListClass = OWLUtils.createClass(ontology, IRI.create(prefixIRI + CFIHOSUtils.PROPERTY_PICKLIST_CODE));
+		OWLUtils.addAnnotation(ontology, pickListClass, IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_HAS_CFIHOS_CODE), CFIHOSUtils.PROPERTY_PICKLIST_CODE);
+		OWLUtils.addSubclassOf(ontology, pickListClass, qualitativeValueClass);
+
 
 		OWLObjectProperty property = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.PROPERTY_CODE));
 		OWLUtils.addAnnotation(ontology, property, IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_HAS_CFIHOS_CODE), CFIHOSUtils.PROPERTY_CODE);
-		//OWLUtils.addAnnotation(ontology, property, IRI.create(RDFConstants.RDFS_LABEL), CFIHOSUtils.PROPERTY_CODE);
-		//OWLUtils.addAnnotation(ontology, property, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "A type of feature that is used to distinguish and describe tags, equipment, models) or their class.");
 
 
 		OWLObjectProperty quantitativeProperty = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.QUANTITATIVE_PROPERTY_CODE));
 		OWLUtils.addAnnotation(ontology, quantitativeProperty, IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_HAS_CFIHOS_CODE), CFIHOSUtils.QUANTITATIVE_PROPERTY_CODE);
-		//OWLUtils.addAnnotation(ontology, quantitativeProperty, IRI.create(RDFConstants.RDFS_LABEL), "quantitative property");
-		//OWLUtils.addAnnotation(ontology, quantitativeProperty, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "A type of feature that (a) is used to distinguish and describe tags, equipment, models or their class (b) is numeric (c) may have an associated unit of measure.");
 		OWLUtils.addRange(ontology, quantitativeProperty, measureClass);
 		OWLUtils.addSubPropertyOf(ontology, quantitativeProperty, property);
 
 		OWLObjectProperty qualitativeProperty = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.QUALITATIVE_PROPERTY_CODE));
 		OWLUtils.addAnnotation(ontology, qualitativeProperty, IRI.create(prefixIRI + CFIHOSUtils.CFIHOS_HAS_CFIHOS_CODE), CFIHOSUtils.QUALITATIVE_PROPERTY_CODE);
-		//OWLUtils.addAnnotation(ontology, qualitativeProperty, IRI.create(RDFConstants.RDFS_LABEL), "qualitative property");
-		//OWLUtils.addAnnotation(ontology, qualitativeProperty, IRI.create(OWLUtils.IAO_DEFINITION_IRI), "A type of feature that (a) is used to distinguish and describe tags, equipment, models or their class (b) may have defined list of values to select from (c) is non-numeric.");
 		OWLUtils.addSubPropertyOf(ontology, qualitativeProperty, property);
-
+		OWLUtils.addRange(ontology, qualitativeProperty, qualitativeValueClass);
 
 		OWLObjectProperty hasDiscipline = OWLUtils.createObjectProperty(ontology, IRI.create(prefixIRI + CFIHOSUtils.HAS_DISCIPLINE));
 		OWLUtils.addAnnotation(ontology, hasDiscipline, IRI.create(RDFConstants.RDFS_LABEL), "has discipline");
@@ -1191,12 +1195,16 @@ public class Cfihos {
 		OWLUtils.addSubclassOf(ontology, cfihosStandardClass, idoInformationObjectClass);
 
 		/* CFIHOS picklist sub class of IDO information object */
-		OWLClass cfihosPropertyPicklistClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRI() + CFIHOSUtils.PROPERTY_PICKLIST_CODE);
-		OWLUtils.addSubclassOf(ontology, cfihosPropertyPicklistClass, idoInformationObjectClass);
+		//OWLClass cfihosPropertyPicklistClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRI() + CFIHOSUtils.PROPERTY_PICKLIST_CODE);
+		//OWLUtils.addSubclassOf(ontology, cfihosPropertyPicklistClass, idoInformationObjectClass);
 
 		/* CFIHOS property picklist value sub class of IDO information object */
 //		OWLClass cfihosPropertyPicklistValueClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRI() + "PropertyPickListValue");
 //		OWLUtils.addSubclassOf(ontology, cfihosPropertyPicklistValueClass, idoInformationObjectClass);
+
+		/* QualitativeValue class as subclass of information object */
+		OWLClass qualitativeValueClass = OWLUtils.createClass(ontology, IRI.create(getPrefixIRI() + CFIHOSUtils.QUALITATIVE_VALUE_CODE));
+		OWLUtils.addSubclassOf(ontology, qualitativeValueClass, idoInformationObjectClass);
 
 		/* CFIHOS SourceStandardDocumentAndDataRequirement sub class of IDO information object */
 		OWLClass cfihosSourceStandardDocumentAndDataRequirementClass = manager.getOWLDataFactory().getOWLClass(getPrefixIRI() + CFIHOSUtils.SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_CODE);
@@ -1248,10 +1256,10 @@ public class Cfihos {
 		OWLObjectProperty idoHasContentPart = manager.getOWLDataFactory().getOWLObjectProperty(OWLUtils.IDO_NS + "hasContentPart");
 		OWLUtils.addSubPropertyOf(ontology, cfihosHasUnit, idoHasContentPart);
 
-		/* IDO datumValue equivalent to om2:hasNumericalValue */
+		/* IDO datumValue equivalent to qudt:value */
 		OWLDataProperty idoDatumValue = manager.getOWLDataFactory().getOWLDataProperty(OWLUtils.IDO_NS + "datumValue");
-		OWLDataProperty cfihosHasNumericalValue = manager.getOWLDataFactory().getOWLDataProperty(OWLUtils.OM2_HAS_NUMERICAL_VALUE);
-		OWLUtils.addEquivalentDataProperties(ontology, cfihosHasNumericalValue, idoDatumValue);
+		OWLDataProperty hasValue = OWLUtils.createDataProperty(ontology, IRI.create(OWLUtils.QUDT_VALUE_IRI));
+		OWLUtils.addEquivalentDataProperties(ontology, hasValue, idoDatumValue);
 
 
 		/*Qualities do not appear in CFIHOS, but we create them from the properties to make them interoperable with IDO */

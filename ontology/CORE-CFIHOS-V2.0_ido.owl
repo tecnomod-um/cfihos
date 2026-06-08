@@ -130,19 +130,19 @@
     
 
 
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/datumValue -->
+    <!-- http://qudt.org/schema/qudt/value -->
 
 
-    <owl:DatatypeProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/datumValue">
-        <owl:equivalentProperty rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue"/>
+    <owl:DatatypeProperty rdf:about="http://qudt.org/schema/qudt/value">
+        <owl:equivalentProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/datumValue"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/datumValue -->
 
 
-    <rdf:Description rdf:about="http://www.ontology-of-units-of-measure.org/resource/om-2/hasNumericalValue"/>
+    <owl:DatatypeProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/datumValue"/>
     
 
 
@@ -155,15 +155,6 @@
      -->
 
 
-    
-
-
-    <!-- http://infohub.siemens-energy.com/CFIHOS#CFIHOS-00000019 -->
-
-
-    <rdf:Description rdf:about="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-00000019">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
-    </rdf:Description>
     
 
 
@@ -717,7 +708,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Is the functional item buried, yes/no?</obo:IAO_0000115>
@@ -2061,7 +2052,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the identification of electrical equipment&apos;s explosion protection and type of ignition protection in accordance with IEC/EN 60079-0.</obo:IAO_0000115>
@@ -2119,7 +2110,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The name of the nationally accredited approval body that has issued the examination certificate for the physical object.</obo:IAO_0000115>
@@ -2547,7 +2538,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <CFIHOS:CFIHOS-00000052>550473</CFIHOS:CFIHOS-00000052>
@@ -3074,7 +3065,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if the functional or physical object can be immersed or not.</obo:IAO_0000115>
@@ -3190,7 +3181,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify insulation code, handbook or industry practice.</obo:IAO_0000115>
@@ -3774,7 +3765,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The name of the product in liquid phase.</obo:IAO_0000115>
@@ -4294,7 +4285,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <CFIHOS:CFIHOS-00000052>910235</CFIHOS:CFIHOS-00000052>
@@ -4630,7 +4621,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the non destructive group of methods of checking the structural quality of the functional or physical object.</obo:IAO_0000115>
@@ -5994,7 +5985,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The code of practice and the painting system within that practice with which the painting of a functional or physical object complies.</obo:IAO_0000115>
@@ -6024,7 +6015,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the type and grade of material that the pipeline is constructed from.</obo:IAO_0000115>
@@ -6445,7 +6436,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Is a collection of items each of which is a relief bellow.</obo:IAO_0000115>
@@ -8862,7 +8853,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <CFIHOS:CFIHOS-00000052>3959</CFIHOS:CFIHOS-00000052>
@@ -8884,7 +8875,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <CFIHOS:CFIHOS-00000052>10440</CFIHOS:CFIHOS-00000052>
@@ -10632,7 +10623,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <CFIHOS:CFIHOS-00000052>193002</CFIHOS:CFIHOS-00000052>
@@ -11073,7 +11064,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The mount position of an equipment such as horizontal, vertical or submerged</obo:IAO_0000115>
@@ -11091,7 +11082,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Any performance requirements for allowing tools for pigging, through flowline requirements (TFL), workover, or other operations through the pipe, including ID, bend radius, and end-fitting transitions</obo:IAO_0000115>
@@ -11604,7 +11595,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Valve with an unobstructed opening, not smaller than the internal bore of the end connections.</obo:IAO_0000115>
@@ -11622,7 +11613,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The standard and classification of the fire rated equipment including valves, firewalls, doors, windows</obo:IAO_0000115>
@@ -11830,7 +11821,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Signal range (e.g. 4 mA - 20 mA, or 3 - 15 psig) applied to a device, instrument, or system</obo:IAO_0000115>
@@ -11848,7 +11839,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Signal range (e.g. 4 mA - 20 mA, or 3 - 15psig) delivered by a device, instrument, or system</obo:IAO_0000115>
@@ -12154,7 +12145,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <CFIHOS:CFIHOS-00000052>4023</CFIHOS:CFIHOS-00000052>
@@ -12515,7 +12506,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <CFIHOS:CFIHOS-00000052>102</CFIHOS:CFIHOS-00000052>
@@ -12859,7 +12850,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if insulation is required or not.</obo:IAO_0000115>
@@ -13020,7 +13011,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>An indicator that an equipment has been classified as safe for use in hazardous areas</obo:IAO_0000115>
@@ -13114,7 +13105,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The company which will be engaged to issue equipment certification.</obo:IAO_0000115>
@@ -19762,7 +19753,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Geographic location of the project within a country which will determine the applicability of local regulatory requirements.</obo:IAO_0000115>
@@ -19841,7 +19832,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The assumed loading factor value given for a section containing only 1 distribution circuits in accordance with IEC 61439-2:2020.</obo:IAO_0000115>
@@ -19860,7 +19851,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The assumed loading factor value given for a section containing 2 to 3 distribution circuits in accordance with IEC 61439-2:2020.</obo:IAO_0000115>
@@ -19879,7 +19870,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The assumed loading factor value given for a section containing 4 to 5 distribution circuits in accordance with IEC 61439-2:2020.</obo:IAO_0000115>
@@ -19898,7 +19889,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The assumed loading factor value given for a section containing 6 to 9 distribution circuits in accordance with IEC 61439-2:2020.</obo:IAO_0000115>
@@ -19917,7 +19908,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The assumed loading factor value given for a section containing more than 10 distribution circuits in accordance with IEC 61439-2:2020.</obo:IAO_0000115>
@@ -19936,7 +19927,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The assumed loading factor electric actuator (MOV).</obo:IAO_0000115>
@@ -19955,7 +19946,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The assumed loading factor motors rated less than or equal to 100 kW.</obo:IAO_0000115>
@@ -19974,7 +19965,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The assumed loading factor motors rated greater than 100 kW.</obo:IAO_0000115>
@@ -20136,7 +20127,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The maximum rotation about fore-and-aft axis of the vessel under dynamic conditions defined in accordance with IEC 60092-101.</obo:IAO_0000115>
@@ -20158,7 +20149,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The maximum rotation about athwartship axis of the vessel under dynamic conditions defined in accordance with IEC 60092-101.</obo:IAO_0000115>
@@ -21245,7 +21236,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The discrete hardwired interlocking / intertripping protocol requirements.</obo:IAO_0000115>
@@ -21283,7 +21274,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The IED to power management system interface protocol requirements.</obo:IAO_0000115>
@@ -21340,7 +21331,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The IED to generator control panel interface protocol requirements.</obo:IAO_0000115>
@@ -21589,7 +21580,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The gas lift function requirement.</obo:IAO_0000115>
@@ -21665,7 +21656,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if snag load protection is required.</obo:IAO_0000115>
@@ -21800,7 +21791,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The VXT TH production bore plug model.</obo:IAO_0000115>
@@ -21819,7 +21810,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The VXT TH production bore plug type.</obo:IAO_0000115>
@@ -21838,7 +21829,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The VXT TH production bore plug size.</obo:IAO_0000115>
@@ -21857,7 +21848,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The VXT TH annulus bore plug model.</obo:IAO_0000115>
@@ -21876,7 +21867,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The VXT TH annulus bore plug type.</obo:IAO_0000115>
@@ -21895,7 +21886,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The VXT TH annulus bore plug size.</obo:IAO_0000115>
@@ -21914,7 +21905,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The VXT tubing plug or other plug model.</obo:IAO_0000115>
@@ -21933,7 +21924,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The VXT tubing plug or other plug type.</obo:IAO_0000115>
@@ -21952,7 +21943,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The VXT tubing plug or other plug size.</obo:IAO_0000115>
@@ -21971,7 +21962,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The TH pup joint / saver sub connection type.</obo:IAO_0000115>
@@ -22047,7 +22038,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Select whether seabed hydrates are expected.</obo:IAO_0000115>
@@ -22066,7 +22057,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Select whether wellhead connector hydrate prevention and inhibition are required.</obo:IAO_0000115>
@@ -22085,7 +22076,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material grade of the downhole tubing.</obo:IAO_0000115>
@@ -22104,7 +22095,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The connection type of the downhole tubing.</obo:IAO_0000115>
@@ -22123,7 +22114,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The connection load capacity of the downhole tubing.</obo:IAO_0000115>
@@ -22142,7 +22133,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The connection details (connector type and prep) for the downhole tubing connections to the bottom of the tubing hanger.</obo:IAO_0000115>
@@ -22180,7 +22171,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The connection details (connector type and preparation) for downhole electric and fiber optic connections to bottom of tubing hanger.</obo:IAO_0000115>
@@ -22199,7 +22190,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The connection details (connector type and preparation) for surface-controlled subsurface safety valves (SCSSV) hydraulic connection(s) to the bottom of the tubing hanger (TH).</obo:IAO_0000115>
@@ -22598,7 +22589,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The choke step size and profile details.</obo:IAO_0000115>
@@ -22712,7 +22703,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if flowline leak detection is required.</obo:IAO_0000115>
@@ -22731,7 +22722,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if flowline sand detection is required.</obo:IAO_0000115>
@@ -22750,7 +22741,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if flowline erosion condition monitoring is required.</obo:IAO_0000115>
@@ -22769,7 +22760,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if flowline pig detection is required.</obo:IAO_0000115>
@@ -22788,7 +22779,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The tree-mounted production (injection) choke valve flow coefficient.</obo:IAO_0000115>
@@ -22807,7 +22798,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if a gas lift choke is required.</obo:IAO_0000115>
@@ -22826,7 +22817,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if a gas lift flow meter is required.</obo:IAO_0000115>
@@ -22902,7 +22893,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if metering for chemical injection between PMV and PWV - Line #1 is required.</obo:IAO_0000115>
@@ -22940,7 +22931,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if metering for chemical injection between PWV and PCV - Line #3 is required.</obo:IAO_0000115>
@@ -22959,7 +22950,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if metering for chemical injection outboard of PCV - Line #4 is required.</obo:IAO_0000115>
@@ -22978,7 +22969,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if metering for downhole chemical injection - Line #1 is required.</obo:IAO_0000115>
@@ -22997,7 +22988,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if metering for downhole chemical injection - Line #2 is required.</obo:IAO_0000115>
@@ -23016,7 +23007,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if metering for downhole chemical injection - Line #3 is required.</obo:IAO_0000115>
@@ -23035,7 +23026,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if metering for downhole chemical injection - Line #4 is required.</obo:IAO_0000115>
@@ -23111,7 +23102,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if metering for chemical injection between PWV and PCV - Line #2 is required.</obo:IAO_0000115>
@@ -23187,7 +23178,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if the USVs are to be monogrammed per API.</obo:IAO_0000115>
@@ -23442,7 +23433,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if the pump has an individual flow control.</obo:IAO_0000115>
@@ -23558,7 +23549,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the metocean and floating facility data of the location where the equipment will be installed.</obo:IAO_0000115>
@@ -23628,7 +23619,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The type or quality of the required cooling water.</obo:IAO_0000115>
@@ -23647,7 +23638,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The amount of fouling in the liquid.</obo:IAO_0000115>
@@ -23685,7 +23676,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Description of the cause of the expected corrosion.</obo:IAO_0000115>
@@ -23704,7 +23695,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Description of the cause of the expected erosion.</obo:IAO_0000115>
@@ -24123,7 +24114,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify where heat tracing and insulation is to be applied.</obo:IAO_0000115>
@@ -24307,7 +24298,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the strainer type.</obo:IAO_0000115>
@@ -24421,7 +24412,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the grade (underside of pump mounting plate or top of foundation) elevation at which the proposed pump is to be installed.</obo:IAO_0000115>
@@ -24538,7 +24529,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the oil viscosity ISO grade.</obo:IAO_0000115>
@@ -24557,7 +24548,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Is a specification which describes the bearing lubricant.</obo:IAO_0000115>
@@ -24581,7 +24572,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Is a specification which describes the lubricant grease type.</obo:IAO_0000115>
@@ -24600,7 +24591,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Is a specification which describes the lubricant grease grade.</obo:IAO_0000115>
@@ -24714,7 +24705,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the case and case cover is constructed.</obo:IAO_0000115>
@@ -24733,7 +24724,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the nonwetted pressure-retaining fastener is constructed.</obo:IAO_0000115>
@@ -24752,7 +24743,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the diffuser is constructed.</obo:IAO_0000115>
@@ -24771,7 +24762,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the impeller is constructed.</obo:IAO_0000115>
@@ -24792,7 +24783,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the inducer is constructed.</obo:IAO_0000115>
@@ -24830,7 +24821,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the impeller wear component is constructed.</obo:IAO_0000115>
@@ -24849,7 +24840,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The hardness of the material from which the impeller wear component is constructed.</obo:IAO_0000115>
@@ -24868,7 +24859,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the case wear ring is constructed.</obo:IAO_0000115>
@@ -24887,7 +24878,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The hardness of the material from which the wear parts is constructed.</obo:IAO_0000115>
@@ -24906,7 +24897,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the shaft is constructed.</obo:IAO_0000115>
@@ -24944,7 +24935,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the suction barrel/can is constructed.</obo:IAO_0000115>
@@ -24963,7 +24954,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the discharge head is constructed.</obo:IAO_0000115>
@@ -24982,7 +24973,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the discharge column is constructed.</obo:IAO_0000115>
@@ -25001,7 +24992,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the head column is constructed.</obo:IAO_0000115>
@@ -25020,7 +25011,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the discharge elbow and pipe is constructed.</obo:IAO_0000115>
@@ -25039,7 +25030,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the bowl/casing is constructed.</obo:IAO_0000115>
@@ -25058,7 +25049,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the bellmouth/suction cover is constructed.</obo:IAO_0000115>
@@ -25077,7 +25068,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the strainer is constructed.</obo:IAO_0000115>
@@ -25096,7 +25087,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the line shaft is constructed.</obo:IAO_0000115>
@@ -25115,7 +25106,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the shaft enclosing tube is constructed.</obo:IAO_0000115>
@@ -25134,7 +25125,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the bowl shaft is constructed.</obo:IAO_0000115>
@@ -25153,7 +25144,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the process wetted fasteners is constructed.</obo:IAO_0000115>
@@ -25172,7 +25163,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the bearing retainer or spider is constructed.</obo:IAO_0000115>
@@ -25191,7 +25182,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the line shaft bearing is constructed.</obo:IAO_0000115>
@@ -25210,7 +25201,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the line shaft hard facing is constructed.</obo:IAO_0000115>
@@ -25229,7 +25220,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the line shaft sleeve is constructed.</obo:IAO_0000115>
@@ -25248,7 +25239,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the bearing lubrication lines is constructed.</obo:IAO_0000115>
@@ -25267,7 +25258,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the bowl bearing is constructed.</obo:IAO_0000115>
@@ -25362,7 +25353,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the components to be subjected to additional surface/sub-surface examination.</obo:IAO_0000115>
@@ -25419,7 +25410,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the additional components to be subjected to positive material identification (PMI) testing.</obo:IAO_0000115>
@@ -25546,7 +25537,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the API Standard 682 mechanical seal code required for the proposed pump.</obo:IAO_0000115>
@@ -25679,7 +25670,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Is a specification which describes the coupling.</obo:IAO_0000115>
@@ -25698,7 +25689,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>A general description of the size of the coupling to the drive shaft of an equipment item.</obo:IAO_0000115>
@@ -25787,7 +25778,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Is a specification which describes the coupling guard.</obo:IAO_0000115>
@@ -25806,7 +25797,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The material from which the coupling and exposed shaft guard is constructed.</obo:IAO_0000115>
@@ -25825,7 +25816,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Is a specification which describes the driver.</obo:IAO_0000115>
@@ -25960,7 +25951,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Is a specification which describes the gear.</obo:IAO_0000115>
@@ -25998,7 +25989,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the required mounting locations for the accelerometers.</obo:IAO_0000115>
@@ -26074,7 +26065,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the required mounting locations for the vibration proximity probes.</obo:IAO_0000115>
@@ -26169,7 +26160,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the required mounting locations for the temperature probes.</obo:IAO_0000115>
@@ -26359,7 +26350,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The switchgear back-to-wall configuration.</obo:IAO_0000115>
@@ -27406,7 +27397,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The colour of the paint of a physical object.</obo:IAO_0000115>
@@ -27451,7 +27442,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#BooleanValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify whether the equipment shall be rated for use in a potentially explosive atmosphere in accordance with IEC 60079.</obo:IAO_0000115>
@@ -27594,7 +27585,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The line conductor cable type (e.g. multi-core cable, multi-cores in parallel, singles in parallel).</obo:IAO_0000115>
@@ -27614,7 +27605,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The number of line conductor cables e.g. for multi-core cable &apos;3 x 50&apos;, for singles &apos;3 x 1 x 50&apos;, for multi-cores in parallel &apos;2 x 3 x 50&apos;, for singles in parallel &apos;6 x 1 x 50&apos;.</obo:IAO_0000115>
@@ -28048,7 +28039,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The inverse of the average time between two successive impulses of the same polarity, whether unipolar or bipolar in accordance with IEC 60034-18-42.</obo:IAO_0000115>
@@ -28127,7 +28118,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify if differential protection current transformer ratio is required.</obo:IAO_0000115>
@@ -28147,7 +28138,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify what differential protection current transformer class is required.</obo:IAO_0000115>
@@ -28167,7 +28158,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The type of partial discharge sensing element.</obo:IAO_0000115>
@@ -28186,7 +28177,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Specify the site connection type requirement where shock pulse monitoring connection points are to be provided.</obo:IAO_0000115>
@@ -28205,7 +28196,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The type of partial discharge sensing element to be provided.</obo:IAO_0000115>
@@ -28300,7 +28291,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>The chemicals or corrosives that are present in the location environment.</obo:IAO_0000115>
@@ -28452,7 +28443,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                <owl:someValuesFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#TextValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <obo:IAO_0000115>Is a specification which describes the grease.</obo:IAO_0000115>
@@ -28822,6 +28813,15 @@
         <pav:derivedFrom rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-40001398"/>
         <schema:category rdf:resource="http://infohub.siemens-energy.com/CFIHOS#CFIHOS-42000078"/>
         <rdfs:label>upper limit specific heat</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://infohub.siemens-energy.com/CFIHOS#QualitativeValue -->
+
+
+    <owl:Class rdf:about="http://infohub.siemens-energy.com/CFIHOS#QualitativeValue">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
     </owl:Class>
     
 

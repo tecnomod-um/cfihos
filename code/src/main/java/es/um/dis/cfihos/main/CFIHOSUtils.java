@@ -61,6 +61,9 @@ public class CFIHOSUtils {
 	public static final String UNIT_OF_MEASUREMENT_CODE = "CFIHOS-00000073";
 	public static final String CFIHOS_OBJECT_EQUIVALENT_MAPPING_CODE = "CFIHOS-00000052";
 	public static final String CFIHOS_DELIVERABLE_FORMAT_CODE = "CFIHOS-00000137";
+	public static final String QUALITATIVE_VALUE_CODE = "QualitativeValue";
+	public static final String TEXT_VALUE_CODE = "TextValue";
+	public static final String BOOLEAN_VALUE_CODE = "BooleanValue";
 	public static final String SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_CODE = "CFIHOS-00000132";
 	public static final String SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_NUMBER_CODE = "CFIHOS-10000267";
 	public static final String SOURCE_STANDARD_DOCUMENT_AND_DATA_REQUIREMENT_TITLE_CODE = "CFIHOS-10000268";
@@ -427,9 +430,18 @@ public class CFIHOSUtils {
 			if ("Number".equals(propertyDataType)) {
 				OWLUtils.addSubPropertyOf(ontology, objectProperty, quantitativeProperty);
 			}
-			/* Else -> qualitative property */
+			/* Else -> qualitative property with TextValue as range*/
 			else {
 				OWLUtils.addSubPropertyOf(ontology, objectProperty, qualitativeProperty);
+				OWLClass range = null;
+				if ("Text".equals(propertyDataType)) {
+					range = OWLUtils.createClass(ontology, IRI.create(prefixIRI + CFIHOSUtils.TEXT_VALUE_CODE));
+				} else if ("Boolean".equals(propertyDataType)) {
+					range = OWLUtils.createClass(ontology, IRI.create(prefixIRI + CFIHOSUtils.BOOLEAN_VALUE_CODE));
+				}
+				if(range != null) {
+					OWLUtils.addRange(ontology, objectProperty, range);
+				}
 			}
 		}
 

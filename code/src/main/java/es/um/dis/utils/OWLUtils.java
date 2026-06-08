@@ -36,6 +36,7 @@ public class OWLUtils {
 	public static final String IAO_NS = "http://purl.obolibrary.org/obo/";
 	public static final String SKOS_NS = "http://www.w3.org/2004/02/skos/core#";
 	public static final String XSD_NS = "http://www.w3.org/2001/XMLSchema#";
+	public static final String QUDT_NS = "http://qudt.org/schema/qudt/";
 	public static final String IAO_DEFINITION_IRI = IAO_NS + "IAO_0000115";
 	public static final String SKOS_ALT_LABEL_IRI = SKOS_NS + "altLabel";
 	public static final String IDO_NS = "http://rds.posccaesar.org/ontology/lis14/rdl/";
@@ -49,6 +50,7 @@ public class OWLUtils {
 
 	public static final String DECIMAL_IRI = XSD_NS + "decimal";
 	public static final String DOUBLE_IRI = XSD_NS + "double";
+	public static final String QUDT_VALUE_IRI = QUDT_NS + "value";
 	public static final String SCHEMA_NS = "http://schema.org/";
 	public static final String SCHEMA_IDENTIFIER = SCHEMA_NS + "identifier";
 	public static final String SCHEMA_CATEGORY = OWLUtils.SCHEMA_NS + "category";
