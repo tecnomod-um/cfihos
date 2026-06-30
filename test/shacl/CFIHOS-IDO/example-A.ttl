@@ -1,0 +1,106 @@
+@prefix : <http://www.semanticweb.org/fabad/ontologies/2026/4/untitled-ontology-2969/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix om-2: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix CFIHOS: <http://infohub.siemens-energy.com/CFIHOS#> .
+@prefix schema: <http://schema.org/> .
+@base <http://infohub.siemens-energy.com/CFIHOS-example-A> .
+
+<http://infohub.siemens-energy.com/CFIHOS-example-A> rdf:type owl:Ontology ;
+                                                      owl:imports <http://infohub.siemens-energy.com/CFIHOS> .
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://infohub.siemens-energy.com/CFIHOS-example-A#ball_valve_instance
+:ball_valve_instance rdf:type owl:NamedIndividual ,
+                              <http://infohub.siemens-energy.com/CFIHOS/equipment#CFIHOS-30000807> ;
+                     CFIHOS:CFIHOS-40000017 CFIHOS:CFIHOS-60000209 ;
+                     CFIHOS:CFIHOS-40000247 :ball_valve_instance_length ;
+                     CFIHOS:CFIHOS-40000337 :ball_valve_instance_remark_1 ,
+                                            :ball_valve_instance_remark_2 ,
+                                            :ball_valve_instance_remark_3 ;
+                     CFIHOS:CFIHOS-40000479 CFIHOS:CFIHOS-60000215 ;
+                     CFIHOS:CFIHOS-40000487 :ball_valve_instance_special_design_req ;
+                     CFIHOS:CFIHOS-40000514 :ball_valve_instance_operating_temeperature ;
+                     CFIHOS:CFIHOS-40000570 :ball_valve_instance_maximum_design_pressure ;
+                     CFIHOS:CFIHOS-40000584 :ball_valve_instance_full_bore ;
+                     CFIHOS:CFIHOS-40000588 CFIHOS:CFIHOS-60001713 ;
+                     CFIHOS:CFIHOS-40000589 :ball_valve_instance_stem_seal_design ;
+                     CFIHOS:CFIHOS-40000591 :ball_valve_instance_rating .
+
+
+###  http://infohub.siemens-energy.com/CFIHOS-example-A#ball_valve_instance_full_bore
+:ball_valve_instance_full_bore rdf:type owl:NamedIndividual ,
+                                        CFIHOS:BooleanValue ;
+                               qudt:value "true"^^xsd:boolean .
+
+
+###  http://infohub.siemens-energy.com/CFIHOS-example-A#ball_valve_instance_length
+:ball_valve_instance_length rdf:type owl:NamedIndividual ,
+                                     om-2:Measure ;
+                            om-2:hasUnit CFIHOS:CFIHOS-60001446 ;
+                            om-2:hasNumericalValue 15 .
+
+
+###  http://infohub.siemens-energy.com/CFIHOS-example-A#ball_valve_instance_maximum_design_pressure
+:ball_valve_instance_maximum_design_pressure rdf:type owl:NamedIndividual ,
+                                                      om-2:Measure ;
+                                             om-2:hasUnit CFIHOS:CFIHOS-60001431 ;
+                                             om-2:hasNumericalValue 13.7 .
+
+
+###  http://infohub.siemens-energy.com/CFIHOS-example-A#ball_valve_instance_operating_temeperature
+:ball_valve_instance_operating_temeperature rdf:type owl:NamedIndividual ,
+                                                     om-2:Measure ;
+                                            om-2:hasUnit CFIHOS:CFIHOS-60001435 ;
+                                            om-2:hasNumericalValue 20 .
+
+
+###  http://infohub.siemens-energy.com/CFIHOS-example-A#ball_valve_instance_rating
+:ball_valve_instance_rating rdf:type owl:NamedIndividual ,
+                                     CFIHOS:TextValue ;
+                            qudt:value "CL150" .
+
+
+###  http://infohub.siemens-energy.com/CFIHOS-example-A#ball_valve_instance_remark_1
+:ball_valve_instance_remark_1 rdf:type owl:NamedIndividual ,
+                                       CFIHOS:TextValue ;
+                              qudt:value """VDS maximum operating temperature does not reflect use in saliferous atmosphere.
+Valves shall not be used above 60ºC in saliferous atmosphere.""" .
+
+
+###  http://infohub.siemens-energy.com/CFIHOS-example-A#ball_valve_instance_remark_2
+:ball_valve_instance_remark_2 rdf:type owl:NamedIndividual ,
+                                       CFIHOS:TextValue ;
+                              qudt:value "The soft seat on floating valves shall be secured in a pocket in the valve body." .
+
+
+###  http://infohub.siemens-energy.com/CFIHOS-example-A#ball_valve_instance_remark_3
+:ball_valve_instance_remark_3 rdf:type owl:NamedIndividual ,
+                                       CFIHOS:TextValue ;
+                              qudt:value "Wetted parts suitable for sour service to NACE MR0175 / ISO 15156-3." .
+
+
+###  http://infohub.siemens-energy.com/CFIHOS-example-A#ball_valve_instance_special_design_req
+:ball_valve_instance_special_design_req rdf:type owl:NamedIndividual ,
+                                                 CFIHOS:TextValue ;
+                                        qudt:value "QSL/CAS level specified in General VSK" .
+
+
+###  http://infohub.siemens-energy.com/CFIHOS-example-A#ball_valve_instance_stem_seal_design
+:ball_valve_instance_stem_seal_design rdf:type owl:NamedIndividual ,
+                                               CFIHOS:TextValue ;
+                                      qudt:value "O-ring" .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi

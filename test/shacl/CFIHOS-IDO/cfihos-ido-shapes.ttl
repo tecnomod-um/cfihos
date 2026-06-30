@@ -432,9 +432,7 @@
         sh:property     <https://astrea.linkeddata.es/shapes#95914f4fdbddf57805d2363b171e8c48> ;
         sh:targetClass  CFIHOS:CFIHOS-40000830Quality .
 
-<https://astrea.linkeddata.es/shapes#f7b0636cd7714bf10e38e0e34be42247>
-        a         sh:PropertyShape ;
-        sh:class  lis:SpatialLocation .
+
 
 <https://astrea.linkeddata.es/shapes#f4d46607d47a6249ea41d3b81209d794>
         a               sh:NodeShape ;
@@ -3390,9 +3388,6 @@
         sh:nodeKind     sh:IRI ;
         sh:targetClass  CFIHOS:CFIHOS-40000634Quality .
 
-<https://astrea.linkeddata.es/shapes#938e38f6f2f03389e27de3c527d8294f>
-        a         sh:PropertyShape ;
-        sh:class  lis:Quality .
 
 <https://astrea.linkeddata.es/shapes#39275c2b2e9a0586858d0304f373ebc7>
         a            sh:PropertyShape ;
@@ -4604,9 +4599,6 @@
         sh:property     <https://astrea.linkeddata.es/shapes#1eb8eade4e91f64db8a647d30f5fd0c6> ;
         sh:targetClass  CFIHOS:CFIHOS-40001372Quality .
 
-<https://astrea.linkeddata.es/shapes#50cbdae1a0b1ec8a23e1f0c73fab15c8>
-        a         sh:PropertyShape ;
-        sh:class  lis:Specified .
 
 <https://astrea.linkeddata.es/shapes#f61523f1f45e071f0eb545027b3f5dd5>
         a            sh:PropertyShape ;
@@ -7698,13 +7690,7 @@
         sh:nodeKind  sh:IRIOrLiteral ;
         sh:path      lis:qualityQuantifiedAs .
 
-<https://astrea.linkeddata.es/shapes#59c8b990bdda1994c31abb610db307dd>
-        a               sh:PropertyShape ;
-        rdfs:label      "profileQuantityDatum" , "Intuitively, 'profile quantity datum' should only point to quantity data recorded while the activity is taking place. This can not be enforced with OWL restrictions on the relation (it would require a \"diamond\" pattern). However, with a suitable date or time data property value restriction, an individual activity can constrain related quantity data." ;
-        rdfs:seeAlso    lis:quantityDatumOfProfile ;
-        sh:description  "Intuitively, 'profile quantity datum' should only point to quantity data recorded while the activity is taking place. This can not be enforced with OWL restrictions on the relation (it would require a \"diamond\" pattern). However, with a suitable date or time data property value restriction, an individual activity can constrain related quantity data." ;
-        sh:name         "profileQuantityDatum" ;
-        sh:nodeKind     sh:BlankNodeOrIRI .
+
 
 <https://astrea.linkeddata.es/shapes#062abce91e3bb95088a108b2e8fe2b63>
         a            sh:PropertyShape ;
@@ -9956,9 +9942,7 @@
         sh:property     <https://astrea.linkeddata.es/shapes#f3513489f6d8f20860cd98c91efb2cf5> ;
         sh:targetClass  CFIHOS:CFIHOS-40001136Quality .
 
-<https://astrea.linkeddata.es/shapes#b8840ae319dd17775a4c3ff2c43caeca>
-        a            sh:PropertyShape ;
-        sh:nodeKind  sh:Literal .
+
 
 <https://astrea.linkeddata.es/shapes#018868318077d4a0c9cf375844a48246>
         a            sh:PropertyShape ;
@@ -10099,9 +10083,7 @@
         sh:property     <https://astrea.linkeddata.es/shapes#8e20083a4ef6da45eb041fd7a840f1c1> ;
         sh:targetClass  CFIHOS:CFIHOS-40000307Quality .
 
-<https://astrea.linkeddata.es/shapes#10c08cb2b733eef75e01e5e0496706c2>
-        a            sh:PropertyShape ;
-        sh:nodeKind  sh:Literal .
+
 
 <https://astrea.linkeddata.es/shapes#51519a3ec32d2b28437211b65be817b5>
         a            sh:PropertyShape ;
@@ -10338,13 +10320,7 @@
         sh:property     <https://astrea.linkeddata.es/shapes#ce285a8acff83ff17c01fda8e58c2601> ;
         sh:targetClass  CFIHOS:CFIHOS-40000973Quality .
 
-<https://astrea.linkeddata.es/shapes#fe8f7ea74abfc304ccf736776e347f20>
-        a             sh:PropertyShape ;
-        rdfs:label    "isAbout" ;
-        rdfs:seeAlso  "ISO 15926-2:2003 'representation_of_thing'" ;
-        rdfs:seeAlso  lis:representedIn , obo:IAO_0000136 ;
-        sh:name       "isAbout" ;
-        sh:nodeKind   sh:BlankNodeOrIRI .
+
 
 <https://astrea.linkeddata.es/shapes#312e56364cadf5f384956a81074770e0>
         a               sh:NodeShape ;
@@ -11966,9 +11942,6 @@
         sh:nodeKind     sh:IRI ;
         sh:targetClass  CFIHOS:CFIHOS-40000253Quality .
 
-<https://astrea.linkeddata.es/shapes#13be789b5fffdc118f154b0b918ff747>
-        a            sh:PropertyShape ;
-        sh:nodeKind  sh:Literal .
 
 <https://astrea.linkeddata.es/shapes#950fe3b78b465d3a1f68a766eec6724f>
         a            sh:PropertyShape ;
@@ -14358,15 +14331,6 @@
         a            sh:PropertyShape ;
         sh:nodeKind  sh:IRIOrLiteral ;
         sh:path      lis:qualityQuantifiedAs .
-
-<https://astrea.linkeddata.es/shapes#11ced0ff27a7f9cfe2ef320e38adc9ff>
-        a               sh:PropertyShape ;
-        rdfs:label      "hasInterest" , "Note, the use of \"potential\" in the definition does not imply \"not actual\", only \"not necessarily actual\"." ;
-        rdfs:seeAlso    "ISO 15926-2:2003 'lifecycle_stage'" ;
-        rdfs:seeAlso    lis:interestOf , obo:IAO_0000033 ;
-        sh:description  "Note, the use of \"potential\" in the definition does not imply \"not actual\", only \"not necessarily actual\"." ;
-        sh:name         "hasInterest" ;
-        sh:nodeKind     sh:BlankNodeOrIRI .
 
 <https://astrea.linkeddata.es/shapes#70179d7beebb25ca55cb67894e3e042a>
         a               sh:NodeShape ;
