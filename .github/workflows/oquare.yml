@@ -25,3 +25,4 @@ jobs:
         uses: tecnomod-um/oquare-metrics@v3.0
         with:
           ontology-folders: ontology
+          contents-folder: oquare-evaluation
