@@ -1,0 +1,44 @@
+# Gate valve instance compliant with cfihos-ido-shapes.ttl but NOT with
+# cfihos-shapes.ttl.
+#
+# Both files independently constrain CFIHOS:CFIHOS-40000017 ("body material"),
+# but via two incompatible patterns:
+#
+#  cfihos-shapes.ttl ("gate valve" NodeShape,
+#  https://astrea.linkeddata.es/shapes#42f5301452b77097f55ee63fa4628c23):
+#     CFIHOS:CFIHOS-40000017 value must be an IRI, typed
+#     a CFIHOS:CFIHOS-50000070          <- flat "pick a material from the enum" pattern
+#
+#  cfihos-ido-shapes.ttl ("body material" NodeShape,
+#  targetClass CFIHOS:CFIHOS-40000017Quality):
+#     an individual typed a CFIHOS:CFIHOS-40000017Quality must be an IRI, and
+#     if it carries lis:qualityQuantifiedAs, that value must be
+#     sh:nodeKind sh:IRIOrLiteral       <- ISO15926/IDO "reified quality,
+#                                          quantified as a literal" pattern
+#
+# COMPLIANT with cfihos-ido-shapes.ttl:
+#   ex:BodyMaterialY is an IRI typed "a CFIHOS:CFIHOS-40000017Quality", and
+#   its lis:qualityQuantifiedAs value is a plain string literal - textbook
+#   valid use of the reified quality-quantification pattern.
+#
+# NOT COMPLIANT with cfihos-shapes.ttl:
+#   the gate valve shape requires the CFIHOS-40000017 value to be
+#   "a CFIHOS:CFIHOS-50000070". ex:BodyMaterialY is never given that type
+#   (it's typed CFIHOS-40000017Quality instead), so the sh:class constraint
+#   in cfihos-shapes.ttl is violated even though the value is correctly an IRI.
+
+@prefix CFIHOS:     <http://infohub.siemens-energy.com/CFIHOS#> .
+@prefix cfihos-eq:  <http://infohub.siemens-energy.com/CFIHOS/equipment#> .
+@prefix lis:        <http://rds.posccaesar.org/ontology/lis14/rdl/> .
+@prefix ex:         <http://example.org/instances#> .
+
+ex:ValveCompliantWithIDOOnly
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_CompliantIDOOnly ;
+    CFIHOS:CFIHOS-40000017 ex:BodyMaterialY .
+
+ex:Tag_CompliantIDOOnly a CFIHOS:CFIHOS-20000922 .
+
+ex:BodyMaterialY
+    a CFIHOS:CFIHOS-40000017Quality ;
+    lis:qualityQuantifiedAs "Stainless Steel 316" .

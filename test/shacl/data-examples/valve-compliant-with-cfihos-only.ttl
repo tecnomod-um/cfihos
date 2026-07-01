@@ -1,0 +1,49 @@
+# Gate valve instance compliant with cfihos-shapes.ttl but NOT with
+# cfihos-ido-shapes.ttl.
+#
+# Both files independently constrain CFIHOS:CFIHOS-40000017 ("body material"),
+# but via two incompatible patterns:
+#
+#  cfihos-shapes.ttl ("gate valve" NodeShape,
+#  https://astrea.linkeddata.es/shapes#42f5301452b77097f55ee63fa4628c23):
+#     CFIHOS:CFIHOS-40000017 value must be an IRI, typed
+#     a CFIHOS:CFIHOS-50000070          <- flat "pick a material from the enum" pattern
+#
+#  cfihos-ido-shapes.ttl ("body material" NodeShape,
+#  targetClass CFIHOS:CFIHOS-40000017Quality):
+#     an individual typed a CFIHOS:CFIHOS-40000017Quality must be an IRI, and
+#     if it carries lis:qualityQuantifiedAs, that value must be
+#     sh:nodeKind sh:IRIOrLiteral       <- ISO15926/IDO "reified quality,
+#                                          quantified as a literal" pattern
+#
+# COMPLIANT with cfihos-shapes.ttl:
+#   ex:BodyMaterialX is an IRI and "a CFIHOS:CFIHOS-50000070" - exactly what
+#   the gate valve shape requires for CFIHOS-40000017.
+#
+# NOT COMPLIANT with cfihos-ido-shapes.ttl:
+#   ex:BodyMaterialX is ALSO typed "a CFIHOS:CFIHOS-40000017Quality", which
+#   brings it under the "body material" IDO shape - and that shape's
+#   lis:qualityQuantifiedAs property is given a blank node here. Blank nodes
+#   are not sh:IRIOrLiteral, so this violates that shape's node-kind
+#   constraint.
+#
+# (Neither shapes file is sh:closed, so the extra rdf:type/property that the
+# other graph doesn't recognize would normally be harmless on its own - the
+# violation here comes specifically from the blank node value.)
+
+@prefix CFIHOS:     <http://infohub.siemens-energy.com/CFIHOS#> .
+@prefix cfihos-eq:  <http://infohub.siemens-energy.com/CFIHOS/equipment#> .
+@prefix lis:        <http://rds.posccaesar.org/ontology/lis14/rdl/> .
+@prefix ex:         <http://example.org/instances#> .
+
+ex:ValveCompliantWithCFIHOSOnly
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_CompliantCFIHOSOnly ;
+    CFIHOS:CFIHOS-40000017 ex:BodyMaterialX .
+
+ex:Tag_CompliantCFIHOSOnly a CFIHOS:CFIHOS-20000922 .
+
+ex:BodyMaterialX
+    a CFIHOS:CFIHOS-50000070 ,          # satisfies cfihos-shapes.ttl's sh:class requirement
+      CFIHOS:CFIHOS-40000017Quality ;   # brings it under the IDO "body material" shape too
+    lis:qualityQuantifiedAs [] .        # blank node -> violates that shape's nodeKind IRIOrLiteral

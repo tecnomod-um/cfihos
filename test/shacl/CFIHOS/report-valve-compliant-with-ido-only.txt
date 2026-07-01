@@ -1,0 +1,10 @@
+Validation Report
+Conforms: False
+Results (1):
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: <https://astrea.linkeddata.es/shapes#98613f95bf12e6fa3da805be0a937864>
+	Focus Node: ex:ValveCompliantWithIDOOnly
+	Value Node: ex:BodyMaterialY
+	Result Path: CFIHOS:CFIHOS-40000017
+	Message: Value does not have class CFIHOS:CFIHOS-50000070

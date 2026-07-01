@@ -1,0 +1,10 @@
+Validation Report
+Conforms: False
+Results (1):
+Constraint Violation in NodeKindConstraintComponent (http://www.w3.org/ns/shacl#NodeKindConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: <https://astrea.linkeddata.es/shapes#47ba6651ae7fa0d72adb5339e8e58187>
+	Focus Node: ex:BodyMaterialX
+	Value Node: [ ]
+	Result Path: lis:qualityQuantifiedAs
+	Message: Value is not of Node Kind sh:IRIOrLiteral

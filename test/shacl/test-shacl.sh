@@ -4,3 +4,9 @@ python3 validate_shacl.py -d data-examples/valve-instances-compliant.ttl  -s CFI
 python3 validate_shacl.py -d data-examples/valve-instances-compliant.ttl  -s CFIHOS-IDO/cfihos-ido-shapes.ttl --report CFIHOS-IDO/report-valve-instances-compliant.txt
 python3 validate_shacl.py -d data-examples/valve-instances-noncompliant.ttl  -s CFIHOS/cfihos-shapes.ttl --report CFIHOS/report-valve-instances-noncompliant.txt
 python3 validate_shacl.py -d data-examples/valve-instances-noncompliant.ttl  -s CFIHOS-IDO/cfihos-ido-shapes.ttl --report CFIHOS-IDO/report-valve-instances-noncompliant.txt
+
+python3 validate_shacl.py -d data-examples/valve-compliant-with-cfihos-only.ttl  -s CFIHOS-IDO/cfihos-ido-shapes.ttl --report CFIHOS-IDO/report-valve-compliant-with-cfihos-only.txt
+python3 validate_shacl.py -d data-examples/valve-compliant-with-cfihos-only.ttl  -s CFIHOS/cfihos-shapes.ttl --report CFIHOS/report-valve-compliant-with-cfihos-only.txt
+python3 validate_shacl.py -d data-examples/valve-compliant-with-ido-only.ttl  -s CFIHOS-IDO/cfihos-ido-shapes.ttl --report CFIHOS-IDO/report-valve-compliant-with-ido-only.txt
+python3 validate_shacl.py -d data-examples/valve-compliant-with-ido-only.ttl  -s CFIHOS/cfihos-shapes.ttl --report CFIHOS/report-valve-compliant-with-ido-only.txt
+
