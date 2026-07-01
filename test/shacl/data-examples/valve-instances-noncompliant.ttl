@@ -1,0 +1,158 @@
+# 10 instances of "gate valve" that each VIOLATE exactly one constraint from
+# the "gate valve" NodeShape in cfihos-shapes.ttl
+# (https://astrea.linkeddata.es/shapes#42f5301452b77097f55ee63fa4628c23,
+#  targetClass cfihos-eq:CFIHOS-30000838).
+#
+# Each block below is annotated with the specific rule it breaks and why.
+# NOTE: several of these are only invalid because two property shapes share the
+# same sh:path in the source file (a loose "sh:nodeKind IRIOrLiteral" shape plus
+# a stricter "sh:class ... ; sh:nodeKind BlankNodeOrIRI" shape) - SHACL applies
+# both to the same value (logical AND), so the effective allowed node kind for
+# those paths is IRI only, and the value must additionally have the stated
+# rdf:type.
+
+@prefix CFIHOS:     <http://infohub.siemens-energy.com/CFIHOS#> .
+@prefix cfihos-eq:  <http://infohub.siemens-energy.com/CFIHOS/equipment#> .
+@prefix ex:         <http://example.org/instances#> .
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:        <http://www.w3.org/2001/XMLSchema#> .
+
+# reference individuals reused below (correctly typed, for contrast)
+ex:Material_SS316   a CFIHOS:CFIHOS-50000070 .
+ex:Conn_Flanged150  a CFIHOS:CFIHOS-50000127 .
+
+# ---------------------------------------------------------------------------
+# BadValve001
+# Reason: the valve resource itself is a blank node instead of an IRI.
+# Violates: NodeShape constraint sh:nodeKind sh:IRI (the focus node identifying
+# any gate valve must be a URI resource, not an anonymous blank node).
+# ---------------------------------------------------------------------------
+[]  a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_BadValve001 ;
+    CFIHOS:CFIHOS-40000017 ex:Material_SS316 .
+
+ex:Tag_BadValve001 a CFIHOS:CFIHOS-20000922 .
+
+# ---------------------------------------------------------------------------
+# BadValve002
+# Reason: CFIHOS-40000017 (body material) is given as a plain string literal.
+# Violates: nodeKind. The path has two property shapes: one says
+# "sh:nodeKind sh:IRIOrLiteral", the other says "sh:nodeKind sh:BlankNodeOrIRI"
+# (plus sh:class CFIHOS-50000070). Both apply, so the value must be an IRI -
+# a bare string literal satisfies neither the class requirement nor the
+# stricter of the two node-kind constraints.
+# ---------------------------------------------------------------------------
+ex:BadValve002
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_BadValve002 ;
+    CFIHOS:CFIHOS-40000017 "Stainless Steel 316" .
+
+ex:Tag_BadValve002 a CFIHOS:CFIHOS-20000922 .
+
+# ---------------------------------------------------------------------------
+# BadValve003
+# Reason: CFIHOS-40000017 (body material) value is an IRI but is never
+# declared to be a CFIHOS:CFIHOS-50000070 (it's typed as an unrelated/no class).
+# Violates: sh:class CFIHOS:CFIHOS-50000070.
+# ---------------------------------------------------------------------------
+ex:BadValve003
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_BadValve003 ;
+    CFIHOS:CFIHOS-40000017 ex:UntypedMaterialThing .
+
+ex:UntypedMaterialThing a CFIHOS:TextValue .  # wrong class - not CFIHOS-50000070
+ex:Tag_BadValve003 a CFIHOS:CFIHOS-20000922 .
+
+# ---------------------------------------------------------------------------
+# BadValve004
+# Reason: CFIHOS-40000586 (inlet connection type) value is a blank node.
+# Violates: nodeKind. Same "two shapes on one path" situation as BadValve002 -
+# effective allowed node kind is IRI only, so a blank node (even correctly
+# typed) still fails.
+# ---------------------------------------------------------------------------
+ex:BadValve004
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_BadValve004 ;
+    CFIHOS:CFIHOS-40000586 [ a CFIHOS:CFIHOS-50000127 ] .
+
+ex:Tag_BadValve004 a CFIHOS:CFIHOS-20000922 .
+
+# ---------------------------------------------------------------------------
+# BadValve005
+# Reason: CFIHOS-40000587 (outlet connection type) value is typed
+# CFIHOS:CFIHOS-50000126 (the "seat design type" enumeration class) instead of
+# the required CFIHOS:CFIHOS-50000127 (connection type class).
+# Violates: sh:class CFIHOS:CFIHOS-50000127 (wrong enumeration class used).
+# ---------------------------------------------------------------------------
+ex:BadValve005
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_BadValve005 ;
+    CFIHOS:CFIHOS-40000587 ex:MisclassifiedValue005 .
+
+ex:MisclassifiedValue005 a CFIHOS:CFIHOS-50000126 .  # wrong class for this path
+ex:Tag_BadValve005 a CFIHOS:CFIHOS-20000922 .
+
+# ---------------------------------------------------------------------------
+# BadValve006
+# Reason: CFIHOS-40000588 (seat design type) is given as an integer literal.
+# Violates: nodeKind (must be IRI, not a Literal of any datatype).
+# ---------------------------------------------------------------------------
+ex:BadValve006
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_BadValve006 ;
+    CFIHOS:CFIHOS-40000588 3 .
+
+ex:Tag_BadValve006 a CFIHOS:CFIHOS-20000922 .
+
+# ---------------------------------------------------------------------------
+# BadValve007
+# Reason: CFIHOS-40000589 (stem sealing type) value is an IRI with no
+# rdf:type at all.
+# Violates: sh:class CFIHOS:TextValue (an untyped resource cannot satisfy a
+# class-membership requirement).
+# ---------------------------------------------------------------------------
+ex:BadValve007
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_BadValve007 ;
+    CFIHOS:CFIHOS-40000589 ex:UntypedSealValue007 .
+
+ex:Tag_BadValve007 a CFIHOS:CFIHOS-20000922 .
+# note: ex:UntypedSealValue007 is deliberately given no rdf:type triple
+
+# ---------------------------------------------------------------------------
+# BadValve008
+# Reason: CFIHOS-40000590 (valve operator type) value is typed
+# CFIHOS:CFIHOS-50000070 (the body-material class) instead of the required
+# CFIHOS:TextValue.
+# Violates: sh:class CFIHOS:TextValue.
+# ---------------------------------------------------------------------------
+ex:BadValve008
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_BadValve008 ;
+    CFIHOS:CFIHOS-40000590 ex:MisclassifiedValue008 .
+
+ex:MisclassifiedValue008 a CFIHOS:CFIHOS-50000070 .  # wrong class for this path
+ex:Tag_BadValve008 a CFIHOS:CFIHOS-20000922 .
+
+# ---------------------------------------------------------------------------
+# BadValve009
+# Reason: CFIHOS-40000592 (seat leakage class) value is an untyped blank node.
+# Violates: BOTH nodeKind (blank node not allowed - effective requirement is
+# IRI) AND sh:class CFIHOS:CFIHOS-50000125 (no type asserted at all) at once.
+# ---------------------------------------------------------------------------
+ex:BadValve009
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_BadValve009 ;
+    CFIHOS:CFIHOS-40000592 [] .
+
+ex:Tag_BadValve009 a CFIHOS:CFIHOS-20000922 .
+
+# ---------------------------------------------------------------------------
+# BadValve010
+# Reason: CFIHOS:hasTag value is a blank node instead of an IRI or a literal.
+# Violates: sh:nodeKind sh:IRIOrLiteral on the hasTag property shape.
+# ---------------------------------------------------------------------------
+ex:BadValve010
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag [ a CFIHOS:CFIHOS-20000922 ] ;
+    CFIHOS:CFIHOS-40000017 ex:Material_SS316 .

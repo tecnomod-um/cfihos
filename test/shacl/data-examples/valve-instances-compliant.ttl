@@ -1,0 +1,202 @@
+# 10 SHACL-compliant instances of "gate valve"
+# (rdfs:label "gate valve", targetClass cfihos-eq:CFIHOS-30000838)
+# as constrained by cfihos-shapes.ttl / cfihos-shapes.fixed.ttl.
+#
+# Constraints enforced by that shape (NodeShape at
+# https://astrea.linkeddata.es/shapes#42f5301452b77097f55ee63fa4628c23):
+#   - the valve resource itself must be sh:nodeKind sh:IRI (no blank nodes)
+#   - CFIHOS:hasTag                : nodeKind IRIOrLiteral
+#   - CFIHOS:CFIHOS-40000017 (body material)          -> value must be an IRI, a CFIHOS:CFIHOS-50000070
+#   - CFIHOS:CFIHOS-40000570 (unlabeled generic attr) -> nodeKind IRIOrLiteral
+#   - CFIHOS:CFIHOS-40000586 (inlet connection type)  -> value must be an IRI, a CFIHOS:CFIHOS-50000127
+#   - CFIHOS:CFIHOS-40000587 (outlet connection type) -> value must be an IRI, a CFIHOS:CFIHOS-50000127
+#   - CFIHOS:CFIHOS-40000588 (seat design type)       -> value must be an IRI, a CFIHOS:CFIHOS-50000126
+#   - CFIHOS:CFIHOS-40000589 (stem sealing type)      -> value must be an IRI, a CFIHOS:TextValue
+#   - CFIHOS:CFIHOS-40000590 (valve operator type)    -> value must be an IRI, a CFIHOS:TextValue
+#   - CFIHOS:CFIHOS-40000591 (pressure rating)        -> value must be an IRI, a CFIHOS:TextValue
+#   - CFIHOS:CFIHOS-40000592 (seat leakage class)      -> value must be an IRI, a CFIHOS:CFIHOS-50000125
+#   - CFIHOS:CFIHOS-40000593 (temperature rating)     -> value must be an IRI, a CFIHOS:TextValue
+#
+# Note: the shapes file has no sh:minCount, so every property above is OPTIONAL;
+# these instances include a rich set of them to demonstrate realistic, fully valid data.
+# The controlled-vocabulary value IRIs (materials, connection types, etc.) are not
+# published in cfihos-shapes.ttl itself (they live in the CFIHOS reference data
+# library) - illustrative IRIs are minted here under ex: and typed with the
+# exact classes the shape requires.
+
+@prefix CFIHOS:     <http://infohub.siemens-energy.com/CFIHOS#> .
+@prefix cfihos-eq:  <http://infohub.siemens-energy.com/CFIHOS/equipment#> .
+@prefix ex:         <http://example.org/instances#> .
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:        <http://www.w3.org/2001/XMLSchema#> .
+
+# ---- shared controlled-vocabulary value individuals, correctly typed ----
+
+ex:Material_SS316        a CFIHOS:CFIHOS-50000070 .
+ex:Material_CarbonSteel  a CFIHOS:CFIHOS-50000070 .
+ex:Material_DuplexSS     a CFIHOS:CFIHOS-50000070 .
+
+ex:Conn_Flanged150       a CFIHOS:CFIHOS-50000127 .
+ex:Conn_Flanged300       a CFIHOS:CFIHOS-50000127 .
+ex:Conn_Threaded         a CFIHOS:CFIHOS-50000127 .
+ex:Conn_ButtWeld         a CFIHOS:CFIHOS-50000127 .
+
+ex:SeatDesign_Soft       a CFIHOS:CFIHOS-50000126 .
+ex:SeatDesign_Metal      a CFIHOS:CFIHOS-50000126 .
+
+ex:StemSeal_Bellows      a CFIHOS:TextValue .
+ex:StemSeal_PTFEPacking  a CFIHOS:TextValue .
+
+ex:Operator_Manual       a CFIHOS:TextValue .
+ex:Operator_Gearbox      a CFIHOS:TextValue .
+ex:Operator_Pneumatic    a CFIHOS:TextValue .
+
+ex:PressureRating_150    a CFIHOS:TextValue .
+ex:PressureRating_300    a CFIHOS:TextValue .
+ex:PressureRating_600    a CFIHOS:TextValue .
+
+ex:SeatLeakage_ClassIV   a CFIHOS:CFIHOS-50000125 .
+ex:SeatLeakage_ClassVI   a CFIHOS:CFIHOS-50000125 .
+
+ex:TempRating_Minus29to400 a CFIHOS:TextValue .
+ex:TempRating_Minus46to200 a CFIHOS:TextValue .
+
+# ---- 10 compliant gate valve instances ----
+
+ex:Valve001
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_10-GV-0001 ;
+    CFIHOS:CFIHOS-40000017 ex:Material_SS316 ;
+    CFIHOS:CFIHOS-40000570 "ACME Valve Corp" ;
+    CFIHOS:CFIHOS-40000586 ex:Conn_Flanged150 ;
+    CFIHOS:CFIHOS-40000587 ex:Conn_Flanged150 ;
+    CFIHOS:CFIHOS-40000588 ex:SeatDesign_Soft ;
+    CFIHOS:CFIHOS-40000589 ex:StemSeal_Bellows ;
+    CFIHOS:CFIHOS-40000590 ex:Operator_Manual ;
+    CFIHOS:CFIHOS-40000591 ex:PressureRating_150 ;
+    CFIHOS:CFIHOS-40000592 ex:SeatLeakage_ClassVI ;
+    CFIHOS:CFIHOS-40000593 ex:TempRating_Minus29to400 .
+
+ex:Tag_10-GV-0001 a CFIHOS:CFIHOS-20000922 .
+
+ex:Valve002
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_10-GV-0002 ;
+    CFIHOS:CFIHOS-40000017 ex:Material_CarbonSteel ;
+    CFIHOS:CFIHOS-40000570 "Velan Inc." ;
+    CFIHOS:CFIHOS-40000586 ex:Conn_Flanged300 ;
+    CFIHOS:CFIHOS-40000587 ex:Conn_Flanged300 ;
+    CFIHOS:CFIHOS-40000588 ex:SeatDesign_Metal ;
+    CFIHOS:CFIHOS-40000589 ex:StemSeal_PTFEPacking ;
+    CFIHOS:CFIHOS-40000590 ex:Operator_Gearbox ;
+    CFIHOS:CFIHOS-40000591 ex:PressureRating_300 ;
+    CFIHOS:CFIHOS-40000592 ex:SeatLeakage_ClassIV ;
+    CFIHOS:CFIHOS-40000593 ex:TempRating_Minus46to200 .
+
+ex:Tag_10-GV-0002 a CFIHOS:CFIHOS-20000922 .
+
+ex:Valve003
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_10-GV-0003 ;
+    CFIHOS:CFIHOS-40000017 ex:Material_DuplexSS ;
+    CFIHOS:CFIHOS-40000586 ex:Conn_ButtWeld ;
+    CFIHOS:CFIHOS-40000587 ex:Conn_ButtWeld ;
+    CFIHOS:CFIHOS-40000588 ex:SeatDesign_Soft ;
+    CFIHOS:CFIHOS-40000590 ex:Operator_Pneumatic ;
+    CFIHOS:CFIHOS-40000592 ex:SeatLeakage_ClassVI .
+
+ex:Tag_10-GV-0003 a CFIHOS:CFIHOS-20000922 .
+
+# Valve004: minimal - only the mandatory-in-spirit hasTag and a couple of attributes.
+# Still fully compliant because the shape has no sh:minCount on any property.
+ex:Valve004
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_10-GV-0004 ;
+    CFIHOS:CFIHOS-40000017 ex:Material_SS316 .
+
+ex:Tag_10-GV-0004 a CFIHOS:CFIHOS-20000922 .
+
+ex:Valve005
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_10-GV-0005 ;
+    CFIHOS:CFIHOS-40000017 ex:Material_CarbonSteel ;
+    CFIHOS:CFIHOS-40000570 "Kitz Corporation" ;
+    CFIHOS:CFIHOS-40000586 ex:Conn_Threaded ;
+    CFIHOS:CFIHOS-40000587 ex:Conn_Threaded ;
+    CFIHOS:CFIHOS-40000588 ex:SeatDesign_Metal ;
+    CFIHOS:CFIHOS-40000589 ex:StemSeal_Bellows ;
+    CFIHOS:CFIHOS-40000590 ex:Operator_Manual ;
+    CFIHOS:CFIHOS-40000591 ex:PressureRating_150 ;
+    CFIHOS:CFIHOS-40000592 ex:SeatLeakage_ClassIV ;
+    CFIHOS:CFIHOS-40000593 ex:TempRating_Minus29to400 .
+
+ex:Tag_10-GV-0005 a CFIHOS:CFIHOS-20000922 .
+
+ex:Valve006
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_10-GV-0006 ;
+    CFIHOS:CFIHOS-40000017 ex:Material_SS316 ;
+    CFIHOS:CFIHOS-40000586 ex:Conn_Flanged150 ;
+    CFIHOS:CFIHOS-40000587 ex:Conn_Flanged150 ;
+    CFIHOS:CFIHOS-40000591 ex:PressureRating_150 ;
+    CFIHOS:CFIHOS-40000593 ex:TempRating_Minus46to200 .
+
+ex:Tag_10-GV-0006 a CFIHOS:CFIHOS-20000922 .
+
+ex:Valve007
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_10-GV-0007 ;
+    CFIHOS:CFIHOS-40000017 ex:Material_DuplexSS ;
+    CFIHOS:CFIHOS-40000570 "Emerson / Fisher" ;
+    CFIHOS:CFIHOS-40000586 ex:Conn_Flanged300 ;
+    CFIHOS:CFIHOS-40000587 ex:Conn_Flanged300 ;
+    CFIHOS:CFIHOS-40000588 ex:SeatDesign_Soft ;
+    CFIHOS:CFIHOS-40000589 ex:StemSeal_PTFEPacking ;
+    CFIHOS:CFIHOS-40000590 ex:Operator_Gearbox ;
+    CFIHOS:CFIHOS-40000591 ex:PressureRating_300 ;
+    CFIHOS:CFIHOS-40000592 ex:SeatLeakage_ClassVI ;
+    CFIHOS:CFIHOS-40000593 ex:TempRating_Minus29to400 .
+
+ex:Tag_10-GV-0007 a CFIHOS:CFIHOS-20000922 .
+
+ex:Valve008
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_10-GV-0008 ;
+    CFIHOS:CFIHOS-40000017 ex:Material_CarbonSteel ;
+    CFIHOS:CFIHOS-40000588 ex:SeatDesign_Metal ;
+    CFIHOS:CFIHOS-40000589 ex:StemSeal_Bellows ;
+    CFIHOS:CFIHOS-40000590 ex:Operator_Manual .
+
+ex:Tag_10-GV-0008 a CFIHOS:CFIHOS-20000922 .
+
+ex:Valve009
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_10-GV-0009 ;
+    CFIHOS:CFIHOS-40000017 ex:Material_SS316 ;
+    CFIHOS:CFIHOS-40000570 "Flowserve" ;
+    CFIHOS:CFIHOS-40000586 ex:Conn_ButtWeld ;
+    CFIHOS:CFIHOS-40000587 ex:Conn_ButtWeld ;
+    CFIHOS:CFIHOS-40000588 ex:SeatDesign_Soft ;
+    CFIHOS:CFIHOS-40000589 ex:StemSeal_Bellows ;
+    CFIHOS:CFIHOS-40000590 ex:Operator_Pneumatic ;
+    CFIHOS:CFIHOS-40000591 ex:PressureRating_600 ;
+    CFIHOS:CFIHOS-40000592 ex:SeatLeakage_ClassIV ;
+    CFIHOS:CFIHOS-40000593 ex:TempRating_Minus46to200 .
+
+ex:Tag_10-GV-0009 a CFIHOS:CFIHOS-20000922 .
+
+ex:Valve010
+    a cfihos-eq:CFIHOS-30000838 ;
+    CFIHOS:hasTag ex:Tag_10-GV-0010 ;
+    CFIHOS:CFIHOS-40000017 ex:Material_DuplexSS ;
+    CFIHOS:CFIHOS-40000570 "Neway Valve" ;
+    CFIHOS:CFIHOS-40000586 ex:Conn_Flanged150 ;
+    CFIHOS:CFIHOS-40000587 ex:Conn_Flanged150 ;
+    CFIHOS:CFIHOS-40000588 ex:SeatDesign_Metal ;
+    CFIHOS:CFIHOS-40000589 ex:StemSeal_PTFEPacking ;
+    CFIHOS:CFIHOS-40000590 ex:Operator_Manual ;
+    CFIHOS:CFIHOS-40000591 ex:PressureRating_150 ;
+    CFIHOS:CFIHOS-40000592 ex:SeatLeakage_ClassVI ;
+    CFIHOS:CFIHOS-40000593 ex:TempRating_Minus29to400 .
+
+ex:Tag_10-GV-0010 a CFIHOS:CFIHOS-20000922 .
