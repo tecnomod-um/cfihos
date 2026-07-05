@@ -100,24 +100,21 @@ SELECT * WHERE {
 } 
 ```
 
-## CQ6 — quantitative properties and units for a class**
+## CQ6 — What units of measure (with their symbols) are available for a given dimension?
 ```sparql
-PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX om-2:  <http://www.ontology-of-units-of-measure.org/resource/om-2/>
 PREFIX cfihos: <http://infohub.siemens-energy.com/CFIHOS#>
-PREFIX cfihos-eq: <http://infohub.siemens-energy.com/CFIHOS/equipment#>
-PREFIX ido:   <http://rds.posccaesar.org/ontology/lis14/rdl/>
-PREFIX om2:   <http://www.ontology-of-units-of-measure.org/resource/om-2/>
-SELECT ?property ?label ?unit WHERE {
-  cfihos-eq:CFIHOS-30000807 rdfs:subClassOf ?r .      # target equipment class
-  ?r a owl:Restriction ;
-     owl:onProperty ?property ;
-     owl:someValuesFrom ?measureRestriction .
-  ?property rdfs:label ?label .
-  ?measureRestriction owl:onProperty om2:hasUnit ;
-                       owl:someValuesFrom ?unit .
+
+SELECT ?unit ?unitLabel ?symbol WHERE {
+  ?dimension a cfihos:CFIHOS-00000072 ;
+             rdfs:label "pressure" .
+  ?unit a cfihos:CFIHOS-00000073 ;
+        om-2:hasDimension ?dimension ;
+        rdfs:label ?unitLabel .
+  OPTIONAL { ?unit om-2:symbol ?symbol }
 }
+ORDER BY ?unitLabel
 ```
 
 ### CQ7 — Which documents are required for commissioning a pump?
