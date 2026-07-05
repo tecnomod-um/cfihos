@@ -55,41 +55,62 @@
 # ---- shared controlled-vocabulary value individuals (identical IRIs/typing
 #      to valve-instances-ido-aligned.ttl / valve-instances-cfihos-from-ido.ttl) ----
 
-ex:Material_SS316        a CFIHOS:CFIHOS-50000070 .
-ex:Material_CarbonSteel  a CFIHOS:CFIHOS-50000070 .
-ex:Material_DuplexSS     a CFIHOS:CFIHOS-50000070 .
+ex:Material_SS316        a CFIHOS:CFIHOS-50000070 ;
+                         rdfs:label "SS316 (austenitic stainless steel)".
+ex:Material_CarbonSteel  a CFIHOS:CFIHOS-50000070 ;
+                         rdfs:label "carbon steel".
+ex:Material_DuplexSS     a CFIHOS:CFIHOS-50000070 ;
+                         rdfs:label "duplex stainless steel".
 
-ex:Conn_Flanged150       a CFIHOS:CFIHOS-50000127 .
-ex:Conn_Flanged300       a CFIHOS:CFIHOS-50000127 .
-ex:Conn_Threaded         a CFIHOS:CFIHOS-50000127 .
-ex:Conn_ButtWeld         a CFIHOS:CFIHOS-50000127 .
+ex:Conn_Flanged150       a CFIHOS:CFIHOS-50000127 ;
+                         rdfs:label "flanged, Class 150".
+ex:Conn_Flanged300       a CFIHOS:CFIHOS-50000127 ;
+                         rdfs:label "flanged, Class 300".
+ex:Conn_Threaded         a CFIHOS:CFIHOS-50000127 ;
+                         rdfs:label "threaded".
+ex:Conn_ButtWeld         a CFIHOS:CFIHOS-50000127 ;
+                         rdfs:label "butt-weld".
 
-ex:SeatDesign_Soft       a CFIHOS:CFIHOS-50000126 .
-ex:SeatDesign_Metal      a CFIHOS:CFIHOS-50000126 .
+ex:SeatDesign_Soft       a CFIHOS:CFIHOS-50000126 ;
+                         rdfs:label "soft-seated".
+ex:SeatDesign_Metal      a CFIHOS:CFIHOS-50000126 ;
+                         rdfs:label "metal-to-metal seated".
 
-ex:StemSeal_Bellows      a CFIHOS:TextValue .
-ex:StemSeal_PTFEPacking  a CFIHOS:TextValue .
+ex:StemSeal_Bellows      a CFIHOS:TextValue ;
+                         rdfs:label "bellows".
+ex:StemSeal_PTFEPacking  a CFIHOS:TextValue ;
+                         rdfs:label "PTFE packing".
 
-ex:Operator_Manual       a CFIHOS:TextValue .
-ex:Operator_Gearbox      a CFIHOS:TextValue .
-ex:Operator_Pneumatic    a CFIHOS:TextValue .
+ex:Operator_Manual       a CFIHOS:TextValue ;
+                         rdfs:label "manual (hand wheel)".
+ex:Operator_Gearbox      a CFIHOS:TextValue ;
+                         rdfs:label "gearbox operated".
+ex:Operator_Pneumatic    a CFIHOS:TextValue ;
+                         rdfs:label "pneumatic actuator".
 
-ex:PressureRating_150    a CFIHOS:TextValue .
-ex:PressureRating_300    a CFIHOS:TextValue .
-ex:PressureRating_600    a CFIHOS:TextValue .
+ex:PressureRating_150    a CFIHOS:TextValue ;
+                         rdfs:label "Class 150".
+ex:PressureRating_300    a CFIHOS:TextValue ;
+                         rdfs:label "Class 300".
+ex:PressureRating_600    a CFIHOS:TextValue ;
+                         rdfs:label "Class 600".
 
-ex:SeatLeakage_ClassIV   a CFIHOS:CFIHOS-50000125 .
-ex:SeatLeakage_ClassVI   a CFIHOS:CFIHOS-50000125 .
+ex:SeatLeakage_ClassIV   a CFIHOS:CFIHOS-50000125 ;
+                         rdfs:label "seat leakage Class IV".
+ex:SeatLeakage_ClassVI   a CFIHOS:CFIHOS-50000125 ;
+                         rdfs:label "seat leakage Class VI".
 
-ex:TempRating_Minus29to400 a CFIHOS:TextValue .
-ex:TempRating_Minus46to200 a CFIHOS:TextValue .
+ex:TempRating_Minus29to400 a CFIHOS:TextValue ;
+                         rdfs:label "-29 C to 400 C".
+ex:TempRating_Minus46to200 a CFIHOS:TextValue ;
+                         rdfs:label "-46 C to 200 C".
 
 # ---- 10 valve instances, CFIHOS-IDO mixed vocabulary, qualities included ----
 # (ex:Valve101 keeps the identifier currently used for the first valve in
 # valve-instances-ido-only.ttl / valve-instances-ido-aligned.ttl.)
 
 ex:Valve101
-    a cfihos-eq:CFIHOS-30000838 ;
+    a cfihos-eq:CFIHOS-30000838 ; rdfs:label "gate valve" ;
     ido:hasQuality ex:Valve101_BodyMaterialQ, ex:Valve101_InletConnQ, ex:Valve101_OutletConnQ,
                    ex:Valve101_SeatDesignQ, ex:Valve101_StemSealQ, ex:Valve101_OperatorTypeQ,
                    ex:Valve101_PressureRatingQ, ex:Valve101_SeatLeakageQ, ex:Valve101_TempRatingQ .
@@ -105,7 +126,7 @@ ex:Valve101_SeatLeakageQ    a CFIHOS:CFIHOS-40000592Quality ; ido:qualityQuantif
 ex:Valve101_TempRatingQ     a CFIHOS:CFIHOS-40000593Quality ; ido:qualityQuantifiedAs ex:TempRating_Minus29to400 .
 
 ex:Valve002
-    a cfihos-eq:CFIHOS-30000838 ;
+    a cfihos-eq:CFIHOS-30000838 ; rdfs:label "gate valve" ;
     ido:hasQuality ex:Valve002_BodyMaterialQ, ex:Valve002_InletConnQ, ex:Valve002_OutletConnQ,
                    ex:Valve002_SeatDesignQ, ex:Valve002_StemSealQ, ex:Valve002_OperatorTypeQ,
                    ex:Valve002_PressureRatingQ, ex:Valve002_SeatLeakageQ, ex:Valve002_TempRatingQ .
@@ -121,7 +142,7 @@ ex:Valve002_SeatLeakageQ    a CFIHOS:CFIHOS-40000592Quality ; ido:qualityQuantif
 ex:Valve002_TempRatingQ     a CFIHOS:CFIHOS-40000593Quality ; ido:qualityQuantifiedAs ex:TempRating_Minus46to200 .
 
 ex:Valve003
-    a cfihos-eq:CFIHOS-30000838 ;
+    a cfihos-eq:CFIHOS-30000838 ; rdfs:label "gate valve" ;
     ido:hasQuality ex:Valve003_BodyMaterialQ, ex:Valve003_InletConnQ, ex:Valve003_OutletConnQ,
                    ex:Valve003_SeatDesignQ, ex:Valve003_OperatorTypeQ, ex:Valve003_SeatLeakageQ .
 
@@ -133,13 +154,13 @@ ex:Valve003_OperatorTypeQ a CFIHOS:CFIHOS-40000590Quality ; ido:qualityQuantifie
 ex:Valve003_SeatLeakageQ  a CFIHOS:CFIHOS-40000592Quality ; ido:qualityQuantifiedAs ex:SeatLeakage_ClassVI .
 
 ex:Valve004
-    a cfihos-eq:CFIHOS-30000838 ;
+    a cfihos-eq:CFIHOS-30000838 ; rdfs:label "gate valve" ;
     ido:hasQuality ex:Valve004_BodyMaterialQ .
 
 ex:Valve004_BodyMaterialQ a CFIHOS:CFIHOS-40000017Quality ; ido:qualityQuantifiedAs ex:Material_SS316 .
 
 ex:Valve005
-    a cfihos-eq:CFIHOS-30000838 ;
+    a cfihos-eq:CFIHOS-30000838 ; rdfs:label "gate valve" ;
     ido:hasQuality ex:Valve005_BodyMaterialQ, ex:Valve005_InletConnQ, ex:Valve005_OutletConnQ,
                    ex:Valve005_SeatDesignQ, ex:Valve005_StemSealQ, ex:Valve005_OperatorTypeQ,
                    ex:Valve005_PressureRatingQ, ex:Valve005_SeatLeakageQ, ex:Valve005_TempRatingQ .
@@ -155,7 +176,7 @@ ex:Valve005_SeatLeakageQ    a CFIHOS:CFIHOS-40000592Quality ; ido:qualityQuantif
 ex:Valve005_TempRatingQ     a CFIHOS:CFIHOS-40000593Quality ; ido:qualityQuantifiedAs ex:TempRating_Minus29to400 .
 
 ex:Valve006
-    a cfihos-eq:CFIHOS-30000838 ;
+    a cfihos-eq:CFIHOS-30000838 ; rdfs:label "gate valve" ;
     ido:hasQuality ex:Valve006_BodyMaterialQ, ex:Valve006_InletConnQ, ex:Valve006_OutletConnQ,
                    ex:Valve006_PressureRatingQ, ex:Valve006_TempRatingQ .
 
@@ -166,7 +187,7 @@ ex:Valve006_PressureRatingQ a CFIHOS:CFIHOS-40000591Quality ; ido:qualityQuantif
 ex:Valve006_TempRatingQ     a CFIHOS:CFIHOS-40000593Quality ; ido:qualityQuantifiedAs ex:TempRating_Minus46to200 .
 
 ex:Valve007
-    a cfihos-eq:CFIHOS-30000838 ;
+    a cfihos-eq:CFIHOS-30000838 ; rdfs:label "gate valve" ;
     ido:hasQuality ex:Valve007_BodyMaterialQ, ex:Valve007_InletConnQ, ex:Valve007_OutletConnQ,
                    ex:Valve007_SeatDesignQ, ex:Valve007_StemSealQ, ex:Valve007_OperatorTypeQ,
                    ex:Valve007_PressureRatingQ, ex:Valve007_SeatLeakageQ, ex:Valve007_TempRatingQ .
@@ -182,7 +203,7 @@ ex:Valve007_SeatLeakageQ    a CFIHOS:CFIHOS-40000592Quality ; ido:qualityQuantif
 ex:Valve007_TempRatingQ     a CFIHOS:CFIHOS-40000593Quality ; ido:qualityQuantifiedAs ex:TempRating_Minus29to400 .
 
 ex:Valve008
-    a cfihos-eq:CFIHOS-30000838 ;
+    a cfihos-eq:CFIHOS-30000838 ; rdfs:label "gate valve" ;
     ido:hasQuality ex:Valve008_BodyMaterialQ, ex:Valve008_SeatDesignQ, ex:Valve008_StemSealQ,
                    ex:Valve008_OperatorTypeQ .
 
@@ -192,7 +213,7 @@ ex:Valve008_StemSealQ     a CFIHOS:CFIHOS-40000589Quality ; ido:qualityQuantifie
 ex:Valve008_OperatorTypeQ a CFIHOS:CFIHOS-40000590Quality ; ido:qualityQuantifiedAs ex:Operator_Manual .
 
 ex:Valve009
-    a cfihos-eq:CFIHOS-30000838 ;
+    a cfihos-eq:CFIHOS-30000838 ; rdfs:label "gate valve" ;
     ido:hasQuality ex:Valve009_BodyMaterialQ, ex:Valve009_InletConnQ, ex:Valve009_OutletConnQ,
                    ex:Valve009_SeatDesignQ, ex:Valve009_StemSealQ, ex:Valve009_OperatorTypeQ,
                    ex:Valve009_PressureRatingQ, ex:Valve009_SeatLeakageQ, ex:Valve009_TempRatingQ .
@@ -208,7 +229,7 @@ ex:Valve009_SeatLeakageQ    a CFIHOS:CFIHOS-40000592Quality ; ido:qualityQuantif
 ex:Valve009_TempRatingQ     a CFIHOS:CFIHOS-40000593Quality ; ido:qualityQuantifiedAs ex:TempRating_Minus46to200 .
 
 ex:Valve010
-    a cfihos-eq:CFIHOS-30000838 ;
+    a cfihos-eq:CFIHOS-30000838 ; rdfs:label "gate valve" ;
     ido:hasQuality ex:Valve010_BodyMaterialQ, ex:Valve010_InletConnQ, ex:Valve010_OutletConnQ,
                    ex:Valve010_SeatDesignQ, ex:Valve010_StemSealQ, ex:Valve010_OperatorTypeQ,
                    ex:Valve010_PressureRatingQ, ex:Valve010_SeatLeakageQ, ex:Valve010_TempRatingQ .
