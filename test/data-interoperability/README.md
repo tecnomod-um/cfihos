@@ -1,5 +1,11 @@
 # Interoperability test queries (IDO vocabulary only)
 
+This page describes the queries that demonstrate how data based on our CFIHOS-IDO ontology can interoperate with content based on the IDO. For this purpose two small datasets consisting on ten instances of valves each have been generated:
+* [Dataset CFIHOS-IDO](dataset-chfios-ido.ttl)
+* [Dataset IDO](dataset-ido.ttl)
+
+Once these two files are loaded into a triple store repository including the 
+[CFIHOS-IDO ontology](../../ontology/CORE-CFIHOS-V2.0_ido.owl), the [CFIHOS ontology](../../ontology/CORE-CFIHOS-V2.0.owl) and the [IDO ontology](../../ontology/ido.owl), the following queries can be executed and obtain the expected answers.
 
 ## CQ1 - Instances of physical artefacts
 
