@@ -1,4 +1,4 @@
-# Interoperability test queries (IDO vocabulary only)
+# Data interoperability test queries 
 
 This page describes the queries that demonstrate how data based on our CFIHOS-IDO ontology can interoperate with content based on the IDO. For this purpose two small datasets consisting on ten instances of valves each have been generated:
 * [Dataset CFIHOS-IDO](dataset-chfios-ido.ttl)
