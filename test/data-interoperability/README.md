@@ -65,58 +65,6 @@ ORDER BY ?asset
 ```
 
 **Results**
-```
-?asset
-<http://example.org/cfhios#Valve101>
-<http://example.org/cfhios#Valve002>
-<http://example.org/cfhios#Valve003>
-<http://example.org/cfhios#Valve004>
-<http://example.org/cfhios#Valve005>
-<http://example.org/cfhios#Valve006>
-<http://example.org/cfhios#Valve007>
-<http://example.org/cfhios#Valve008>
-<http://example.org/cfhios#Valve009>
-<http://example.org/cfhios#Valve010>
-<http://example.org/ido#Valve001>
-<http://example.org/ido#Valve002>
-<http://example.org/ido#Valve003>
-<http://example.org/ido#Valve004>
-<http://example.org/ido#Valve005>
-<http://example.org/ido#Valve006>
-<http://example.org/ido#Valve007>
-<http://example.org/ido#Valve008>
-<http://example.org/ido#Valve009>
-<http://example.org/ido#Valve010>
-```
-
-
-
-## CQ3 - What are the assets with a "body material" quality quantified as something labeled "SS316", using only IDO vocabulary
-
-This query is written to work regardless of *where* the quality's label lives - asserted directly on the individual (as in the ido-only file) or only on its `rdf:type` class (as in the aligned file, where the label sits on `CFIHOS-40000017Quality` inside the bridge ontology).
-
-```sparql
-PREFIX ido:  <http://rds.posccaesar.org/ontology/lis14/rdl/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-SELECT DISTINCT ?asset ?assetLabel WHERE {
-  ?asset ido:hasQuality ?quality .
-  ?quality ido:qualityQuantifiedAs ?datum .
-  ?datum rdfs:label ?datumLabel .
-  FILTER(CONTAINS(?datumLabel, "SS316"))
-
-  { ?quality rdfs:label ?qualityLabel }
-  UNION
-  { ?quality a ?qualityClass . ?qualityClass rdfs:label ?qualityLabel }
-
-  FILTER(?qualityLabel = "body material")
-  OPTIONAL { ?asset rdfs:label ?assetLabel }
-}
-```
-
-
-
-**Results**
 | asset | assetLabel | quality | qualityLabel | datum | datumLabel |
 |---|---|---|---|---|---|
 | cfhios:Valve002 | gate valve | cfhios:Valve002_BodyMaterialQ | — | cfhios:Material_CarbonSteel | carbon steel |
@@ -259,3 +207,57 @@ SELECT DISTINCT ?asset ?assetLabel WHERE {
 | ido:Valve010 | gate valve | ido:Valve010_PressureRatingQ | pressure rating | ido:PressureRating_150 | Class 150 |
 | ido:Valve010 | gate valve | ido:Valve010_SeatLeakageQ | seat leakage class | ido:SeatLeakage_ClassVI | seat leakage Class VI |
 | ido:Valve010 | gate valve | ido:Valve010_TempRatingQ | temperature rating | ido:TempRating_Minus29to400 | -29 C to 400 C |
+
+
+
+
+## CQ3 - What are the assets with a "body material" quality quantified as something labeled "SS316", using only IDO vocabulary
+
+This query is written to work regardless of *where* the quality's label lives - asserted directly on the individual (as in the ido-only file) or only on its `rdf:type` class (as in the aligned file, where the label sits on `CFIHOS-40000017Quality` inside the bridge ontology).
+
+```sparql
+PREFIX ido:  <http://rds.posccaesar.org/ontology/lis14/rdl/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?asset ?assetLabel WHERE {
+  ?asset ido:hasQuality ?quality .
+  ?quality ido:qualityQuantifiedAs ?datum .
+  ?datum rdfs:label ?datumLabel .
+  FILTER(CONTAINS(?datumLabel, "SS316"))
+
+  { ?quality rdfs:label ?qualityLabel }
+  UNION
+  { ?quality a ?qualityClass . ?qualityClass rdfs:label ?qualityLabel }
+
+  FILTER(?qualityLabel = "body material")
+  OPTIONAL { ?asset rdfs:label ?assetLabel }
+}
+```
+
+
+
+
+**Results**
+```
+?asset
+<http://example.org/cfhios#Valve101>
+<http://example.org/cfhios#Valve002>
+<http://example.org/cfhios#Valve003>
+<http://example.org/cfhios#Valve004>
+<http://example.org/cfhios#Valve005>
+<http://example.org/cfhios#Valve006>
+<http://example.org/cfhios#Valve007>
+<http://example.org/cfhios#Valve008>
+<http://example.org/cfhios#Valve009>
+<http://example.org/cfhios#Valve010>
+<http://example.org/ido#Valve001>
+<http://example.org/ido#Valve002>
+<http://example.org/ido#Valve003>
+<http://example.org/ido#Valve004>
+<http://example.org/ido#Valve005>
+<http://example.org/ido#Valve006>
+<http://example.org/ido#Valve007>
+<http://example.org/ido#Valve008>
+<http://example.org/ido#Valve009>
+<http://example.org/ido#Valve010>
+```
