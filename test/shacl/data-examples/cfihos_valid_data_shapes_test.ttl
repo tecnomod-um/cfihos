@@ -1,0 +1,39 @@
+########################################################################
+# CONFORMANT ball valve instance -- passes every shape in cfihos_shapes.ttl
+# (aligned to the OM / qudt value model, as in example-A).
+#   body material  : IRI in picklist CFIHOS-50000070                (OK)
+#   seat design    : IRI in picklist CFIHOS-50000126                (OK)
+#   nominal size   : om-2:Measure, numeric value + length unit      (OK)
+#   pressure rating: cfihos:TextValue wrapper                       (OK)
+# Run: pyshacl -s cfihos_shapes.ttl -e cfihos_shapes.ttl -i rdfs -a -df turtle -f human cfihos_valid_data_shapes_test.ttl
+# Expected: Conforms: True  (0 results)
+########################################################################
+ 
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix om-2: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix cfihos:    <http://infohub.siemens-energy.com/CFIHOS#> .
+@prefix cfihos-eq: <http://infohub.siemens-energy.com/CFIHOS/equipment#> .
+@prefix ex:   <http://example.org/data#> .
+ 
+ex:Valve001 a cfihos-eq:CFIHOS-30000807 ;
+    rdfs:label "Ball valve BV-001" ;
+    cfihos:CFIHOS-40000017 cfihos:CFIHOS-60000209 ;      # body material -> austenitic stainless (picklist)
+    cfihos:CFIHOS-40000588 cfihos:CFIHOS-60001713 ;      # seat design  -> soft-seated (picklist)
+    cfihos:CFIHOS-40000247 ex:Valve001_size ;            # nominal size -> om-2:Measure
+    cfihos:CFIHOS-40000591 ex:V1_pressureRating .        # pressure rating -> TextValue wrapper
+ 
+ex:Valve001_size a om-2:Measure ;
+    om-2:hasNumericalValue "50.0"^^xsd:decimal ;
+    om-2:hasUnit cfihos:CFIHOS-60001446 .                # length unit (has length dimension in the stub)
+ 
+ex:V1_pressureRating a cfihos:TextValue ;
+    qudt:value "CL150" .
+ 
+# Type assertions normally supplied by the ontology (via -e cfihos.ttl -i rdfs);
+# inlined so the fixture validates standalone.
+cfihos:CFIHOS-60000209 a cfihos:CFIHOS-50000070 .        # body material picklist member
+cfihos:CFIHOS-60001713 a cfihos:CFIHOS-50000126 .        # seat design picklist member
+cfihos:CFIHOS-60001446 a cfihos:CFIHOS-00000073 .        # length unit -> unit of measure (required by Astrea shape #a87bc6)

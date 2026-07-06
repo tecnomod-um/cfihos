@@ -1,0 +1,50 @@
+Validation Report
+Conforms: False
+Results (4):
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: ex:BodyMaterialShape
+	Focus Node: ex:BadValve001
+	Value Node: Literal("Stainless Steel 316")
+	Result Path: cfihos:CFIHOS-40000017
+	Message: body material must be an IRI from picklist CFIHOS-50000070.
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: ex:SeatDesignShape
+	Focus Node: ex:BadValve001
+	Value Node: cfihos:CFIHOS-60000999
+	Result Path: cfihos:CFIHOS-40000588
+	Message: seat design type must be an IRI from picklist CFIHOS-50000126.
+Constraint Violation in NodeConstraintComponent (http://www.w3.org/ns/shacl#NodeConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: ex:NominalSizeShape
+	Focus Node: ex:BadValve001
+	Value Node: ex:BadValve001_size
+	Result Path: cfihos:CFIHOS-40000247
+	Message: nominal size must be an om-2:Measure with a numeric value and a length unit.
+	Details:
+		Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+			Severity: sh:Violation
+			Source Shape: ex:LengthMeasureShape
+			Focus Node: ex:BadValve001_size
+			Value Node: ex:BadValve001_size
+			Message: Value does not have class om-2:Measure
+		Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+			Severity: sh:Violation
+			Source Shape: [ sh:maxCount Literal("1", datatype=xsd:integer) ; sh:message Literal("om-2:hasNumericalValue must be a single numeric literal.") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:or ( [ sh:datatype xsd:decimal ] [ sh:datatype xsd:double ] [ sh:datatype xsd:integer ] [ sh:datatype xsd:float ] ) ; sh:path om-2:hasNumericalValue ]
+			Focus Node: ex:BadValve001_size
+			Result Path: om-2:hasNumericalValue
+			Message: om-2:hasNumericalValue must be a single numeric literal.
+		Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+			Severity: sh:Violation
+			Source Shape: [ sh:maxCount Literal("1", datatype=xsd:integer) ; sh:message Literal("om-2:hasUnit must reference a single unit IRI.") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:nodeKind sh:IRI ; sh:path om-2:hasUnit ]
+			Focus Node: ex:BadValve001_size
+			Result Path: om-2:hasUnit
+			Message: om-2:hasUnit must reference a single unit IRI.
+Constraint Violation in NodeKindConstraintComponent (http://www.w3.org/ns/shacl#NodeKindConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: ex:BodyMaterialShape
+	Focus Node: ex:BadValve001
+	Value Node: Literal("Stainless Steel 316")
+	Result Path: cfihos:CFIHOS-40000017
+	Message: body material must be an IRI from picklist CFIHOS-50000070.

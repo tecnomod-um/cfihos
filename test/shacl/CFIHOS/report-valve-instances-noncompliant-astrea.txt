@@ -26,7 +26,7 @@ Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#Cla
 	Severity: sh:Violation
 	Source Shape: <https://astrea.linkeddata.es/shapes#6a22467737dd0838a5a1c30a83fc671a>
 	Focus Node: ex:BadValve009
-	Value Node: [ ]
+	Value Node: [ rdf:type rdfs:Resource ]
 	Result Path: CFIHOS:CFIHOS-40000592
 	Message: Value does not have class CFIHOS:CFIHOS-50000125
 Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
@@ -74,7 +74,7 @@ Constraint Violation in NodeKindConstraintComponent (http://www.w3.org/ns/shacl#
 	Severity: sh:Violation
 	Source Shape: <https://astrea.linkeddata.es/shapes#40ebabb6e5009eafe0167e5a00b0d883>
 	Focus Node: ex:BadValve009
-	Value Node: [ ]
+	Value Node: [ rdf:type rdfs:Resource ]
 	Result Path: CFIHOS:CFIHOS-40000592
 	Message: Value is not of Node Kind sh:IRIOrLiteral
 Constraint Violation in NodeKindConstraintComponent (http://www.w3.org/ns/shacl#NodeKindConstraintComponent):

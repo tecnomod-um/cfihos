@@ -5,6 +5,6 @@ Constraint Violation in NodeKindConstraintComponent (http://www.w3.org/ns/shacl#
 	Severity: sh:Violation
 	Source Shape: <https://astrea.linkeddata.es/shapes#47ba6651ae7fa0d72adb5339e8e58187>
 	Focus Node: ex:BodyMaterialX
-	Value Node: [ ]
+	Value Node: [ rdf:type rdfs:Resource ]
 	Result Path: lis:qualityQuantifiedAs
 	Message: Value is not of Node Kind sh:IRIOrLiteral

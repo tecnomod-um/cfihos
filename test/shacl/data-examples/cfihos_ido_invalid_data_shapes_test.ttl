@@ -1,0 +1,43 @@
+########################################################################
+# NON-CONFORMANT ball valve instance -- CFIHOS-IDO (quality/datum) model.
+# One seeded violation per shape. Expected: Conforms: False, 5 results:
+#
+#  V1  BodyMaterialQualityShape : datum is a string literal, not a
+#                                 picklist IRI (nodeKind / sh:class)
+#  V2  SeatDesignQualityShape   : datum CFIHOS-60000999 not in sh:in set
+#  V3  IDOLengthDatumShape      : ido:hasValue "fifty" is not xsd:decimal
+#  V4  IDOLengthDatumShape      : unit degC has dimension temperature,
+#                                 not length (SPARQL)
+#  V5  RequiredDocumentsConstraint : IOM document type required, not provided
+########################################################################
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix cfihos:    <http://infohub.siemens-energy.com/CFIHOS#> .
+@prefix cfihos-eq: <http://infohub.siemens-energy.com/CFIHOS/equipment#> .
+@prefix ido:  <http://rds.posccaesar.org/ontology/lis14/rdl/> .
+@prefix ex:   <http://example.org/data#> .
+
+ex:BadValve001 a cfihos-eq:CFIHOS-30000807 ;
+    rdfs:label "Ball valve BV-BAD (IDO)" ;
+    ido:hasQuality ex:BV_bodyMaterialQ, ex:BV_seatDesignQ, ex:BV_nominalSizeQ ;
+    cfihos:hasProvidedDocument ex:Doc_DS_002 .              # V5: only data sheet -> IOM missing
+
+ex:BV_bodyMaterialQ a cfihos:CFIHOS-Q-40000017 ;
+    ido:qualityQuantifiedAs "Stainless Steel 316" .         # V1: literal, not a picklist IRI
+
+ex:BV_seatDesignQ a cfihos:CFIHOS-Q-40000588 ;
+    ido:qualityQuantifiedAs cfihos:CFIHOS-60000999 .        # V2: value outside allowed set
+
+ex:BV_nominalSizeQ a cfihos:CFIHOS-Q-40000247 ;
+    ido:qualityQuantifiedAs ex:BV_sizeDatum .
+ex:BV_sizeDatum
+    ido:hasValue "fifty" ;                                  # V3: not xsd:decimal
+    ido:hasUnit cfihos:degC .                               # V4: temperature unit, not length
+
+ex:Doc_DS_002 a ex:DocTypeDatasheet .
+
+# value used above but not a member of the seat-design picklist
+cfihos:CFIHOS-60000999 a owl:NamedIndividual ; rdfs:label "unknown seat type" .

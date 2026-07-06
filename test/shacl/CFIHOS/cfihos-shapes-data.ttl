@@ -1,0 +1,154 @@
+
+
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix om-2: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix cfihos:    <http://infohub.siemens-energy.com/CFIHOS#> .
+@prefix cfihos-eq: <http://infohub.siemens-energy.com/CFIHOS/equipment#> .
+@prefix ex:   <http://example.org/data#> .
+
+
+########################################################################
+# PART 0 -- minimal stubs (DELETE when running on the real ontology, which
+# supplies these types/dimensions via the example's owl:imports).
+########################################################################
+
+# value wrappers and measurement vocabulary
+cfihos:TextValue    a owl:Class .
+cfihos:BooleanValue a owl:Class .
+om-2:Measure           a owl:Class .
+om-2:hasUnit           a owl:ObjectProperty .
+om-2:hasNumericalValue a owl:DatatypeProperty .
+qudt:value             a owl:DatatypeProperty .
+cfihos:hasDimension    a owl:ObjectProperty .   # unit -> dimension   # CONFIRM predicate
+
+# equipment hierarchy
+cfihos-eq:CFIHOS-30000660 a owl:Class ; rdfs:label "valve" .
+cfihos-eq:CFIHOS-30000807 a owl:Class ; rdfs:subClassOf cfihos-eq:CFIHOS-30000660 ; rdfs:label "ball valve" .
+
+# body-material picklist (class + a member)
+cfihos:CFIHOS-50000070 a owl:Class ; rdfs:label "material category picklist" .
+cfihos:CFIHOS-60000209 a owl:NamedIndividual, cfihos:CFIHOS-50000070 ; rdfs:label "austenitic stainless steels" .
+
+# seat-design-type picklist (class + the real member from example-A)
+cfihos:CFIHOS-50000126 a owl:Class ; rdfs:label "seat design type picklist" .
+cfihos:CFIHOS-60001713 a owl:NamedIndividual, cfihos:CFIHOS-50000126 ; rdfs:label "soft-seated" .  # CONFIRM label
+
+# units + dimensions (as used by example-A: CFIHOS unit individuals)
+cfihos:CFIHOS-70000001 a owl:NamedIndividual ; rdfs:label "length dimension" .        # CONFIRM
+cfihos:CFIHOS-70000002 a owl:NamedIndividual ; rdfs:label "temperature dimension" .   # CONFIRM
+cfihos:CFIHOS-60001446 a owl:NamedIndividual ; cfihos:hasDimension cfihos:CFIHOS-70000001 ; rdfs:label "mm" . # length unit (example-A)
+cfihos:degC            a owl:NamedIndividual ; cfihos:hasDimension cfihos:CFIHOS-70000002 ; rdfs:label "deg C" .
+
+# documentation stubs (only needed if the required-documents shape is used)
+cfihos:hasEquipment        a owl:ObjectProperty .
+cfihos:hasDocumentType     a owl:ObjectProperty .
+cfihos:hasProvidedDocument a owl:ObjectProperty .
+cfihos:CFIHOS-00000132 a owl:Class .
+
+
+########################################################################
+# PART 1 -- SHACL shapes for the ball valve (property/value model)
+########################################################################
+
+ex:BallValveShape a sh:NodeShape ;
+    sh:targetClass cfihos-eq:CFIHOS-30000807 ;      # ball valve
+    sh:nodeKind sh:IRI ;
+    sh:property ex:BodyMaterialShape ;
+    sh:property ex:SeatDesignShape ;
+    sh:property ex:NominalSizeShape ;
+    sh:property ex:PressureRatingShape ;
+    sh:property ex:FullBoreShape .
+    # Documentation completeness is a separate concern; attach
+    # ex:RequiredDocumentsConstraint (below) only when documents are in scope.
+
+# --- PICKLIST (membership in the picklist class) -----------------------
+ex:BodyMaterialShape a sh:PropertyShape ;
+    sh:path cfihos:CFIHOS-40000017 ;                # body material
+    sh:maxCount 1 ;
+    sh:nodeKind sh:IRI ;
+    sh:class cfihos:CFIHOS-50000070 ;
+    sh:message "body material must be an IRI from picklist CFIHOS-50000070." .
+
+ex:SeatDesignShape a sh:PropertyShape ;
+    sh:path cfihos:CFIHOS-40000588 ;                # seat design type
+    sh:maxCount 1 ;
+    sh:nodeKind sh:IRI ;
+    sh:class cfihos:CFIHOS-50000126 ;
+    sh:message "seat design type must be an IRI from picklist CFIHOS-50000126." .
+
+# --- QUANTITY: OM measure with numeric value + length unit -------------
+ex:NominalSizeShape a sh:PropertyShape ;
+    sh:path cfihos:CFIHOS-40000247 ;                # nominal size
+    sh:maxCount 1 ;
+    sh:node ex:LengthMeasureShape ;
+    sh:message "nominal size must be an om-2:Measure with a numeric value and a length unit." .
+
+ex:LengthMeasureShape a sh:NodeShape ;
+    sh:class om-2:Measure ;
+    sh:property [
+        sh:path om-2:hasNumericalValue ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:or ( [ sh:datatype xsd:decimal ] [ sh:datatype xsd:double ]
+                [ sh:datatype xsd:integer ] [ sh:datatype xsd:float ] ) ;
+        sh:message "om-2:hasNumericalValue must be a single numeric literal." ] ;
+    sh:property [
+        sh:path om-2:hasUnit ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "om-2:hasUnit must reference a single unit IRI." ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "the unit of a nominal size must have the length dimension (CFIHOS-70000001)." ;
+        sh:select """
+            PREFIX om-2: <http://www.ontology-of-units-of-measure.org/resource/om-2/>
+            PREFIX cfihos: <http://infohub.siemens-energy.com/CFIHOS#>
+            SELECT $this ?unit WHERE {
+                $this om-2:hasUnit ?unit .
+                FILTER NOT EXISTS { ?unit cfihos:hasDimension cfihos:CFIHOS-70000001 }
+            }
+        """ ] .
+
+# --- FREE TEXT: TextValue wrapper (Appendix A.3, qudt:value) -----------
+ex:PressureRatingShape a sh:PropertyShape ;
+    sh:path cfihos:CFIHOS-40000591 ;                # pressure rating (free text)
+    sh:maxCount 1 ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:class cfihos:TextValue ;
+    sh:message "pressure rating is free text, modelled as a cfihos:TextValue wrapper (qudt:value)." .
+
+# --- BOOLEAN: BooleanValue wrapper -------------------------------------
+ex:FullBoreShape a sh:PropertyShape ;
+    sh:path cfihos:CFIHOS-40000584 ;                # full opening valve (full bore)
+    sh:maxCount 1 ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:class cfihos:BooleanValue ;
+    sh:message "full-bore must be a cfihos:BooleanValue wrapper (qudt:value boolean)." .
+
+
+########################################################################
+# PART 2 -- optional: documentation completeness (attach to
+# ex:BallValveShape with  sh:sparql ex:RequiredDocumentsConstraint  when
+# documentation is in scope; example-A models no documents, so leaving it
+# detached lets example-A conform on the property/value model).
+########################################################################
+ex:RequiredDocumentsConstraint a sh:SPARQLConstraint ;
+    sh:message "a required document type has no provided document for this asset." ;
+    sh:select """
+        PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+        PREFIX cfihos: <http://infohub.siemens-energy.com/CFIHOS#>
+        SELECT $this ?docType WHERE {
+            $this rdf:type ?cls .
+            ?cls rdfs:subClassOf* ?c .
+            ?req rdfs:subClassOf* cfihos:CFIHOS-00000132 .
+            ?req rdfs:subClassOf ?r1 . ?r1 owl:onProperty cfihos:hasEquipment ;    owl:someValuesFrom ?c .
+            ?req rdfs:subClassOf ?r2 . ?r2 owl:onProperty cfihos:hasDocumentType ; owl:someValuesFrom ?docType .
+            FILTER NOT EXISTS { $this cfihos:hasProvidedDocument ?d . ?d rdf:type ?docType . }
+        }
+    """ .

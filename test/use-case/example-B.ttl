@@ -1,0 +1,145 @@
+# ###########################################################################
+#  example-A-ido.ttl
+#  CFIHOS-IDO equivalent of example-A.ttl (the ball-valve running example).
+#
+#  Model difference vs. the standalone example-A:
+#    standalone :  :valve  CFIHOS:<prop>  <value>
+#    CFIHOS-IDO :  :valve  ido:hasQuality  :q ;
+#                  :q  a  <quality class> ;  ido:qualityQuantifiedAs  <value>
+#  The <value> nodes (om-2:Measure, CFIHOS:TextValue, CFIHOS:BooleanValue,
+#  picklist members) are identical to the standalone file; the IDO variant
+#  only inserts a quality node between the asset and its value.
+#
+#  CONFIRM against your CFIHOS-IDO ontology:
+#    * the ontology IRI imported below (CFIHOS-IDO variant);
+#    * the IDO predicates ido:hasQuality / ido:qualityQuantifiedAs;
+#    * the quality-class IRIs. Here each CFIHOS property code is reused as
+#      the quality class (paper: "CFIHOS properties are reinterpreted as IDO
+#      quality classes"). If your alignment names them differently
+#      (e.g. a dedicated ...-Q- IRI), substitute the rdf:type of each :q_*.
+# ###########################################################################
+
+@prefix :      <http://www.semanticweb.org/fabad/ontologies/2026/4/untitled-ontology-2969/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix om-2:  <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix qudt:  <http://qudt.org/schema/qudt/> .
+@prefix ido:   <http://rds.posccaesar.org/ontology/lis14/rdl/> .
+@prefix CFIHOS: <http://infohub.siemens-energy.com/CFIHOS#> .
+@base <http://infohub.siemens-energy.com/CFIHOS-IDO-example-A> .
+
+<http://infohub.siemens-energy.com/CFIHOS-IDO-example-A> rdf:type owl:Ontology ;
+    owl:imports <http://infohub.siemens-energy.com/CFIHOS-IDO> .   # CONFIRM IDO-variant ontology IRI
+
+#################################################################
+#    Asset: ball valve, described through its qualities
+#################################################################
+
+:ball_valve_instance rdf:type owl:NamedIndividual ,
+                              <http://infohub.siemens-energy.com/CFIHOS/equipment#CFIHOS-30000807> ;
+    ido:hasQuality :q_body_material ,
+                   :q_nominal_size ,
+                   :q_operating_temperature ,
+                   :q_maximum_design_pressure ,
+                   :q_full_bore ,
+                   :q_seat_design ,
+                   :q_stem_seal_design ,
+                   :q_rating ,
+                   :q_special_design_req ,
+                   :q_40000479 ,
+                   :q_remark_1 ,
+                   :q_remark_2 ,
+                   :q_remark_3 .
+
+#################################################################
+#    Qualitative qualities quantified as picklist members
+#################################################################
+
+:q_body_material rdf:type owl:NamedIndividual , CFIHOS:CFIHOS-40000017 ;   # body material
+    rdfs:label "body material" ;
+    ido:qualityQuantifiedAs CFIHOS:CFIHOS-60000209 .                       # austenitic stainless steels
+
+:q_seat_design rdf:type owl:NamedIndividual , CFIHOS:CFIHOS-40000588 ;     # seat design type
+    rdfs:label "seat design type" ;
+    ido:qualityQuantifiedAs CFIHOS:CFIHOS-60001713 .                       # soft-seated
+
+:q_40000479 rdf:type owl:NamedIndividual , CFIHOS:CFIHOS-40000479 ;
+    ido:qualityQuantifiedAs CFIHOS:CFIHOS-60000215 .
+
+#################################################################
+#    Quantitative qualities quantified as om-2 measures
+#################################################################
+
+:q_nominal_size rdf:type owl:NamedIndividual , CFIHOS:CFIHOS-40000247 ;    # nominal size
+    rdfs:label "nominal size" ;
+    ido:qualityQuantifiedAs :nominal_size_measure .
+:nominal_size_measure rdf:type owl:NamedIndividual , om-2:Measure ;
+    om-2:hasUnit CFIHOS:CFIHOS-60001446 ;
+    om-2:hasNumericalValue 15.0 .
+
+:q_operating_temperature rdf:type owl:NamedIndividual , CFIHOS:CFIHOS-40000514 ;
+    rdfs:label "normal operating temperature" ;
+    ido:qualityQuantifiedAs :operating_temperature_measure .
+:operating_temperature_measure rdf:type owl:NamedIndividual , om-2:Measure ;
+    om-2:hasUnit CFIHOS:CFIHOS-60001435 ;
+    om-2:hasNumericalValue 20.0 .
+
+:q_maximum_design_pressure rdf:type owl:NamedIndividual , CFIHOS:CFIHOS-40000570 ;
+    rdfs:label "upper limit allowable pressure" ;
+    ido:qualityQuantifiedAs :maximum_design_pressure_measure .
+:maximum_design_pressure_measure rdf:type owl:NamedIndividual , om-2:Measure ;
+    om-2:hasUnit CFIHOS:CFIHOS-60001431 ;
+    om-2:hasNumericalValue 13.7 .
+
+#################################################################
+#    Boolean quality
+#################################################################
+
+:q_full_bore rdf:type owl:NamedIndividual , CFIHOS:CFIHOS-40000584 ;        # full opening valve
+    rdfs:label "full opening valve" ;
+    ido:qualityQuantifiedAs :full_bore_value .
+:full_bore_value rdf:type owl:NamedIndividual , CFIHOS:BooleanValue ;
+    qudt:value "true"^^xsd:boolean .
+
+#################################################################
+#    Free-text qualities quantified as TextValue wrappers
+#################################################################
+
+:q_rating rdf:type owl:NamedIndividual , CFIHOS:CFIHOS-40000591 ;           # pressure rating
+    rdfs:label "pressure rating" ;
+    ido:qualityQuantifiedAs :rating_value .
+:rating_value rdf:type owl:NamedIndividual , CFIHOS:TextValue ;
+    qudt:value "CL150" .
+
+:q_stem_seal_design rdf:type owl:NamedIndividual , CFIHOS:CFIHOS-40000589 ; # stem sealing type
+    rdfs:label "stem sealing type" ;
+    ido:qualityQuantifiedAs :stem_seal_design_value .
+:stem_seal_design_value rdf:type owl:NamedIndividual , CFIHOS:TextValue ;
+    qudt:value "O-ring" .
+
+:q_special_design_req rdf:type owl:NamedIndividual , CFIHOS:CFIHOS-40000487 ; # design specification
+    rdfs:label "design specification" ;
+    ido:qualityQuantifiedAs :special_design_req_value .
+:special_design_req_value rdf:type owl:NamedIndividual , CFIHOS:TextValue ;
+    qudt:value "QSL/CAS level specified in General VSK" .
+
+:q_remark_1 rdf:type owl:NamedIndividual , CFIHOS:CFIHOS-40000337 ;         # remarks
+    rdfs:label "remarks" ;
+    ido:qualityQuantifiedAs :remark_1_value .
+:remark_1_value rdf:type owl:NamedIndividual , CFIHOS:TextValue ;
+    qudt:value """VDS maximum operating temperature does not reflect use in saliferous atmosphere.
+Valves shall not be used above 60ºC in saliferous atmosphere.""" .
+
+:q_remark_2 rdf:type owl:NamedIndividual , CFIHOS:CFIHOS-40000337 ;
+    rdfs:label "remarks" ;
+    ido:qualityQuantifiedAs :remark_2_value .
+:remark_2_value rdf:type owl:NamedIndividual , CFIHOS:TextValue ;
+    qudt:value "The soft seat on floating valves shall be secured in a pocket in the valve body." .
+
+:q_remark_3 rdf:type owl:NamedIndividual , CFIHOS:CFIHOS-40000337 ;
+    rdfs:label "remarks" ;
+    ido:qualityQuantifiedAs :remark_3_value .
+:remark_3_value rdf:type owl:NamedIndividual , CFIHOS:TextValue ;
+    qudt:value "Wetted parts suitable for sour service to NACE MR0175 / ISO 15156-3." .

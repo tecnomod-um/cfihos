@@ -1,0 +1,39 @@
+########################################################################
+# NON-CONFORMANT ball valve instance -- one seeded violation per shape.
+# Expected pyshacl result: Conforms: False, 5 results:
+#
+#  V1  BodyMaterialShape   : value is a string literal, not an IRI /
+#                            not an instance of picklist CFIHOS-50000070
+#  V2  SeatDesignShape     : CFIHOS-60000999 is not in the allowed sh:in set
+#  V3  LengthQuantityShape : hasNumericalValue "fifty" is not an xsd:decimal
+#  V4  LengthQuantityShape : unit degC has dimension 'temperature', not 'length'
+#  V5  RequiredDocuments   : the IOM document type is required but not provided
+#
+# (V1 may surface as two results -- nodeKind and sh:class -- depending on
+#  the engine; pySHACL reports the sh:class violation for a literal.)
+########################################################################
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix cfihos:    <http://infohub.siemens-energy.com/CFIHOS#> .
+@prefix cfihos-eq: <http://infohub.siemens-energy.com/CFIHOS/equipment#> .
+@prefix ex:   <http://example.org/data#> .
+
+ex:BadValve001 a cfihos-eq:CFIHOS-30000807 ;
+    rdfs:label "Ball valve BV-BAD" ;
+    cfihos:CFIHOS-40000017 "Stainless Steel 316" ;      # V1: literal, not a picklist IRI
+    cfihos:CFIHOS-40000588 cfihos:CFIHOS-60000999 ;      # V2: value outside allowed set
+    cfihos:CFIHOS-40000247 ex:BadValve001_size ;         # V3+V4: malformed quantity
+    cfihos:hasProvidedDocument ex:Doc_DS_002 .           # V5: only data sheet -> IOM missing
+
+ex:BadValve001_size
+    cfihos:hasNumericalValue "fifty" ;                   # V3: not xsd:decimal
+    cfihos:hasUnit cfihos:degC .                         # V4: temperature unit, not length
+
+ex:Doc_DS_002 a ex:DocTypeDatasheet .
+
+# undeclared value used above (present in data so the graph is well-formed,
+# but not a member of the seat-design picklist)
+cfihos:CFIHOS-60000999 a owl:NamedIndividual ; rdfs:label "unknown seat type" .

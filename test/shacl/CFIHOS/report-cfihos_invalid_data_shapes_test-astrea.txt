@@ -1,0 +1,24 @@
+Validation Report
+Conforms: False
+Results (3):
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: <https://astrea.linkeddata.es/shapes#46e5d253a1d66fed432bfaf5044156c2>
+	Focus Node: ex:BadValve001
+	Value Node: CFIHOS:CFIHOS-60000999
+	Result Path: CFIHOS:CFIHOS-40000588
+	Message: Value does not have class CFIHOS:CFIHOS-50000126
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: <https://astrea.linkeddata.es/shapes#98613f95bf12e6fa3da805be0a937864>
+	Focus Node: ex:BadValve001
+	Value Node: Literal("Stainless Steel 316")
+	Result Path: CFIHOS:CFIHOS-40000017
+	Message: Value does not have class CFIHOS:CFIHOS-50000070
+Constraint Violation in NodeKindConstraintComponent (http://www.w3.org/ns/shacl#NodeKindConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: <https://astrea.linkeddata.es/shapes#98613f95bf12e6fa3da805be0a937864>
+	Focus Node: ex:BadValve001
+	Value Node: Literal("Stainless Steel 316")
+	Result Path: CFIHOS:CFIHOS-40000017
+	Message: Value is not of Node Kind sh:BlankNodeOrIRI

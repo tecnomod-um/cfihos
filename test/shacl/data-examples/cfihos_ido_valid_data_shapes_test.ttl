@@ -1,0 +1,37 @@
+########################################################################
+# CONFORMANT ball valve instance -- CFIHOS-IDO (quality/datum) model.
+# Passes every shape in cfihos_ido_shapes.ttl:
+#   body material : quality datum -> picklist IRI CFIHOS-60000209   (OK)
+#   seat design   : quality datum -> soft-seated, in allowed set    (OK)
+#   nominal size  : quality datum -> xsd:decimal + mm (length unit) (OK)
+#   documents     : both required types provided                    (OK)
+# Expected pyshacl result: Conforms: True  (0 results)
+########################################################################
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix cfihos:    <http://infohub.siemens-energy.com/CFIHOS#> .
+@prefix cfihos-eq: <http://infohub.siemens-energy.com/CFIHOS/equipment#> .
+@prefix ido:  <http://rds.posccaesar.org/ontology/lis14/rdl/> .
+@prefix ex:   <http://example.org/data#> .
+
+ex:Valve001 a cfihos-eq:CFIHOS-30000807 ;
+    rdfs:label "Ball valve BV-001 (IDO)" ;
+    ido:hasQuality ex:V1_bodyMaterialQ, ex:V1_seatDesignQ, ex:V1_nominalSizeQ ;
+    cfihos:hasProvidedDocument ex:Doc_DS_001, ex:Doc_IOM_001 .
+
+ex:V1_bodyMaterialQ a cfihos:CFIHOS-Q-40000017 ;
+    ido:qualityQuantifiedAs cfihos:CFIHOS-60000209 .        # picklist IRI (austenitic stainless)
+
+ex:V1_seatDesignQ a cfihos:CFIHOS-Q-40000588 ;
+    ido:qualityQuantifiedAs cfihos:CFIHOS-60000210 .        # soft-seated (in allowed set)
+
+ex:V1_nominalSizeQ a cfihos:CFIHOS-Q-40000247 ;
+    ido:qualityQuantifiedAs ex:V1_sizeDatum .
+ex:V1_sizeDatum
+    ido:hasValue "50.0"^^xsd:decimal ;
+    ido:hasUnit cfihos:mm .                                 # length unit -> dimension conforms
+
+ex:Doc_DS_001  a ex:DocTypeDatasheet .
+ex:Doc_IOM_001 a ex:DocTypeIOM .

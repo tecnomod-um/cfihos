@@ -1,0 +1,185 @@
+
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix cfihos:    <http://infohub.siemens-energy.com/CFIHOS#> .
+@prefix cfihos-eq: <http://infohub.siemens-energy.com/CFIHOS/equipment#> .
+@prefix ido:  <http://rds.posccaesar.org/ontology/lis14/rdl/> .
+@prefix ex:   <http://example.org/data#> .
+
+
+########################################################################
+# PART 0 -- minimal TBox stubs (DELETE when running on the real ontology)
+########################################################################
+
+# IDO + helper properties
+ido:hasQuality           a owl:ObjectProperty .
+ido:qualityQuantifiedAs  a owl:ObjectProperty .
+ido:hasValue             a owl:DatatypeProperty .   # CONFIRM datum value predicate
+ido:hasUnit              a owl:ObjectProperty .      # CONFIRM datum unit predicate
+ido:Quality              a owl:Class .
+ido:PhysicalQuantity     a owl:Class ; rdfs:subClassOf ido:Quality .
+cfihos:hasDimension        a owl:ObjectProperty .
+cfihos:hasEquipment        a owl:ObjectProperty .
+cfihos:hasDocumentType     a owl:ObjectProperty .
+cfihos:hasProvidedDocument a owl:ObjectProperty .
+
+# CFIHOS property -> IDO quality classes (aligned variant)          # CONFIRM naming
+cfihos:CFIHOS-Q-40000017 a owl:Class ; rdfs:subClassOf ido:Quality ;
+    rdfs:label "body material quality" .
+cfihos:CFIHOS-Q-40000588 a owl:Class ; rdfs:subClassOf ido:Quality ;
+    rdfs:label "seat design type quality" .
+cfihos:CFIHOS-Q-40000247 a owl:Class ; rdfs:subClassOf ido:PhysicalQuantity ;
+    rdfs:label "nominal size quality" .
+
+# body-material picklist (values are instances of the picklist class)
+cfihos:CFIHOS-50000070 a owl:Class ; rdfs:label "material category picklist" .
+cfihos:CFIHOS-60000209 a owl:NamedIndividual, cfihos:CFIHOS-50000070 ;
+    rdfs:label "austenitic stainless steels" .
+cfihos:CFIHOS-60000205 a owl:NamedIndividual, cfihos:CFIHOS-50000070 ;
+    rdfs:label "carbon steel" .                      # CONFIRM code
+
+# seat-design-type picklist (class CFIHOS-50000126) and its two values
+cfihos:CFIHOS-50000126 a owl:Class ; rdfs:label "seat design type picklist" .
+cfihos:CFIHOS-60000208 a owl:NamedIndividual, cfihos:CFIHOS-50000126 ; rdfs:label "metal-to-metal seated" .
+cfihos:CFIHOS-60000210 a owl:NamedIndividual, cfihos:CFIHOS-50000126 ; rdfs:label "soft-seated" .
+
+# free-text wrapper class + pressure-rating quality (qualitative, no picklist; Appendix A.3)
+cfihos:TextValue a owl:Class ; rdfs:label "text value" .
+cfihos:CFIHOS-Q-40000591 a owl:Class ; rdfs:subClassOf ido:Quality ; rdfs:label "pressure rating quality" . # CONFIRM
+
+# units & dimensions
+cfihos:CFIHOS-00000072 a owl:Class ; rdfs:label "dimension" .
+cfihos:CFIHOS-00000073 a owl:Class ; rdfs:label "unit of measure" .                 # CONFIRM
+cfihos:CFIHOS-70000001 a owl:NamedIndividual, cfihos:CFIHOS-00000072 ; rdfs:label "length" .       # CONFIRM
+cfihos:CFIHOS-70000002 a owl:NamedIndividual, cfihos:CFIHOS-00000072 ; rdfs:label "temperature" .  # CONFIRM
+cfihos:mm   a owl:NamedIndividual, cfihos:CFIHOS-00000073 ;
+    cfihos:hasDimension cfihos:CFIHOS-70000001 ; rdfs:label "millimetre" .
+cfihos:degC a owl:NamedIndividual, cfihos:CFIHOS-00000073 ;
+    cfihos:hasDimension cfihos:CFIHOS-70000002 ; rdfs:label "degree Celsius" .
+
+# equipment hierarchy
+cfihos-eq:CFIHOS-30000660 a owl:Class ; rdfs:label "valve" .
+cfihos-eq:CFIHOS-30000807 a owl:Class ; rdfs:label "ball valve" ;
+    rdfs:subClassOf cfihos-eq:CFIHOS-30000660 .
+
+# documentation requirements for the ball valve class
+cfihos:CFIHOS-00000132 a owl:Class ; rdfs:label "source standard document and data requirement" .
+ex:DocTypeDatasheet a owl:Class ; rdfs:label "data sheet" .
+ex:DocTypeIOM       a owl:Class ; rdfs:label "installation and operating manual" .
+ex:Req_Valve_Datasheet a owl:Class ; rdfs:subClassOf cfihos:CFIHOS-00000132 ,
+    [ a owl:Restriction ; owl:onProperty cfihos:hasEquipment ;
+      owl:someValuesFrom cfihos-eq:CFIHOS-30000807 ] ,
+    [ a owl:Restriction ; owl:onProperty cfihos:hasDocumentType ;
+      owl:someValuesFrom ex:DocTypeDatasheet ] .
+ex:Req_Valve_IOM a owl:Class ; rdfs:subClassOf cfihos:CFIHOS-00000132 ,
+    [ a owl:Restriction ; owl:onProperty cfihos:hasEquipment ;
+      owl:someValuesFrom cfihos-eq:CFIHOS-30000807 ] ,
+    [ a owl:Restriction ; owl:onProperty cfihos:hasDocumentType ;
+      owl:someValuesFrom ex:DocTypeIOM ] .
+
+
+########################################################################
+# PART 1 -- SHACL shapes
+########################################################################
+
+# Valve-level shape: node kind, presence of the key qualities, documents.
+ex:IDOBallValveShape a sh:NodeShape ;
+    sh:targetClass cfihos-eq:CFIHOS-30000807 ;      # ball valve
+    sh:nodeKind sh:IRI ;
+    sh:property [
+        sh:path ido:hasQuality ;
+        sh:qualifiedValueShape [ sh:class cfihos:CFIHOS-Q-40000017 ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:message "a ball valve must carry exactly one body-material quality." ] ;
+    sh:sparql ex:RequiredDocumentsConstraint .
+
+# --- (1a) PICKLIST via type membership on the quality's datum ----------
+# body material quality: its ido:qualityQuantifiedAs datum must be one IRI
+# that is an instance of picklist CFIHOS-50000070.
+ex:BodyMaterialQualityShape a sh:NodeShape ;
+    sh:targetClass cfihos:CFIHOS-Q-40000017 ;
+    sh:property [
+        sh:path ido:qualityQuantifiedAs ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class cfihos:CFIHOS-50000070 ;
+        sh:message "body material value must be a single IRI drawn from picklist CFIHOS-50000070." ] .
+
+# --- (1b) PICKLIST via enumerated set on the quality's datum -----------
+# seat design type quality: datum must be one of the two allowed values.
+ex:SeatDesignQualityShape a sh:NodeShape ;
+    sh:targetClass cfihos:CFIHOS-Q-40000588 ;       # CONFIRM quality class
+    sh:property [
+        sh:path ido:qualityQuantifiedAs ;
+        sh:maxCount 1 ;
+        sh:in ( cfihos:CFIHOS-60000208 cfihos:CFIHOS-60000210 ) ;
+        sh:message "seat design type value must be 'metal-to-metal seated' or 'soft-seated'." ] .
+
+# --- free-text quality: datum must be a TextValue wrapper (no picklist) --
+ex:PressureRatingQualityShape a sh:NodeShape ;
+    sh:targetClass cfihos:CFIHOS-Q-40000591 ;           # CONFIRM quality class
+    sh:property [
+        sh:path ido:qualityQuantifiedAs ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:class cfihos:TextValue ;
+        sh:message "pressure rating is free text, quantified as a cfihos:TextValue wrapper (no picklist -> known interoperability gap)." ] .
+
+# --- (2) DATATYPE + UNIT/DIMENSION on a physical-quantity datum ---------
+# nominal size quality: its datum must have a decimal value and a length unit.
+ex:NominalSizeQualityShape a sh:NodeShape ;
+    sh:targetClass cfihos:CFIHOS-Q-40000247 ;
+    sh:property [
+        sh:path ido:qualityQuantifiedAs ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:node ex:IDOLengthDatumShape ;
+        sh:message "nominal size must be quantified as a datum with a decimal value and a length unit." ] .
+
+ex:IDOLengthDatumShape a sh:NodeShape ;
+    sh:property [
+        sh:path ido:hasValue ;                       # CONFIRM predicate
+        sh:datatype xsd:decimal ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "the datum value must be a single xsd:decimal." ] ;
+    sh:property [
+        sh:path ido:hasUnit ;                        # CONFIRM predicate
+        sh:nodeKind sh:IRI ;
+        sh:class cfihos:CFIHOS-00000073 ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "the datum must reference a single unit-of-measure IRI." ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "the unit of a nominal size must have dimension 'length' (CFIHOS-70000001)." ;
+        sh:select """
+            PREFIX cfihos: <http://infohub.siemens-energy.com/CFIHOS#>
+            PREFIX ido: <http://rds.posccaesar.org/ontology/lis14/rdl/>
+            SELECT $this ?unit WHERE {
+                $this ido:hasUnit ?unit .
+                FILTER NOT EXISTS { ?unit cfihos:hasDimension cfihos:CFIHOS-70000001 }
+            }
+        """ ] .
+
+# --- (3) REQUIRED DOCUMENTS (unchanged from the standalone variant) -----
+ex:RequiredDocumentsConstraint a sh:SPARQLConstraint ;
+    sh:message "a required document type has no provided document for this asset." ;
+    sh:select """
+        PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+        PREFIX cfihos: <http://infohub.siemens-energy.com/CFIHOS#>
+        SELECT $this ?docType WHERE {
+            $this rdf:type ?cls .
+            ?cls rdfs:subClassOf* ?c .
+            ?req rdfs:subClassOf* cfihos:CFIHOS-00000132 .
+            ?req rdfs:subClassOf ?r1 .
+            ?r1 owl:onProperty cfihos:hasEquipment ; owl:someValuesFrom ?c .
+            ?req rdfs:subClassOf ?r2 .
+            ?r2 owl:onProperty cfihos:hasDocumentType ; owl:someValuesFrom ?docType .
+            FILTER NOT EXISTS {
+                $this cfihos:hasProvidedDocument ?d . ?d rdf:type ?docType .
+            }
+        }
+    """ .
