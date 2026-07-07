@@ -1,0 +1,23 @@
+Validation Report
+Conforms: False
+Results (3):
+Constraint Violation in QualifiedValueShapeConstraintComponent (http://www.w3.org/ns/shacl#QualifiedMinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:message Literal("a ball valve must carry exactly one body-material quality.") ; sh:path ido:hasQuality ; sh:qualifiedMinCount Literal("1", datatype=xsd:integer) ; sh:qualifiedValueShape [ sh:class cfihos:CFIHOS-Q-40000017 ] ]
+	Focus Node: :ball_valve_instance
+	Result Path: ido:hasQuality
+	Message: a ball valve must carry exactly one body-material quality.
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: ex:IDOBallValveShape
+	Focus Node: :ball_valve_instance
+	Value Node: :ball_valve_instance
+	Source Constraint: ex:RequiredDocumentsConstraint
+	Message: a required document type has no provided document for this asset.
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: ex:IDOBallValveShape
+	Focus Node: :ball_valve_instance
+	Value Node: :ball_valve_instance
+	Source Constraint: ex:RequiredDocumentsConstraint
+	Message: a required document type has no provided document for this asset.
