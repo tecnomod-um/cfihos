@@ -41,8 +41,8 @@ The examples follow the value model of the ontologies:
 
 | Data example | CFIHOS / Astrea | CFIHOS / hand | IDO / Astrea | IDO / hand |
 |--------------|:---:|:---:|:---:|:---:|
-| `example-A` (standalone valve)        | T | T | – | – |
-| `example-B` (IDO valve)               | – | – | T | T |
+| `example-CFIHOS` (standalone valve)        | T | T | – | – |
+| `example-CFIHOS-IDO` (IDO valve)               | – | – | T | T |
 | `cfihos_valid_data_shapes_test`       | T | T | – | – |
 | `cfihos_invalid_data_shapes_test`     | F | F | – | – |
 | `cfihos_ido_valid_data_shapes_test`   | – | – | T | T |
@@ -69,36 +69,7 @@ The examples follow the value model of the ontologies:
   shapes.
 
 
-## Folder structure
 
-```
-shacl/
-├── README.md                     ← this file
-├── test-shacl-cfihos.sh          ← runs all CFIHOS validations
-├── test-shacl-cfihos-ido.sh      ← runs all CFIHOS‑IDO validations
-│
-├── CFIHOS/                        ← standalone variant
-│   ├── cfihos-shapes-astrea.ttl  ← Astrea‑generated shapes
-│   ├── cfihos-shapes-data.ttl    ← hand‑authored shapes
-│   └── report-*.txt              ← one validation report per (data × shape source)
-│
-├── CFIHOS-IDO/                   ← IDO‑aligned variant
-│   ├── cfihos-ido-shapes-astrea.ttl
-│   ├── cfihos-ido-shapes-data.ttl
-│   └── report-*.txt
-│
-└── data-examples/                ← RDF data validated in both suites
-    ├── example-A.ttl                        ← valve, standalone (direct‑property) model
-    ├── example-B.ttl                        ← same valve, CFIHOS‑IDO (quality/datum) model
-    ├── cfihos_valid_data_shapes_test.ttl    ← minimal conformant fixture (CFIHOS)
-    ├── cfihos_invalid_data_shapes_test.ttl  ← fixture with seeded violations (CFIHOS)
-    ├── cfihos_ido_valid_data_shapes_test.ttl
-    ├── cfihos_ido_invalid_data_shapes_test.ttl
-    ├── valve-compliant-with-cfihos-only.ttl ← interoperability cross‑checks
-    ├── valve-compliant-with-ido-only.ttl
-    ├── valve-instances-compliant.ttl        ← batch of conformant valves
-    └── valve-instances-noncompliant.ttl     ← batch with violations
-```
 
 
 
