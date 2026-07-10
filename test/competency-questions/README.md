@@ -156,7 +156,7 @@ SELECT ?document ?documentLabel WHERE {
 ```
 
 ### CQ9 — What discipline is responsible for document type 0505?
-*(= paper's CQ13)*
+
 ```sparql
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
