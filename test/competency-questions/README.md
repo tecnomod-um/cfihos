@@ -184,24 +184,18 @@ SELECT ?doctype ?discipline ?disciplineLabel WHERE {
   ?discipline rdfs:label ?disciplineLabel .
 }
 ```
-### CQ11 —  What are the instances of class “discipline”) covered by CFIHOS? List them with their codes
+### CQ11 —  What are the subclassas of “discipline” covered by CFIHOS? List them with their codes
 ```sparql
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX cfihos: <http://infohub.siemens-energy.com/CFIHOS#>
-SELECT ?code ?propertyLabel ?valueLabel WHERE {
-	?property rdf:type owl:ObjectProperty .
-	?property rdfs:label ?propertyLabel .
-	?property cfihos:hasCFIHOSCode ?code .
-	?property rdfs:range ?range .
-	?range owl:equivalentClass [
-		owl:oneOf ?valueList
-	] .
-	?valueList rdf:rest*/rdf:first ?item .
-	?item rdfs:label ?valueLabel .
+PREFIX schema: <http://schema.org/>
+SELECT * WHERE {
+?discipline rdfs:subClassOf cfihos:CFIHOS-00000021 .
+?discipline schema:identifier ?disciplineCode .
+?discipline rdfs:label ?disciplineName .
 }
-
 ```
 
 
