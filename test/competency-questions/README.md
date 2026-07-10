@@ -15,8 +15,8 @@ The next table shows the competency questions and what it is evaluating from the
 | CQ7 | Data/property validation | What are the properties of class “discipline document type”? |
 | CQ8  | Documentation/handover   | Which documents are required for commissioning a pump? |
 | CQ9  | Documentation/handover   | What discipline is responsible for document type 0505? |
-| C10 | Documentation/handover | Which discipline is responsible for a given document type, and are there document types with no assigned discipline? |
-| C11 | Documentation/handover | What are the subclasses of “discipline” covered by CFIHOS? List them with their codes|
+| CQ10 | Documentation/handover | Which discipline is responsible for a given document type, and are there document types with no assigned discipline? |
+| CQ11 | Documentation/handover | What are the subclasses of “discipline” covered by CFIHOS? List them with their codes|
 | CQ12  | Traceability/provenance  | Which CFIHOS entities are traceable to standards? |
 | CQ13 | Interoperability (IDO)   | What are the assets and their properties, expressed using only IDO vocabulary? |
 | CQ14 | Interoperability (IDO)   | Which CFIHOS classes are `subClassOf` vs. `equivalentClass` to an IDO class? |
