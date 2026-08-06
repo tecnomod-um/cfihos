@@ -53,9 +53,7 @@ The [`docs/`](./docs) folder contains a slide deck (`cfihos-ontology.pptx`) and 
 
 ## Citation
 
-A paper describing the ontology, its IDO alignment, and its evaluation is currently in preparation:
-
-> F. Abad-Navarro, J. T. Fernández-Breis, A. García-Castro. *Making CFIHOS Machine-Interpretable: An IDO-Aligned OWL Ontology for Asset Data Interoperability.* (manuscript in preparation)
+A paper describing the ontology, its IDO alignment, and its evaluation is currently in preparation.
 
 Please check back here for a full citation once the paper is published.
 
